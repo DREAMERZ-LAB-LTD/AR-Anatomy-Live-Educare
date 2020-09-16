@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UI;
 namespace LoginRegisterSystem
 {
     public class AuthManager : MonoBehaviour
     {
         [Header("Sever Root URL")]
         [SerializeField] protected string url;
-        [SerializeField] private UI_Handeller ui;
+        [SerializeField] private UI_Handeler ui;
 
         private static string TokenKey = "Token";//user token will be save into cash using this Token key
 
@@ -48,7 +48,7 @@ namespace LoginRegisterSystem
 
         private void Start()
         {
-            ui.SetupButtonEvent(OnClickLogin, OnClickRegister, OnClickVerification);
+            //ui.SetupButtonEvent(OnClickLogin, OnClickRegister, OnClickVerification);
         }
 
         protected void OnClickLogin()
