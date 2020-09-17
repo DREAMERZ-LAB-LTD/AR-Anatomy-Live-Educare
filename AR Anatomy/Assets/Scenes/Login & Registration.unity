@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 138896403}
   - component: {fileID: 138896402}
   m_Layer: 5
-  m_Name: Backgound Image
+  m_Name: Authentation Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

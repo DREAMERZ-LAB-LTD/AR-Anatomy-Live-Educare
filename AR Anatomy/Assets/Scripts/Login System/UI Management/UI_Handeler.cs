@@ -91,10 +91,6 @@ namespace UI
         //buttons
         [SerializeField] private Button ResetPasswordSuccessToBack_Btn;
         [SerializeField] private Button ResetPasswordSuccessToHome_Btn;
-
-        [Header("Warning Panel's Property ")]
-        [SerializeField] private Button Okay_Btn;
-
       
 #pragma warning restore 649
 
@@ -123,7 +119,7 @@ namespace UI
             TostMessage.SetActive(false);
 
 
-
+         
 
             //remove button's event
             ForgotPassword_Btn.onClick.RemoveAllListeners();//From Login page
@@ -141,8 +137,6 @@ namespace UI
 
             ResetPasswordSuccessToBack_Btn.onClick.RemoveAllListeners(); //From Reset Password Success page
             ResetPasswordSuccessToHome_Btn.onClick.RemoveAllListeners(); //From Reset Password Success page
-
-            Okay_Btn.onClick.RemoveAllListeners(); //From warning page
 
 
 
@@ -164,7 +158,6 @@ namespace UI
  //           ResetPasswordSuccessToBack_Btn.onClick.AddListener(); //From Reset Password Success page
 //            ResetPasswordSuccessToHome_Btn.onClick.AddListener(); //From Reset Password Success page
 
-            Okay_Btn.onClick.AddListener(Warning_Haler.Disable); //From warning page
 
             //remove all of the password input fields value changed event
             Register_PasswordField.onValueChanged.RemoveAllListeners();
@@ -187,7 +180,7 @@ namespace UI
         //change confirm password color when user tying
         private void OnTypeRegisterPassword(string confirmPass) => isMached_RegisterPassword();
         private void OnTypeResetPassword(string confirmPass) => isMached_ResetPassword();
-        private bool isMached_RegisterPassword()
+        public bool isMached_RegisterPassword()
         {
             bool isMatched = Register_PasswordField.text == Register_ConfirmPasswordField.text;
             Register_ConfirmPasswordField.textComponent.color = isMatched ? Color.black : Color.red;
@@ -195,7 +188,7 @@ namespace UI
             return isMatched;
         }
 
-        private bool isMached_ResetPassword()
+        public bool isMached_ResetPassword()
         {
             bool isMatched = ResetPassword_Field.text == ConfirmResetPassword_Field.text;
             ConfirmResetPassword_Field.textComponent.color = isMatched ? Color.black : Color.red;
@@ -293,19 +286,46 @@ namespace UI
         }
 
 
+        //Get access login page user information
+        public string GetLoginEmail => Login_EmailField.text;
+        public string GetLoginPassword => Login_PasswordField.text;
+
+        //Get access register page user information
+        public string GetRegisterName => Register_NameField.text;
+        public string GetRegisterEmail => Register_EmailField.text;
+        public string GetRegisterPhoneNumber => Register_CountryCodeField.options[Register_CountryCodeField.value].text + Register_PhoneNoField.text;
+        public string GetRegisterPassword
+        {
+            get 
+            {
+                if (isMached_RegisterPassword())
+                {
+                    return Register_PasswordField.text;
+                }
+                else
+                {
+                    ShowWarning(new Warning("Password not mached", "Make sure confirm password", null));
+                    return null;
+                }
+            }
+        }
+
+
+        //Get assess reset password request user information
+        public string GetResetPasswordReqEmail => ResetEmail_Field.text;
+
+
+        //Get assess set new password user information
+        public string GetNewPasword => ResetPassword_Field.text;
+        public string GetNewConfirmPasword => ConfirmResetPassword_Field.text;
+
+
+
 
         /// <summary>
-        /// returnverification code from ui screen W.R.To user input
+        /// return verification code from Verification page Verification code field
         /// </summary>
-        public int GetVerificationode => System.Int32.Parse( VerificationCodeField.text);
-        /// <summary>
-        /// retun Login Email from ui screen
-        /// </summary>
-        public string GetLoginEmail => Login_EmailField.text;
-        /// <summary>
-        /// retun Login password from ui screen
-        /// </summary>
-        public string GetLoginPassword => Login_EmailField.text;
+        public string GetVerificationCode =>  VerificationCodeField.text;
 
         public void ShowLoginPage()=> activity.Show(Login_Page);
         public void ShowRegisterPage()=>activity.Show(Register_Page);
@@ -313,7 +333,7 @@ namespace UI
         public void ShowForgotPasswordPage()=> activity.Show(ForgotPassword_Page);
         public void ShowSetNewPasswordPage()=> activity.Show(SetNewPassword_Page);
         public void ShowPasswordResetSuccessPage()=> activity.Show(PasswordResetSuccess_Page);
-        public void ShowWarningPage(Warning warning) => Warning_Haler.ShowWarning(warning);
+        public void ShowWarning(Warning warning) => Warning_Haler.ShowWarning(warning);
         public void ShowToast(string message, float duration, Color color) => activity.ShowToast(message, duration, color);
 
    
