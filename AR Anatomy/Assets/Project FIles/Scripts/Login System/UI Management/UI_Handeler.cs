@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using TMPro;
 using LoginRegisterSystem;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 namespace UI
 {
@@ -66,7 +67,16 @@ namespace UI
         [SerializeField] private Button RegisterPasswordVisible_Btn;//use for Register_Page
         [SerializeField] private Button RegisterConfirmPasswordVisible_Btn;//use for Register_Page
         [Space]
-        [SerializeField] private TMP_Dropdown Register_CountryCodeField;//use for Register_Page
+        //dropdown
+        [SerializeField] private TMP_Dropdown Register_CountryCodeField;//phone country code dropdown Register_Page
+        [Space]
+        //transforms
+        [SerializeField] private GameObject RequiredNameMessage;
+        [SerializeField] private GameObject RequiredEmailMessage;
+        [SerializeField] private GameObject RequiredPhoneMessage;
+        [SerializeField] private GameObject RequiredPasswordMessage;
+        [SerializeField] private GameObject RequiredConfirmPasswordMessage;
+
 
 
         [Header("Verification Panel's Property ")]
@@ -77,7 +87,10 @@ namespace UI
         [SerializeField] private Button VerifiToLogin_Btn;//use for Verification Page
         [SerializeField] private Button Verify_Btn;//use for Verification Page
         [SerializeField] private Button RecntVerificationCode_Btn;//use for Verification Page
-
+        [Space]
+        //Text
+        [SerializeField] private TMP_Text SendingEmail;//use for Verification Page
+        
 
         [Header("ForgotPassword_Page Panel's Property ")]
         //input fileds
@@ -132,6 +145,7 @@ namespace UI
         {
             ShowLoadingPage(false);
             InitilizePanel();
+            HideAllRegisterRequired();
             ClearAllInputField();
             SetPasswordVisibleBtnEvent();
             LoadCountryList();
@@ -173,7 +187,7 @@ namespace UI
             }
         }
 
-        public void ClearAllInputField()
+        private void ClearAllInputField()
         {
             Login_EmailField.text = string.Empty;
             Login_PasswordField.text = string.Empty;
@@ -186,7 +200,6 @@ namespace UI
             ResetEmail_Field.text = string.Empty;
             ResetPassword_Field.text = string.Empty;
             ConfirmResetPassword_Field.text = string.Empty;
-
         }
 
         private void LoadCountryList()
@@ -216,10 +229,8 @@ namespace UI
 
 
         }
-
-        #endregion Initilize Zone
-
-        #region Buttons Event Setup Zone 
+        
+        #region Buttons Event Initilization
 
         /// <summary>
         /// initilize all of the default button event as default
@@ -428,11 +439,14 @@ namespace UI
         {
             SavedUserLogin.onClick.AddListener(GetSavedUser); //From saved user page
         }
-#endregion Buttons Event Setup Zone 
+        #endregion Buttons Event Initilization
+
+        #endregion Initilize Zone
 
 
-#region Information Checker Zone
+        #region Input Information Checker
 
+        //handle password visile button icon and input filed content type.(Like password mode or standerd content)
         private void ChangePasswordFieldMode(Image buttonTexture, TMP_InputField passwordField)
         {
             bool isPasswordMode = passwordField.contentType == TMP_InputField.ContentType.Password;
@@ -442,13 +456,63 @@ namespace UI
             Debug.Log("MOde Changed");
         }
 
+
+        /// <summary>
+        /// return true if user login page all of input field is not null
+        /// </summary>
+        public bool isValidLoginInfo
+        {
+            get
+            {
+                bool isvalid = Login_EmailField.text != "" && Login_PasswordField.text != "";
+                if (!isvalid)
+                {
+                    ShowToast("Please enter email and password", 2f, Color.red);
+                }
+                return isvalid;
+            }
+        }
+
         /// <summary>
         /// return true when user full fill up register form in register panel
         /// </summary>
-        public bool isValidRegisterInfo => GetRegisterName != "" && GetRegisterEmail != "" && GetRegisterPassword != ""&& Register_PhoneNoField.text != "";
-       
+        public bool isValidRegisterInfo
+        {
+            get
+            {
+                bool field_is_Done = GetRegisterName != "" && GetRegisterEmail != "" && GetRegisterPassword != "" && Register_PhoneNoField.text != "";
+                if (!field_is_Done)
+                {
+                    ShowRegisterRequiredInfo();
+                    Warning_Haler.RegisterError("Please complete the form with valid information & submit again");
+                }
+                return field_is_Done;
+            
+            }
+        }
+        //when user try to register with null information show message which register input field is null 
+        private void ShowRegisterRequiredInfo()
+        {
+            RequiredNameMessage.SetActive(Register_NameField.text == "");
+            RequiredEmailMessage.SetActive(Register_EmailField.text== "");
+            RequiredPhoneMessage.SetActive(Register_PhoneNoField.text  == "");
+            RequiredPasswordMessage.SetActive(Register_PasswordField.text  == "");
+            RequiredConfirmPasswordMessage.SetActive(Register_ConfirmPasswordField.text  == "");
+        }
+        //deactive all of the register null message
+        private void HideAllRegisterRequired()
+        {
+            RequiredNameMessage.SetActive(false);
+            RequiredEmailMessage.SetActive(false);
+            RequiredPhoneMessage.SetActive(false);
+            RequiredPasswordMessage.SetActive(false);
+            RequiredConfirmPasswordMessage.SetActive(false);
+        }
+
         //Check  confirm password and change color in runtime when user tying on input field in Register Pagee
         private void OnTypeRegisterPassword(string confirmPass) => isMached_RegisterPassword();
+
+
 
         /// <summary>
         /// return true if password and confirm password are mached in user register page
@@ -458,9 +522,9 @@ namespace UI
         {
             bool isMatched = Register_PasswordField.text !="" && Register_PasswordField.text == Register_ConfirmPasswordField.text;
             Register_ConfirmPasswordField.textComponent.color = isMatched ? Color.black : Color.red;
-
             return isMatched;
         }
+          
 
         //Check  confirm password and change color in runtime when user tying on input field in Reset Pawwword Pagee
         private void OnTypeResetPassword(string confirmPass) => isMached_ResetPassword();
@@ -474,14 +538,14 @@ namespace UI
         {
             bool isMatched = ResetPassword_Field.text!="" && ResetPassword_Field.text == ConfirmResetPassword_Field.text;
             ConfirmResetPassword_Field.textComponent.color = isMatched ? Color.black : Color.red;
-
             return isMatched;
-
         }
-#endregion Information Checker Zone
 
 
-#region Get Access To Authentication Manager
+        #endregion Input Information Checker
+
+
+        #region Get Access To Authentication Manager
         /// <summary>
         /// return Login email from login page email field
         /// </summary>
@@ -525,18 +589,65 @@ namespace UI
         /// return verification code from Verification page Verification code field
         /// </summary>
         public string GetVerificationCode =>  VerificationCodeField.text;
-#endregion Get Access To Authentication Manager
 
-#region Activity Panel Transiction
-        public void ShowLoginPage()=> activity.Show(Login_Page);
-        public void ShowRegisterPage()=>activity.Show(Register_Page);
-        public void ShowVerificationPage()=> activity.Show(VerificationCode_Page);
-        public void ShowForgotPasswordPage()=> activity.Show(ForgotPassword_Page);
-        public void ShowSetNewPasswordPage()=> activity.Show(SetNewPassword_Page);
-        public void ShowPasswordResetSuccessPage()=> activity.Show(PasswordResetSuccess_Page);
-        public void ShowGamePage()=> activity.Show(GamePanel);
+
+        /// <summary>
+        /// set verify email when an user register now and move to verification page
+        /// this value only show the email where we sent verification code 
+        /// </summary>
+        public string SetVerifyEmail
+        {
+            set 
+            {
+                string email = value != null && value != ""? value : "Example@Email.com";
+                SendingEmail.text = "An email with verifiation code has been sent to "+ email + ". Please enter verification code below to proceed";
+
+            }
+        }
+
+
+
+        #endregion Get Access To Authentication Manager
+
+        #region Activity Panel Transiction
+        public void ShowLoginPage()
+        {
+            ClearAllInputField();
+            activity.Show(Login_Page);
+        }
+        public void ShowRegisterPage()
+        {
+            HideAllRegisterRequired();
+            ClearAllInputField();
+            activity.Show(Register_Page);
+        }
+        public void ShowVerificationPage()
+        {
+            ClearAllInputField();
+            activity.Show(VerificationCode_Page);
+        }
+        public void ShowForgotPasswordPage()
+        {
+            ClearAllInputField();
+            activity.Show(ForgotPassword_Page);
+        }
+        public void ShowSetNewPasswordPage()
+        {
+            ClearAllInputField();
+            activity.Show(SetNewPassword_Page);
+        }
+        public void ShowPasswordResetSuccessPage()
+        {
+            ClearAllInputField();
+            activity.Show(PasswordResetSuccess_Page);
+        }
+        public void ShowGamePage()
+        {
+            ClearAllInputField();
+            activity.Show(GamePanel);
+        }
         public void ShowLoadingPage(bool show) => LoadingPanel.SetActive(show);
-        public void ShowSavedUserPage()
+        private void ShowSavedUserPage()
         {
             GetUserInfoStruct LastSavedUer = AuthManager.SavedUser;
             SavedUserName.text = LastSavedUer.data.name;

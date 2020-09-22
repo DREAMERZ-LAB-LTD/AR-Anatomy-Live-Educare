@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
-using UI;
 using System.Security.Cryptography;
+using UnityEngine;
+using Facebook.Unity;
+using UI;
 
 namespace LoginRegisterSystem
 {
@@ -13,17 +14,19 @@ namespace LoginRegisterSystem
         [SerializeField] protected string BaseURL = "http://18.140.117.58/live-educare/public/api";
         [SerializeField] private UI_Handeler ui;
 
-      
+        #region Initilize
         private void Start()
         {
-            ui.SetRegisterPage_BtnEvent(OnClickRegister, OnClickAppleRegister, OnClickFacebookRegister);
-            //   ui.SetVerificationPage_BtnEvent(OnClickVerification, OnClickRecentCode);
+            ui.SetRegisterPage_BtnEvent(OnClickRegister, OnClickAppleRegister, OnClickFacebookLogin);
             ui.SetLoginPage_BtnEvent(OnClickLogin, OnClickAppleLogin, OnClickFacebookLogin);
             ui.SetResetPasswordPage_BtnEvent(OnClickResetPasswordRequest, OnclickPasswordResetToBack);
             ui.SetNewResetPasswordPage_BtnEvent(OnClickSetNewPassword);
             ui.SetLogOutBtnEvent(OnClickLogOut);
             ui.SetSavedUserLoginEvent(GetUserInfo);
+            InitilizeFaceook();
         }
+        #endregion Initilize
+
 
         #region Saved User
         /// <summary>
@@ -83,6 +86,11 @@ namespace LoginRegisterSystem
         SuccessLogIn loginresponse;
         protected void OnClickLogin()
         {
+            if (!ui.isValidLoginInfo)
+            {
+                return;
+            }
+
             OnClickLogOut();
             LogInStruct user = new LogInStruct();
             user.email = ui.GetLoginEmail;
@@ -97,6 +105,7 @@ namespace LoginRegisterSystem
             void OnLoginSuccess(string json)
             {
                 ui.ShowLoadingPage(false);
+                
                 loginresponse = JsonUtility.FromJson<SuccessLogIn>(json);
                 Token = loginresponse.data.token;
                 GetUserInfo();
@@ -120,14 +129,7 @@ namespace LoginRegisterSystem
                 ui.ShowToast(errorLogIn.error, 2f, Color.red);
             }
         }
-        private void OnClickAppleLogin()
-        {
-            Show.Log("Apple Register Zone");
-        }
-        private void OnClickFacebookLogin()
-        {
-            Show.Log("Facebook Register Zone");
-        }
+   
         #endregion User Login
 
         #region User LogOut
@@ -145,7 +147,6 @@ namespace LoginRegisterSystem
         {
             if (!ui.isValidRegisterInfo)
             {
-                ui.Warning_Haler.RegisterError("Please complete the form with valid information & submit again");
                 return;
             }
 
@@ -154,6 +155,7 @@ namespace LoginRegisterSystem
                 ui.Warning_Haler.PasswordError();
                 return;
             }
+
 
             NewUser = new Registation();
             NewUser.name = ui.GetRegisterName;
@@ -170,13 +172,13 @@ namespace LoginRegisterSystem
             //register success callack
             void OnRegisterSuccess(string json)
             {
-                ui.ShowLoadingPage(false);
                 SuccessRegistation successRegistation = JsonUtility.FromJson<SuccessRegistation>(json);
+               
+                ui.SetVerifyEmail = NewUser.email;
+                ui.ShowLoadingPage(false);
                 ui.SetVerificationPage_BtnEvent(OnClickVerification, OnClickRecentCode);
                 ui.ShowVerificationPage();
                 ui.ShowToast("Register Success" , 2f, Color.green);
-                Show.Log(successRegistation.success.ToString());
-                Show.Log(successRegistation.data.token.ToString());
              
             }
             //register error callack
@@ -208,12 +210,9 @@ namespace LoginRegisterSystem
         }
         private void OnClickAppleRegister()
         {
-            Show.Log("Apple Register Zone");
+            ui.ShowToast("Coming soon", 2, Color.yellow);
         }
-        private void OnClickFacebookRegister()
-        {
-            Show.Log("Facebook Register Zone");
-        }
+    
         #endregion User Registration
 
         #region Email Verification
@@ -378,21 +377,26 @@ namespace LoginRegisterSystem
         #region Retive User Data
         public void GetUserInfo()
         {
-            string url = BaseURL + "/details";
             ui.ShowLoadingPage(true);
+
+            //if saved user was loagged in from facebook then no need to retrive from our akend server, Couse user will be exist in faceook server
+            if (SavedUser.data.email == "Facebook")
+            {
+                ui.ShowLoadingPage(false);
+                ui.ShowGamePage();
+                return;
+            }
+
+            string url = BaseURL + "/details";
             StartCoroutine(RestApiHandeler.PostData(url, Token, null, OnSuccessRetriveUserdata, OnUserRetriveError));
        
             void OnSuccessRetriveUserdata(string json)
             {
-                ui.ShowLoadingPage(false);
                 GetUserInfoStruct user = JsonUtility.FromJson<GetUserInfoStruct>(json);
-                ui.ShowGamePage();
-                //ui.ShowToast("User Retrive Success ", 2f, Color.green);
+                SavedUser = user;//save user info into cash
 
-                SavedUser = user;
-                Debug.Log("name : " + user.data.name);
-                Debug.Log("email: " + user.data.email);
-            
+                ui.ShowLoadingPage(false);
+                ui.ShowGamePage();
             }
             void OnUserRetriveError(string message)
             {
@@ -408,6 +412,96 @@ namespace LoginRegisterSystem
 
 
         #endregion Retive User Data
+
+
+
+        #region FacebookLogin
+        private void InitilizeFaceook()
+        {
+            if (!FB.IsInitialized)
+            {
+                FB.Init(() =>
+                {
+                    if (FB.IsInitialized)
+                    {
+                        Show.Log("IsInitialized");
+                        FB.ActivateApp();
+                    }
+                    else
+                    {
+                        Show.Log("Couldn't initialize");
+                    }
+                },
+                isGameShown =>
+                {
+                    if (!isGameShown)
+                    {
+                        Show.Log("IS not Game Shown");
+                    }
+                    else
+                        Show.Log("IS Game Shown");
+                });
+            }
+            else
+            {
+                Show.Log("IsInitialized");
+                FB.ActivateApp();
+            }
+        }
+
+        private void OnClickFacebookLogin()
+        {
+            ui.ShowLoadingPage(true);
+
+            IEnumerable<string> Permissions = new List<string>() { "public_profile", "email", "user_friends" };
+            FB.LogInWithReadPermissions(Permissions, Auth_Callback);
+
+            void Auth_Callback(ILoginResult result)
+            {
+                if (FB.IsLoggedIn)
+                {
+                    FB.API("/me?fields=id,name,email", HttpMethod.GET, GetUserInfo);//sent request to faceook for retrive user data
+                }
+                else
+                {
+                    ui.ShowToast("Login cancelled ", 2, Color.red);
+                }
+            }
+
+            void GetUserInfo(IResult userInfo)
+            {
+                ui.ShowLoadingPage(false);
+
+                if (userInfo.Error != null)
+                {
+                    ui.ShowToast(userInfo.Error, 2, Color.red);//pass error message
+                    return;
+                }
+
+                GetUserInfoStruct facebookUser = new GetUserInfoStruct();
+                facebookUser.data.name = userInfo.ResultDictionary["name"].ToString();
+                //facebookUser.data.id = userInfo.ResultDictionary["id"].ToString();
+                //facebookUser.data.email = userInfo.ResultDictionary["email"].ToString();
+                facebookUser.data.email = "Facebook";
+
+                SavedUser = facebookUser;
+                Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
+                ui.ShowGamePage();
+                ui.ShowToast("Facebook Login Success", 2, Color.green);//pass error message
+                Show.Log("Token" + Token);
+            }
+        }
+        #endregion FacebookLogin
+
+
+
+        #region AppleLogin
+        private void OnClickAppleLogin()
+        {
+            ui.ShowToast("Coming soon", 2, Color.yellow);
+        }
+        #endregion AppleLogin
+
 
     }
 }
