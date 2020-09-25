@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
-using System.Security.Cryptography;
 using UnityEngine;
-using Facebook.Unity;
+//using Facebook.Unity;
 using UI;
 
 namespace LoginRegisterSystem
@@ -12,17 +10,19 @@ namespace LoginRegisterSystem
     {
         [Header("Sever Root URL")]
         [SerializeField] protected string BaseURL = "http://18.140.117.58/live-educare/public/api";
+#pragma warning disable 649
         [SerializeField] private UI_Handeler ui;
+#pragma warning restore 649
 
         #region Initilize
         private void Start()
         {
-            ui.SetRegisterPage_BtnEvent(OnClickRegister, OnClickAppleRegister, OnClickFacebookLogin);
-            ui.SetLoginPage_BtnEvent(OnClickLogin, OnClickAppleLogin, OnClickFacebookLogin);
-            ui.SetResetPasswordPage_BtnEvent(OnClickResetPasswordRequest, OnclickPasswordResetToBack);
-            ui.SetNewResetPasswordPage_BtnEvent(OnClickSetNewPassword);
+            ui.RegisterPanel.SetButtonEvents(OnClickRegister, OnClickAppleRegister, OnClickFacebookLogin);
+            ui.LoginPanel.SetButtonEvents(OnClickLogin, OnClickAppleLogin, OnClickFacebookLogin);
+            ui.ForgotPasswordPanel.SetButtonEvents(OnClickResetPasswordRequest);
+            ui.NewPasswordPanel.SetResetBtnEvent(OnClickSetNewPassword);
+            ui.SaveduserPanel.SetButtonEvents(GetUserInfo);
             ui.SetLogOutBtnEvent(OnClickLogOut);
-            ui.SetSavedUserLoginEvent(GetUserInfo);
             InitilizeFaceook();
         }
         #endregion Initilize
@@ -30,9 +30,9 @@ namespace LoginRegisterSystem
 
         #region Saved User
         /// <summary>
-        /// return true if an user allready login
+        /// return true if an user allready loggedin
         /// </summary>
-        public static bool isLogedin //=> Token != "";
+        public static bool isLoggedin //=> Token != "";
         {
             get
             {
@@ -86,32 +86,34 @@ namespace LoginRegisterSystem
         SuccessLogIn loginresponse;
         protected void OnClickLogin()
         {
-            if (!ui.isValidLoginInfo)
+            if (!ui.LoginPanel.isValidLoginInfo)
             {
+                ui.ShowToast("Enter email and password", 2,  Color.red);
                 return;
             }
 
-            OnClickLogOut();
             LogInStruct user = new LogInStruct();
-            user.email = ui.GetLoginEmail;
-            user.password = ui.GetLoginPassword;
+            user.email = ui.LoginPanel.GetUserEmail;
+            user.password = ui.LoginPanel.GetUserPassword;
+
+            UnAuthorizedmail = user.email;//store email for unauthorized verification
+
+            ui.ShowLoadingPage(true);
 
             string Json = JsonUtility.ToJson(user);
             string url = BaseURL + "/auth/login";
-            ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnLoginSuccess, OnLoginError));
            
             //Login Success Callack
             void OnLoginSuccess(string json)
             {
+                OnClickLogOut();
                 ui.ShowLoadingPage(false);
                 
                 loginresponse = JsonUtility.FromJson<SuccessLogIn>(json);
                 Token = loginresponse.data.token;
                 GetUserInfo();
             
-
-                ui.ShowGamePage();
                 ui.ShowToast("Login Success", 2f, Color.green);
             }
 
@@ -122,6 +124,13 @@ namespace LoginRegisterSystem
                 if (json == RestApiHandeler.InternetError)
                 {
                     ui.Warning_Haler.ConnnectionError();
+                    return;
+                }
+                else if (RestApiHandeler.isUnAuthError(json))
+                {
+                    UserReAuthorize();
+                    ui.VerificationPage.SetBtnEvents(OnClickVerification, UserReAuthorize);
+                    ui.ShowToast("User not verified", 2, Color.red);
                     return;
                 }
 
@@ -136,7 +145,9 @@ namespace LoginRegisterSystem
         private void OnClickLogOut()
         {
             Token = "";
+            SavedUser = new GetUserInfoStruct();
             ui.ShowLoginPage();
+            ui.ShowToast("Logout success", 2, Color.green);
         }
         #endregion User LogOut
 
@@ -145,24 +156,30 @@ namespace LoginRegisterSystem
         Registation NewUser;//current Registred user data store for access to next step 
         private void OnClickRegister()
         {
-            if (!ui.isValidRegisterInfo)
+            if (!ui.RegisterPanel.isValidinInfo)
             {
+                ui.Warning_Haler.RegisterError("Please complete the form with valid information & submit again");
                 return;
-            }
-
-            if (!ui.isMached_RegisterPassword())
+            } else if (!ui.RegisterPanel.isMached_Password())
             {
                 ui.Warning_Haler.PasswordError();
                 return;
             }
-
+            else if (!ui.RegisterPanel.isValidPassword)
+            {
+                ui.ShowToast("Your password must be at last 8 digits", 2, Color.red);
+                return;
+            }
+            
 
             NewUser = new Registation();
-            NewUser.name = ui.GetRegisterName;
-            NewUser.email = ui.GetRegisterEmail;
-            NewUser.phone = ui.GetRegisterPhoneNumber;
-            NewUser.password = ui.GetRegisterPassword;
-            NewUser.confirm_password = ui.GetRegisterPassword;
+            NewUser.name = ui.RegisterPanel.GetUerName;
+            NewUser.email = ui.RegisterPanel.GetUserEmail;
+            NewUser.phone = ui.RegisterPanel.GetUserPhoneNumber;
+            NewUser.password = ui.RegisterPanel.GetUserPassword;
+            NewUser.confirm_password = ui.RegisterPanel.GetUserPassword;
+
+            UnAuthorizedmail = NewUser.email;//store email for unauthorized verification
 
             string Json = JsonUtility.ToJson(NewUser);
             string url = BaseURL + "/auth/register";
@@ -172,13 +189,13 @@ namespace LoginRegisterSystem
             //register success callack
             void OnRegisterSuccess(string json)
             {
+                ui.VerificationPage.SetBtnEvents(OnClickVerification, UserReAuthorize);
                 SuccessRegistation successRegistation = JsonUtility.FromJson<SuccessRegistation>(json);
                
-                ui.SetVerifyEmail = NewUser.email;
+                ui.VerificationPage.SetVerificationEmail = NewUser.email;
                 ui.ShowLoadingPage(false);
-                ui.SetVerificationPage_BtnEvent(OnClickVerification, OnClickRecentCode);
                 ui.ShowVerificationPage();
-                ui.ShowToast("Register Success" , 2f, Color.green);
+                ui.ShowToast("Registration Success", 2f, Color.green);
              
             }
             //register error callack
@@ -188,6 +205,12 @@ namespace LoginRegisterSystem
                 if (json == RestApiHandeler.InternetError)
                 {
                     ui.Warning_Haler.ConnnectionError();
+                    return;
+                }
+                else if (RestApiHandeler.isUnAuthError(json))
+                {
+                    UserReAuthorize();
+                    ui.VerificationPage.SetBtnEvents(OnClickVerification, UserReAuthorize);
                     return;
                 }
 
@@ -208,45 +231,72 @@ namespace LoginRegisterSystem
                 ui.ShowToast(blackstring, 2f, Color.red);
             }
         }
+
+
         private void OnClickAppleRegister()
         {
             ui.ShowToast("Coming soon", 2, Color.yellow);
         }
-    
+
         #endregion User Registration
 
+        #region ReAuthentication
+        private static string UnAuthorizedmail;//store UnAuthorized user email
+        
+        private void UserReAuthorize()
+        {
+            ui.ShowLoadingPage(true);
+           
+            RegistationResetVerifyEmail UnAuthorizedUser = new RegistationResetVerifyEmail();
+            UnAuthorizedUser.email = UnAuthorizedmail;
+            string Json = JsonUtility.ToJson(UnAuthorizedUser);
+            string url = BaseURL + "/auth/resend/otp";
+            StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnRecendCodeSuccess, OnRecendCodeError));
+
+            void OnRecendCodeSuccess(string json)
+            { 
+                ui.ShowLoadingPage(false);
+                ui.ShowVerificationPage();
+                ui.VerificationPage.SetVerificationEmail = UnAuthorizedUser.email;
+                ui.ShowToast("Verifiation code has been sent", 2,Color.green);
+            }
+            void OnRecendCodeError(string json)
+            {
+                ui.ShowLoadingPage(false);
+            }
+        }
+
+        #endregion ReAuthentication
+
         #region Email Verification
-        protected void OnClickVerification()
+        private void OnClickVerification()
         {
 
             VeryficationCode Verification = new VeryficationCode();
-            Verification.email = NewUser.email;
-            Verification.code = ui.GetVerificationCode;
+            Verification.email = UnAuthorizedmail;
+            Verification.code = ui.VerificationPage.GetVerificationCode;
 
             string Json = JsonUtility.ToJson(Verification);
             string url = BaseURL + "/auth/signup/verify";
             ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnEmailVerificationSuccess, OnEmailVerificationError));
 
-        void OnEmailVerificationSuccess(string json)
-        {
+            void OnEmailVerificationSuccess(string json)
+            {
                 ui.ShowLoadingPage(false);
                 ui.ShowLoginPage();
-            ui.ShowToast("Verification Success ", 2f, Color.green);
-        } 
-        void OnEmailVerificationError(string json)
-        {
+                ui.ShowToast("Verification Success ", 2f, Color.green);
+            } 
+            void OnEmailVerificationError(string json)
+            {
                 ui.ShowLoadingPage(false);
                 if (json == RestApiHandeler.InternetError)
                 {
                     ui.Warning_Haler.ConnnectionError();
+                    return;
                 }
-                ui.ShowToast("Email verification fail", 2f, Color.red);
-        }
-        }
-        private void OnClickRecentCode()
-        {
-            ui.ShowToast("Comming Soon", 2, Color.red);
+                ui.ShowToast("verification fail", 2f, Color.red);
+            }
         }
 
         #endregion Email Verification
@@ -257,8 +307,11 @@ namespace LoginRegisterSystem
         private void OnClickResetPasswordRequest()
         {
             PasswordResetRequest = new ResetPasswordEmail();
-            PasswordResetRequest.email = ui.GetResetPasswordReqEmail;
-           
+            PasswordResetRequest.email = ui.ForgotPasswordPanel.GetUserEmail;
+            SentPasswordResetRequest();
+        }
+        private void SentPasswordResetRequest()
+        {
             string Json = JsonUtility.ToJson(PasswordResetRequest);
             string url = BaseURL + "/password/create";
             ui.ShowLoadingPage(true);
@@ -268,9 +321,10 @@ namespace LoginRegisterSystem
             {
                 //ErrorResetPasswordVerifyCode response = new ErrorResetPasswordVerifyCode();
                 ui.ShowLoadingPage(false);
-                ui.SetVerificationPage_BtnEvent(OnClickResetPasswordVerification, OnClickRecentCode);
+                ui.VerificationPage.SetBtnEvents(OnClickResetPasswordVerification, SentPasswordResetRequest);
+                ui.VerificationPage.SetVerificationEmail = PasswordResetRequest.email;
                 ui.ShowVerificationPage();
-                ui.ShowToast("Check email", 2, Color.green);
+                ui.ShowToast("Verifiation code has been sent", 2, Color.green);
             }
 
             void OnPasswordResetRequestError(string json)
@@ -283,15 +337,12 @@ namespace LoginRegisterSystem
                 }
 
             
-                ErrorResetPasswordEmail errorResetPasswordEmail = JsonUtility.FromJson<ErrorResetPasswordEmail>(json);
-                ui.ShowToast("Check this email" + errorResetPasswordEmail.error.email, 2f, Color.red);
+                //ErrorResetPasswordEmail errorResetPasswordEmail = JsonUtility.FromJson<ErrorResetPasswordEmail>(json);
+                ui.ShowToast("User not found" , 2f, Color.red);
             }
         }
 
-        private void OnclickPasswordResetToBack()
-        {
-            ui.ShowLoginPage();
-        }
+  
 
         #endregion Reset Password Request
 
@@ -302,7 +353,7 @@ namespace LoginRegisterSystem
         {
             Verification = new ResetPasswordVerifyCode();
             Verification.email = PasswordResetRequest.email;
-            Verification.code = ui.GetVerificationCode;
+            Verification.code = ui.VerificationPage.GetVerificationCode;
 
             string Json = JsonUtility.ToJson(Verification);
             string url = BaseURL + "/password/find";
@@ -313,7 +364,7 @@ namespace LoginRegisterSystem
             {
                 ui.ShowLoadingPage(false);
                 ui.ShowSetNewPasswordPage();
-                ui.ShowToast("Verifyed", 2, Color.green);
+                ui.ShowToast("Verification Success ", 2f, Color.green);
             }
 
             void PasswordResetVerifiError(string json)
@@ -325,9 +376,9 @@ namespace LoginRegisterSystem
                     return;
                 }
 
-              //  ErrorResetPasswordVerifyCode errorResetPasswordVerifyCode = JsonUtility.FromJson<ErrorResetPasswordVerifyCode>(json);
-              
-                ui.ShowToast("Password reset fail", 2f, Color.red);
+                //  ErrorResetPasswordVerifyCode errorResetPasswordVerifyCode = JsonUtility.FromJson<ErrorResetPasswordVerifyCode>(json);
+
+                ui.ShowToast("verification fail", 2f, Color.red);
             }
         }
         #endregion Reset Password Email Verification
@@ -335,17 +386,22 @@ namespace LoginRegisterSystem
         #region Set New Password
         private void OnClickSetNewPassword()
         {
-            if (!ui.isMached_ResetPassword())
+            if (!ui.NewPasswordPanel.isMached_Password())
             {
                 ui.Warning_Haler.PasswordError();
-                ui.ShowToast("password Not Mached", 2, Color.red);
+                ui.ShowToast("Your password must be at last 8 digits", 2, Color.red);
+                return;
+            }
+            else if (!ui.NewPasswordPanel.isValidPassword)
+            {
+                ui.ShowToast("Your password must be at last 8 digits", 2, Color.red);
                 return;
             }
 
             ResetPasswordNewPassword NewPassData = new ResetPasswordNewPassword();
             NewPassData.code = Verification.code;
-            NewPassData.password = ui.GetNewPasword;
-            NewPassData.password_confirmation = ui.GetNewPasword;
+            NewPassData.password = ui.NewPasswordPanel.GetNewPasword;
+            NewPassData.password_confirmation = ui.NewPasswordPanel.GetNewPasword;
             NewPassData.email = Verification.email;
            
 
@@ -358,7 +414,7 @@ namespace LoginRegisterSystem
             void OnResetPasswordSuccess(string json)
             {
                 ui.ShowLoadingPage(false);
-                ui.ShowLoginPage();
+                ui.ShowPasswordResetSuccessPage();
             }
             //new Password error callack
             void OnResetPasswordError(string json)
@@ -368,7 +424,7 @@ namespace LoginRegisterSystem
                 {
                     ui.Warning_Haler.ConnnectionError();
                 }
-                ui.ShowToast("Email verification fail", 2f, Color.red);
+                ui.ShowToast("Verification fail", 2f, Color.red);
             }
         }
 
@@ -401,23 +457,22 @@ namespace LoginRegisterSystem
             void OnUserRetriveError(string message)
             {
                 ui.ShowLoadingPage(false);
+                ui.ShowToast("User not found", 2f, Color.red);
+
                 if (message == RestApiHandeler.InternetError)
-                    {
-                        ui.Warning_Haler.ConnnectionError();
-                    return;
-                    }
-                    ui.ShowToast("User Data Not Found", 2f, Color.red);
+                {
+                    ui.Warning_Haler.ConnnectionError();
+                }
             }
         }
 
 
         #endregion Retive User Data
 
-
-
         #region FacebookLogin
         private void InitilizeFaceook()
         {
+            /*
             if (!FB.IsInitialized)
             {
                 FB.Init(() =>
@@ -447,10 +502,12 @@ namespace LoginRegisterSystem
                 Show.Log("IsInitialized");
                 FB.ActivateApp();
             }
+            */
         }
 
         private void OnClickFacebookLogin()
         {
+            /*
             ui.ShowLoadingPage(true);
 
             IEnumerable<string> Permissions = new List<string>() { "public_profile", "email", "user_friends" };
@@ -490,15 +547,14 @@ namespace LoginRegisterSystem
                 ui.ShowToast("Facebook Login Success", 2, Color.green);//pass error message
                 Show.Log("Token" + Token);
             }
+            */
         }
         #endregion FacebookLogin
-
-
 
         #region AppleLogin
         private void OnClickAppleLogin()
         {
-            ui.ShowToast("Coming soon", 2, Color.yellow);
+           // ui.ShowToast("Coming soon", 2, Color.yellow);
         }
         #endregion AppleLogin
 

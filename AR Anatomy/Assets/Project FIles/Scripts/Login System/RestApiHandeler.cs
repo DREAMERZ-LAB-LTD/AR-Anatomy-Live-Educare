@@ -8,6 +8,7 @@ public static class RestApiHandeler
 {
 
     public static string InternetError = "InternetConnectionError";
+    public static bool isUnAuthError(string errorCode) => errorCode == "409" || errorCode == "401";
     #region Callback delegats
     public delegate void OnSuccessCallBack(string data);
     public delegate void OnErrorCallBack(string error);
@@ -50,27 +51,27 @@ public static class RestApiHandeler
             Show.Log("Web Request Send");
             //Now Request can be sent
             yield return uwr.SendWebRequest();
-
-            if (uwr.isNetworkError)
+            
+            if (isUnAuthError(uwr.responseCode.ToString()))//return this code when existing unverified user try to login
+            {
+                Debug.Log("Server Responce Unverified user try to Login");
+                onErrorCallBack(uwr.responseCode.ToString());
+            }
+            else if (uwr.isNetworkError)
             {
                 //No Internet
                 onErrorCallBack(InternetError);
                 // Show.Log(uwr.isNetworkError.ToString());
-
             }
             else if (uwr.isHttpError || uwr.responseCode != 200) // here 200 means success
             {
                 //Reuquest has problem And also we can categorize the error using responceCode
-
                 onErrorCallBack(uwr.downloadHandler.text);
-                //  onErrorCallBack("Error "+uwr.isHttpError.ToString()+ " -> "+ uwr.responseCode);
-                //  Show.Log(uwr.isHttpError.ToString()+ " -> "+ uwr.responseCode);
             }
             else
             {
                 //Success
                 onSuccessCallBack(uwr.downloadHandler.text);
-                // Show.Log("data-> "+ uwr.downloadHandler.text);
             }
         }
     }

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 1983320}
   - component: {fileID: 1983321}
   m_Layer: 5
-  m_Name: Confirm Password Image
+  m_Name: Confirm Password Grup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,10 +333,10 @@ RectTransform:
   m_Father: {fileID: 1956895952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0.67425716}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -150.5}
-  m_SizeDelta: {x: 0, y: 301.1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &152305201
 MonoBehaviour:
@@ -890,6 +890,7 @@ GameObject:
   - component: {fileID: 270322755}
   - component: {fileID: 270322757}
   - component: {fileID: 270322756}
+  - component: {fileID: 270322758}
   m_Layer: 5
   m_Name: Last Saved User Panel
   m_TagString: Untagged
@@ -958,6 +959,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 270322754}
   m_CullTransparentMesh: 0
+--- !u!114 &270322758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270322754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430abb91c924c1e4d8df1250d86d1e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SavedUserContinue: {fileID: 817937733}
+  LoginAnother: {fileID: 1608369196}
+  SavedUserName: {fileID: 917213343}
+  SavedUserEmail: {fileID: 1118439798}
 --- !u!1 &322049570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,10 +1316,10 @@ RectTransform:
   m_Father: {fileID: 866242237}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.034375, y: 0}
+  m_AnchorMax: {x: 0.97812504, y: 1}
+  m_AnchoredPosition: {x: -2, y: 0}
+  m_SizeDelta: {x: 18, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464180590
 MonoBehaviour:
@@ -1332,8 +1349,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279440147
-  m_fontColor: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1659,10 +1676,10 @@ RectTransform:
   m_Father: {fileID: 1956895952}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00000095367, y: 13.419991}
-  m_SizeDelta: {x: 320, y: 115.34}
+  m_AnchorMin: {x: 0.19184901, y: 0.45242232}
+  m_AnchorMax: {x: 0.80784905, y: 0.57600003}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &546321428
 MonoBehaviour:
@@ -1739,7 +1756,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e59c3dc514f6be74b93b93d810b7f70a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1980,10 +1997,10 @@ RectTransform:
   m_Father: {fileID: 1956895952}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038146973, y: -89.25001}
-  m_SizeDelta: {x: 320, y: 90}
+  m_AnchorMin: {x: 0.19184901, y: 0.356}
+  m_AnchorMax: {x: 0.80784905, y: 0.45242232}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &572906815
 MonoBehaviour:
@@ -2060,7 +2077,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 9c763f3b450955d46a46f62edb3ebc2a, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2087,7 +2104,7 @@ GameObject:
   - component: {fileID: 627869920}
   - component: {fileID: 627869921}
   m_Layer: 5
-  m_Name: Email Image
+  m_Name: Email Grup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2277,7 +2294,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2290,8 +2307,8 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 513
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2411,10 +2428,10 @@ RectTransform:
   m_Father: {fileID: 1956895952}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000095367, y: -179.25}
-  m_SizeDelta: {x: 320, y: 90}
+  m_AnchorMin: {x: 0.19184901, y: 0.25800002}
+  m_AnchorMax: {x: 0.80784905, y: 0.35500002}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &755369885
 MonoBehaviour:
@@ -2491,7 +2508,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e75325d9ef42b2349905bff92a2d58ed, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2638,7 +2655,7 @@ GameObject:
   - component: {fileID: 823240142}
   - component: {fileID: 823240143}
   m_Layer: 5
-  m_Name: Password Image
+  m_Name: Password Grup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2707,10 +2724,10 @@ RectTransform:
   m_Father: {fileID: 1956895952}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000095367, y: -350}
-  m_SizeDelta: {x: 320, y: 67.3}
+  m_AnchorMin: {x: 0.19184901, y: 0.08523799}
+  m_AnchorMax: {x: 0.80784905, y: 0.15782526}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -0.0000076293945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &866242238
 MonoBehaviour:
@@ -2775,8 +2792,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ef510df42b575814e8727209b5806f99, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
+  m_Type: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3230,7 +3247,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3243,8 +3260,8 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 513
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -4575,7 +4592,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have to input the confirm password
+  m_text: Your password must be at last 8 digits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4730,7 +4747,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -4743,8 +4760,8 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 513
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -5048,8 +5065,10 @@ GameObject:
   - component: {fileID: 1348990497}
   - component: {fileID: 1348990496}
   - component: {fileID: 1348990495}
+  - component: {fileID: 1348990500}
+  - component: {fileID: 1348990499}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas  *UI Script Attached
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5137,6 +5156,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1348990499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348990494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b86b65ace1754af419886c494da2c4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Warning_Haler: {fileID: 1348990500}
+  GamePanel: {fileID: 1848409498}
+  TostMessage: {fileID: 1388417394628005557}
+  LoginPanel: {fileID: 1388417394681867398}
+  RegisterPanel: {fileID: 1388417394328040706}
+  VerificationPage: {fileID: 1388417395348739414}
+  ForgotPasswordPanel: {fileID: 1388417395883044232}
+  NewPasswordPanel: {fileID: 1388417394415414052}
+  ResetPasswordSuccessPanel: {fileID: 1388417394737395164}
+  SaveduserPanel: {fileID: 270322758}
+  LogOutBtn: {fileID: 866242238}
+  LoadingPanel: {fileID: 647482328}
+--- !u!114 &1348990500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348990494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1926fcd4a8f3dde4390199927b018ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WarningPanelObj: {fileID: 1388417395216359474}
+  OkayBtn: {fileID: 1388417395353790430}
+  WarningSign: {fileID: 1388417394716722547}
+  WarningSubject: {fileID: 1388417394918992422}
+  WarningSolution: {fileID: 1388417395495301297}
+  Connnection_Sign: {fileID: 21300000, guid: 89a629b6f4b919e4cbfdd8d80702a6d9, type: 3}
+  PasswordIncorrect_Sign: {fileID: 21300000, guid: c5fc4a880759b11489b6235a36517f68,
+    type: 3}
+  CanNotRegister_Sign: {fileID: 21300000, guid: 2aa72c9debd286e47af33e4d2db361b2,
+    type: 3}
 --- !u!1 &1409118431
 GameObject:
   m_ObjectHideFlags: 0
@@ -5244,10 +5309,10 @@ RectTransform:
   m_Father: {fileID: 1848409499}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 22.449951}
-  m_SizeDelta: {x: 297.9, y: 44.899994}
+  m_AnchorMin: {x: 0.21300001, y: 0}
+  m_AnchorMax: {x: 0.78700006, y: 0.049000002}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -0.0000076293945, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1432729677
 MonoBehaviour:
@@ -5959,7 +6024,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have to input the password
+  m_text: Your password must be at last 8 digits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6114,7 +6179,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -6127,8 +6192,8 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 513
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -6618,10 +6683,10 @@ RectTransform:
   m_Father: {fileID: 1956895952}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00003624, y: -269.25}
-  m_SizeDelta: {x: 320, y: 90}
+  m_AnchorMin: {x: 0.19184901, y: 0.16000001}
+  m_AnchorMax: {x: 0.80784905, y: 0.257}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625871073
 MonoBehaviour:
@@ -6698,7 +6763,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f66f71ceb98f5a941b744c3568925493, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -6800,7 +6865,7 @@ GameObject:
   - component: {fileID: 1682679401}
   - component: {fileID: 1682679400}
   m_Layer: 5
-  m_Name: Phone numer  Image
+  m_Name: Phone numer  Grup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7385,10 +7450,10 @@ RectTransform:
   m_Father: {fileID: 152305200}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000019073486, y: -0.0000019073486}
-  m_SizeDelta: {x: 212.7, y: 212.7}
+  m_AnchorMin: {x: 0.296, y: 0.14764655}
+  m_AnchorMax: {x: 0.70400006, y: 0.8523233}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1947061434
 MonoBehaviour:
@@ -7836,8 +7901,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9220ebe1a97c2d41a40b51d93ecaca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseURL: http://18.140.117.58/dlabtrial/public/api
-  ui: {fileID: 1388417394221468967}
+  BaseURL: http://18.140.117.58/live-educare/public/api
+  ui: {fileID: 1348990499}
   loginresponse:
     success: 0
     data:
@@ -7854,7 +7919,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058356854
 GameObject:
@@ -8076,7 +8141,7 @@ GameObject:
   - component: {fileID: 263688206170320720}
   - component: {fileID: 263688206170320726}
   m_Layer: 5
-  m_Name: Visile & Hide Btn
+  m_Name: Password Visile & Hide Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8593,8 +8658,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.68799, y: -25.021076}
-  m_SizeDelta: {x: 375.37598, y: 50.042152}
+  m_AnchoredPosition: {x: 169.55147, y: -28.742313}
+  m_SizeDelta: {x: 339.10294, y: 57.484627}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &516100938994356115
 GameObject:
@@ -8677,8 +8742,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8853,8 +8918,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.68799, y: -114.59823}
-  m_SizeDelta: {x: 375.37598, y: 49.112152}
+  m_AnchoredPosition: {x: 169.55147, y: -125.76194}
+  m_SizeDelta: {x: 339.10294, y: 56.554626}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &516100939637597086
 GameObject:
@@ -9508,8 +9573,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9704,7 +9769,7 @@ GameObject:
   - component: {fileID: 1388417394037362519}
   - component: {fileID: 1388417394037362518}
   m_Layer: 5
-  m_Name: Confirm Reset Password Field (TMP) (1)
+  m_Name: Confirm Password Field (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9728,8 +9793,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170.01224, y: -133.9196}
-  m_SizeDelta: {x: 340.02448, y: 62.613064}
+  m_AnchoredPosition: {x: 170.01224, y: -128.32959}
+  m_SizeDelta: {x: 340.02448, y: 58.8864}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1388417394037362516
 CanvasRenderer:
@@ -10036,7 +10101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1388417394057999073
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10283,8 +10348,8 @@ RectTransform:
   m_Father: {fileID: 1388417394681867397}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.56030196, y: 0.05}
-  m_AnchorMax: {x: 0.8763962, y: 0.09157773}
+  m_AnchorMin: {x: 0.56030196, y: 0.15900001}
+  m_AnchorMax: {x: 0.8763962, y: 0.1994952}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10669,7 +10734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1388417394178580307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10703,8 +10768,8 @@ RectTransform:
   m_Father: {fileID: 1388417394328040710}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.60200006, y: 0.096}
-  m_AnchorMax: {x: 1, y: 0.124000005}
+  m_AnchorMin: {x: 0.60200006, y: 0.20300001}
+  m_AnchorMax: {x: 1, y: 0.23116508}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10809,7 +10874,7 @@ GameObject:
   - component: {fileID: 1388417394189405701}
   - component: {fileID: 1388417394189405707}
   m_Layer: 5
-  m_Name: Back to login page BtnText (TMP) (1)
+  m_Name: Register To Login Not_Btn Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10884,7 +10949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1388417394190591432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11117,134 +11182,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1388417394221468964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388417394221468966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e61ab8e9c020c540adc7eaacfd064ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WarningPanelObj: {fileID: 1388417395216359474}
-  OkayBtn: {fileID: 1388417395353790430}
-  WarningSign: {fileID: 1388417394716722547}
-  WarningSubject: {fileID: 1388417394918992422}
-  WarningSolution: {fileID: 1388417395495301297}
-  Connnection_Sign: {fileID: 21300000, guid: 89a629b6f4b919e4cbfdd8d80702a6d9, type: 3}
-  PasswordIncorrect_Sign: {fileID: 21300000, guid: c5fc4a880759b11489b6235a36517f68,
-    type: 3}
-  CanNotRegister_Sign: {fileID: 21300000, guid: 2aa72c9debd286e47af33e4d2db361b2,
-    type: 3}
---- !u!4 &1388417394221468965
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388417394221468966}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 703.31396, y: 918.36145, z: -321.26123}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1388417394221468966
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1388417394221468965}
-  - component: {fileID: 1388417394221468964}
-  - component: {fileID: 1388417394221468967}
-  m_Layer: 0
-  m_Name: Authentication UI Handeller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1388417394221468967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388417394221468966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b86b65ace1754af419886c494da2c4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Warning_Haler: {fileID: 1388417394221468964}
-  GamePanel: {fileID: 1848409498}
-  Login_Page: {fileID: 1388417394681867396}
-  Register_Page: {fileID: 1388417394328040705}
-  VerificationCode_Page: {fileID: 1388417395348739413}
-  ForgotPassword_Page: {fileID: 1388417395883044230}
-  SetNewPassword_Page: {fileID: 1388417394415414050}
-  PasswordResetSuccess_Page: {fileID: 1388417394737395163}
-  SavedUser_Page: {fileID: 270322754}
-  TostMessage: {fileID: 1388417394628005557}
-  PasswordVisbleSign: {fileID: 21300000, guid: e2810599c3a844d4f928bffb58dd8406, type: 3}
-  PasswordNonVisbleSign: {fileID: 21300000, guid: 846036873d876d6449e3879d10744903,
-    type: 3}
-  Login_EmailField: {fileID: 1388417395120129446}
-  Login_PasswordField: {fileID: 1388417395830770264}
-  Login_Btn: {fileID: 1388417395840794241}
-  AppleLogin_Btn: {fileID: 1388417395900517144}
-  FacebookLogin_Btn: {fileID: 1388417394336379825}
-  ForgotPassword_Btn: {fileID: 1388417395808341881}
-  GotoRegisterPage_Btn: {fileID: 1388417394084454015}
-  LoginPasswordVisible_Btn: {fileID: 1341686108}
-  Register_NameField: {fileID: 1388417395170886908}
-  Register_EmailField: {fileID: 1388417396012320530}
-  Register_PhoneNoField: {fileID: 1388417394002109131}
-  Register_PasswordField: {fileID: 1388417395230533987}
-  Register_ConfirmPasswordField: {fileID: 1388417395798652886}
-  RegisterToLogin_Btn: {fileID: 3228837083082938625}
-  Register_Btn: {fileID: 1388417394706161303}
-  AppleRegister_Btn: {fileID: 1388417394190591435}
-  FacebookRegister_Btn: {fileID: 1388417394057999078}
-  RegisterToLoginNow_Btn: {fileID: 1388417394189405707}
-  RegisterPasswordVisible_Btn: {fileID: 4241560753104956630}
-  RegisterConfirmPasswordVisible_Btn: {fileID: 263688206170320726}
-  Register_CountryCodeField: {fileID: 1388417395757895313}
-  RequiredNameMessage: {fileID: 3897552902200568268}
-  RequiredEmailMessage: {fileID: 331927758}
-  RequiredPhoneMessage: {fileID: 1197890966}
-  RequiredPasswordMessage: {fileID: 1959552181}
-  RequiredConfirmPasswordMessage: {fileID: 722099138}
-  VerificationCodeField: {fileID: 5491517508610550710}
-  VerifiToLogin_Btn: {fileID: 1388417395454750273}
-  Verify_Btn: {fileID: 5491517508110829499}
-  RecntVerificationCode_Btn: {fileID: 1388417395725108156}
-  SendingEmail: {fileID: 1388417395242691788}
-  ResetEmail_Field: {fileID: 516100938994356113}
-  ForgotPasswordToBack_Btn: {fileID: 1388417394310115362}
-  SentRequest_Btn: {fileID: 516100939637597084}
-  ForgotPasswordGoBack_Btn: {fileID: 1388417395183773633}
-  ResetPassword_Field: {fileID: 1388417395252769292}
-  ConfirmResetPassword_Field: {fileID: 1388417394037362518}
-  NewPasswordToBack_Btn: {fileID: 1388417394629433365}
-  ResetPassword_Btn: {fileID: 1388417395761782273}
-  ResetPasswordVisible_Btn: {fileID: 2349626465284150584}
-  ResetConfirmPasswordVisible_Btn: {fileID: 6947065338314218174}
-  ResetPasswordSuccessToBack_Btn: {fileID: 1388417395335397576}
-  ResetPasswordSuccessToHome_Btn: {fileID: 1388417395142432821}
-  SavedUserLogin: {fileID: 817937733}
-  LoginAnother: {fileID: 1608369196}
-  SavedUserName: {fileID: 917213343}
-  SavedUserEmail: {fileID: 1118439798}
-  LogOutBtn: {fileID: 866242238}
-  LoadingPanel: {fileID: 647482328}
 --- !u!222 &1388417394270426768
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11448,6 +11385,7 @@ GameObject:
   - component: {fileID: 1388417394328040710}
   - component: {fileID: 1388417394328040708}
   - component: {fileID: 1388417394328040711}
+  - component: {fileID: 1388417394328040706}
   m_Layer: 5
   m_Name: Registration Panel
   m_TagString: Untagged
@@ -11455,6 +11393,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1388417394328040706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388417394328040705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9677c14e9bb844baf460a179356a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NameField: {fileID: 1388417395170886908}
+  EmailField: {fileID: 1388417396012320530}
+  PhoneNoField: {fileID: 1388417394002109131}
+  PasswordField: {fileID: 1388417395230533987}
+  ConfirmPasswordField: {fileID: 1388417395798652886}
+  Register_Btn: {fileID: 1388417394706161303}
+  AppleRegister_Btn: {fileID: 1388417394190591435}
+  FacebookRegister_Btn: {fileID: 1388417394057999078}
+  RegisterToLogin_Btn: {fileID: 3228837083082938625}
+  RegisterToLoginNow_Btn: {fileID: 1388417394189405707}
+  PasswordVisible_Btn: {fileID: 4241560753104956630}
+  ConfirmPasswordVisible_Btn: {fileID: 263688206170320726}
+  Register_CountryCodeField: {fileID: 1388417395757895313}
+  RequiredNameMessage: {fileID: 3897552902200568268}
+  RequiredEmailMessage: {fileID: 331927758}
+  RequiredPhoneMessage: {fileID: 1197890966}
+  RequiredPasswordMessage: {fileID: 1959552181}
+  RequiredConfirmPasswordMessage: {fileID: 722099138}
+  VisileSign: {fileID: 21300000, guid: e2810599c3a844d4f928bffb58dd8406, type: 3}
+  NonVisileSign: {fileID: 21300000, guid: 846036873d876d6449e3879d10744903, type: 3}
 --- !u!222 &1388417394328040708
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11599,7 +11569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1388417394336379830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11685,6 +11655,7 @@ GameObject:
   - component: {fileID: 1388417394415414051}
   - component: {fileID: 1388417394415414049}
   - component: {fileID: 1388417394415414048}
+  - component: {fileID: 1388417394415414052}
   m_Layer: 5
   m_Name: Set New Password Panel
   m_TagString: Untagged
@@ -11714,6 +11685,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1388417394415414052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388417394415414050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd6e6d4180f1604280fefa5320b3dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Password_Field: {fileID: 1388417395252769292}
+  ConfirmPassword_Field: {fileID: 1388417394037362518}
+  Back_Btn: {fileID: 1388417394629433365}
+  ResetPassword_Btn: {fileID: 1388417395761782273}
+  PasswordVisible_Btn: {fileID: 2349626465284150584}
+  ConfirmPasswordVisible_Btn: {fileID: 6947065338314218174}
+  VisileSign: {fileID: 21300000, guid: e2810599c3a844d4f928bffb58dd8406, type: 3}
+  NonVisileSign: {fileID: 21300000, guid: 846036873d876d6449e3879d10744903, type: 3}
 --- !u!114 &1388417394456851980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12195,8 +12186,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12466,6 +12457,7 @@ GameObject:
   - component: {fileID: 1388417394681867397}
   - component: {fileID: 1388417394681867403}
   - component: {fileID: 1388417394681867402}
+  - component: {fileID: 1388417394681867398}
   m_Layer: 5
   m_Name: Login Panel
   m_TagString: Untagged
@@ -12500,6 +12492,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1388417394681867398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388417394681867396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9286413726506d7428058af47b65e266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Login_EmailField: {fileID: 1388417395120129446}
+  Login_PasswordField: {fileID: 1388417395830770264}
+  Login_Btn: {fileID: 1388417395840794241}
+  AppleLogin_Btn: {fileID: 1388417395900517144}
+  FacebookLogin_Btn: {fileID: 1388417394336379825}
+  ForgotPassword_Btn: {fileID: 1388417395808341881}
+  GotoRegisterPage_Btn: {fileID: 1388417394084454015}
+  LoginPasswordVisible_Btn: {fileID: 1341686108}
+  VisileSign: {fileID: 21300000, guid: e2810599c3a844d4f928bffb58dd8406, type: 3}
+  NonVisileSign: {fileID: 21300000, guid: 846036873d876d6449e3879d10744903, type: 3}
 --- !u!114 &1388417394681867402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13250,6 +13264,7 @@ GameObject:
   - component: {fileID: 1388417394737395160}
   - component: {fileID: 1388417394737395166}
   - component: {fileID: 1388417394737395161}
+  - component: {fileID: 1388417394737395164}
   m_Layer: 5
   m_Name: Reset Password Success Panel
   m_TagString: Untagged
@@ -13257,6 +13272,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1388417394737395164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388417394737395163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36fa501d0071a2b46b004c8e1b7dd954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Back_Btn: {fileID: 1388417395335397576}
+  GoHome_Btn: {fileID: 1388417395142432821}
 --- !u!222 &1388417394737395166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13283,7 +13312,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.4999962}
+  m_AnchoredPosition: {x: 0, y: -0.5}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1388417394755951581
@@ -13512,7 +13541,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_AnchoredPosition: {x: 0, y: -0.49998474}
   m_SizeDelta: {x: -20, y: -13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1388417394824146926
@@ -13601,8 +13630,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13713,8 +13742,8 @@ RectTransform:
   m_Father: {fileID: 1388417394328040710}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.096}
-  m_AnchorMax: {x: 0.582698, y: 0.124000005}
+  m_AnchorMin: {x: 0, y: 0.20300001}
+  m_AnchorMax: {x: 0.582698, y: 0.23116508}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -14692,7 +14721,7 @@ MonoBehaviour:
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
-  m_HideMobileInput: 1
+  m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
@@ -15941,8 +15970,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16130,7 +16159,7 @@ GameObject:
   - component: {fileID: 1388417395252769293}
   - component: {fileID: 1388417395252769292}
   m_Layer: 5
-  m_Name: Reset Password Field (TMP)
+  m_Name: Password Field (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16154,8 +16183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170.01224, y: -31.306532}
-  m_SizeDelta: {x: 340.02448, y: 62.613064}
+  m_AnchoredPosition: {x: 170.0122, y: -29.443176}
+  m_SizeDelta: {x: 340.02448, y: 58.8864}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1388417395252769330
 CanvasRenderer:
@@ -16581,6 +16610,7 @@ GameObject:
   - component: {fileID: 1388417395348739418}
   - component: {fileID: 1388417395348739416}
   - component: {fileID: 1388417395348739419}
+  - component: {fileID: 1388417395348739414}
   m_Layer: 5
   m_Name: Verification Panel
   m_TagString: Untagged
@@ -16588,6 +16618,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1388417395348739414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388417395348739413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95fb94466af08d4290ca6805bbd2138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VerificationCodeField: {fileID: 5491517508610550710}
+  VerifiToLogin_Btn: {fileID: 1388417395454750273}
+  Verify_Btn: {fileID: 5491517508110829499}
+  RecntVerificationCode_Btn: {fileID: 1388417395725108156}
+  SendingEmail: {fileID: 1388417395242691788}
 --- !u!222 &1388417395348739416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17058,7 +17105,7 @@ GameObject:
   - component: {fileID: 1388417395454750275}
   - component: {fileID: 1388417395454750273}
   m_Layer: 5
-  m_Name: BackBtn from verify
+  m_Name: Verifi To login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17243,8 +17290,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17597,8 +17644,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35
-  m_fontSizeBase: 35
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -17919,7 +17966,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Recent Code
+  m_text: Resend Code
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18148,8 +18195,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170.01224, y: -230.47766}
-  m_SizeDelta: {x: 340.02448, y: 50.503063}
+  m_AnchoredPosition: {x: 170.01224, y: -226.75099}
+  m_SizeDelta: {x: 340.02448, y: 57.956398}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1388417395761782273
 MonoBehaviour:
@@ -19073,7 +19120,7 @@ MonoBehaviour:
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
-  m_HideMobileInput: 1
+  m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
@@ -19495,6 +19542,7 @@ GameObject:
   - component: {fileID: 1388417395883044231}
   - component: {fileID: 1388417395883044229}
   - component: {fileID: 1388417395883044228}
+  - component: {fileID: 1388417395883044232}
   m_Layer: 5
   m_Name: Forgot Password  Panel
   m_TagString: Untagged
@@ -19526,6 +19574,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1388417395883044232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388417395883044230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae0abd0706768e4b9e6c6a45380e1e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Email_Field: {fileID: 516100938994356113}
+  SentRequest_Btn: {fileID: 516100939637597084}
+  Back_Btn: {fileID: 1388417394310115362}
+  GoBack_Btn: {fileID: 1388417395183773633}
 --- !u!114 &1388417395900517144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19616,7 +19680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1388417395900517147
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19757,7 +19821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1388417395906720899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19915,8 +19979,8 @@ RectTransform:
   m_Father: {fileID: 1388417394681867397}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.09816951, y: 0.05}
-  m_AnchorMax: {x: 0.53154707, y: 0.09157773}
+  m_AnchorMin: {x: 0.098000005, y: 0.16100001}
+  m_AnchorMax: {x: 0.53154707, y: 0.20166025}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20961,10 +21025,10 @@ RectTransform:
   m_Father: {fileID: 1865331451709904676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.592}
-  m_AnchorMax: {x: 0.5, y: 0.592}
+  m_AnchorMin: {x: 0.34600002, y: 0.425}
+  m_AnchorMax: {x: 0.65400004, y: 0.758}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 160}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865331453640205742
 MonoBehaviour:
@@ -21233,7 +21297,7 @@ GameObject:
   - component: {fileID: 3228837083082938626}
   - component: {fileID: 3228837083082938625}
   m_Layer: 5
-  m_Name: BackBtn from registe
+  m_Name: Register To Login_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21306,7 +21370,7 @@ GameObject:
   - component: {fileID: 4241560753104956624}
   - component: {fileID: 4241560753104956630}
   m_Layer: 5
-  m_Name: Visile & Hide Btn
+  m_Name: Password Visile & Hide Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

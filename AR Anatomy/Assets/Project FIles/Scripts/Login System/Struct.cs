@@ -230,3 +230,28 @@ public struct AppleLogin
     public string token;
 }
 #endregion
+
+
+
+#region ReAuthentication
+
+[System.Serializable]
+public struct RegistationResetVerifyEmail
+{
+    public string email;
+}
+
+[System.Serializable]
+public class SuccessfullVerifyTokenHolder
+{
+    public string token;
+}
+[System.Serializable]
+public class SuccessVerifyEmail
+{
+    public bool success;
+    public string message;
+    public SuccessfullVerifyTokenHolder data;
+}
+
+#endregion ReAuthentication
