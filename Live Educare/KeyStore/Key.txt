@@ -1,0 +1,16 @@
+
+Keystore info:
+Alias: dl470525
+Pass: le470525
+organization : Live Educare
+
+/*****************************************/
+App info
+Company name: Avatar Digital
+Version : 1.0.0 -  > 1.0.1
+Bundle Version Code: 1 -> 2
+bundle : com.coronationtechnologies.liveeducare
+
+
+
+old bundle :com.dreamerzlab.LiveEducareAR

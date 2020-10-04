@@ -1,7 +1,0 @@
-Project Name: Live Educare
-
-Package Name: com.dreamerzlab.LiveEducareAR
-key pass : dl998819
-alias pass : dl998820
-
-
