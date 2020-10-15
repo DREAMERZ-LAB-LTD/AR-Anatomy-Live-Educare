@@ -20,12 +20,22 @@ public class HomeSceneButtnController : MonoBehaviour
     //public Slider sliderBar;
     public Image imageFillArea;
 
+    [Header("Safety warning Panel Property")]
+    public GameObject SafetyWarningPanel;
+    public Button CloseBtn;
+    public Button I_UnderstandBtn;
+
     void Start()
     {
-        //sliderBar.gameObject.SetActive(false);
+        CloseBtn.onClick.RemoveAllListeners();
+        CloseBtn.onClick.AddListener(delegate { SafetyWarningPanel.SetActive(false); });
+
+        I_UnderstandBtn.onClick.RemoveAllListeners();
+        I_UnderstandBtn.onClick.AddListener(OnClickloadARScene);
+        SafetyWarningPanel.SetActive(false);
     }
 
-    public void OnStartButtonClick()
+    public void OnClickloadARScene ()
     {
         homeScreen.SetActive(false);
         loadingPanel.SetActive(true);
@@ -33,6 +43,11 @@ public class HomeSceneButtnController : MonoBehaviour
 
         //SceneManager.LoadScene("ARScene");
         StartCoroutine(LoadNewScene("ARScene"));
+    }
+
+    public void OnStartButtonClick()
+    {
+        SafetyWarningPanel.SetActive(true);
     }
 
     IEnumerator LoadNewScene(string sceneName)

@@ -31,6 +31,12 @@ public static class RestApiHandeler
         {
             data = "{}";
         }
+        if (url != null)
+        {
+            url += "?" + RemoteConfig.URLData.company_id + "1";// "2" is company ID "2" for AR Anatomy "1" for Live Educare
+            Show.Log("Final URL " + url);
+        }
+
         using (UnityWebRequest uwr = UnityWebRequest.Put(url, data))
         {
             //Setting up REST API CALL TO POST
@@ -87,6 +93,13 @@ public static class RestApiHandeler
     /// <returns></returns>
     public static IEnumerator GetData(string url, string token, OnSuccessCallBack onSuccessCallBack, OnErrorCallBack onErrorCallBack)
     {
+
+        if (url != null)
+        {
+            url += "?" + RemoteConfig.URLData.company_id + "1";// "2" is company ID "2" for AR Anatomy "1" for Live Educare
+            Show.Log("Final URL " + url);
+        }
+
         //Show.Log(url);
         using (UnityWebRequest uwr = UnityWebRequest.Get(url))
         {

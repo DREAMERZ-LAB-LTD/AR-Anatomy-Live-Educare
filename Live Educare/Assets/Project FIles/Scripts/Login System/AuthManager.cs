@@ -8,11 +8,15 @@ namespace LoginRegisterSystem
 {
     public class AuthManager : MonoBehaviour
     {
-        [Header("Sever Root URL")]
-        [SerializeField] protected string BaseURL = "http://54.254.22.111/live-educare/public/api";
+      //  [SerializeField] protected string BaseURL = "http://54.254.22.111/live-educare/public/api";
+
 #pragma warning disable 649
         [SerializeField] private UI_Handeler ui;
+    
+
+       private appAttributes URLData => RemoteConfig.URLData;
 #pragma warning restore 649
+
 
         #region Initilize
         private void Start()
@@ -82,7 +86,6 @@ namespace LoginRegisterSystem
         #endregion Saved User
 
         #region User Login
-        [SerializeField]
         SuccessLogIn loginresponse;
         protected void OnClickLogin()
         {
@@ -101,7 +104,8 @@ namespace LoginRegisterSystem
             ui.ShowLoadingPage(true);
 
             string Json = JsonUtility.ToJson(user);
-            string url = BaseURL + "/auth/login";
+            //string url = BaseURL + "/auth/login";
+            string url = URLData.BaseURL + URLData.Login;
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnLoginSuccess, OnLoginError));
            
             //Login Success Callack
@@ -130,6 +134,7 @@ namespace LoginRegisterSystem
                 {
                     UserReAuthorize();
                     ui.VerificationPage.SetBtnEvents(OnClickVerification, UserReAuthorize);
+                    return;
                 }
 
                 ErrorLogIn errorLogIn = JsonUtility.FromJson<ErrorLogIn>(json);
@@ -180,7 +185,8 @@ namespace LoginRegisterSystem
             UnAuthorizedmail = NewUser.email;//store email for unauthorized verification
 
             string Json = JsonUtility.ToJson(NewUser);
-            string url = BaseURL + "/auth/register";
+            //string url = BaseURL + "/auth/register";
+            string url = URLData.BaseURL + URLData.SignUp;
             ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnRegisterSuccess, OnRegisterError));
 
@@ -248,7 +254,8 @@ namespace LoginRegisterSystem
             RegistationResetVerifyEmail UnAuthorizedUser = new RegistationResetVerifyEmail();
             UnAuthorizedUser.email = UnAuthorizedmail;
             string Json = JsonUtility.ToJson(UnAuthorizedUser);
-            string url = BaseURL + "/auth/resend/otp";
+            //string url = BaseURL + "/auth/resend/otp";
+            string url = URLData.BaseURL + URLData.ResedOTP;
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnRecendCodeSuccess, OnRecendCodeError));
 
             void OnRecendCodeSuccess(string json)
@@ -275,7 +282,8 @@ namespace LoginRegisterSystem
             Verification.code = ui.VerificationPage.GetVerificationCode;
 
             string Json = JsonUtility.ToJson(Verification);
-            string url = BaseURL + "/auth/signup/verify";
+           // string url = BaseURL + "/auth/signup/verify";
+            string url = URLData.BaseURL + URLData.EmailVerification;
             ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnEmailVerificationSuccess, OnEmailVerificationError));
 
@@ -311,7 +319,8 @@ namespace LoginRegisterSystem
         private void SentPasswordResetRequest()
         {
             string Json = JsonUtility.ToJson(PasswordResetRequest);
-            string url = BaseURL + "/password/create";
+            //string url = BaseURL + "/password/create";
+            string url = URLData.BaseURL + URLData.PasswordResetRequest;
             ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnPasswordResetRequestSuccess, OnPasswordResetRequestError));
           
@@ -354,7 +363,8 @@ namespace LoginRegisterSystem
             Verification.code = ui.VerificationPage.GetVerificationCode;
 
             string Json = JsonUtility.ToJson(Verification);
-            string url = BaseURL + "/password/find";
+            //string url = BaseURL + "/password/find";
+            string url = URLData.BaseURL + URLData.PasswordResetRequestVerication;
             ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, PasswordResetVerifiSuccess, PasswordResetVerifiError));
          
@@ -404,7 +414,8 @@ namespace LoginRegisterSystem
            
 
             string Json = JsonUtility.ToJson(NewPassData);
-            string url = BaseURL + "/password/reset";
+           // string url = BaseURL + "/password/reset";
+            string url = URLData.BaseURL + URLData.PasswordReset;
             ui.ShowLoadingPage(true);
             StartCoroutine(RestApiHandeler.PostData(url, null, Json, OnResetPasswordSuccess, OnResetPasswordError));
           
@@ -441,7 +452,8 @@ namespace LoginRegisterSystem
                 return;
             }
 
-            string url = BaseURL + "/details";
+            //string url = BaseURL + "/details";
+            string url = URLData.BaseURL + URLData.GetUserInfo;
             StartCoroutine(RestApiHandeler.PostData(url, Token, null, OnSuccessRetriveUserdata, OnUserRetriveError));
        
             void OnSuccessRetriveUserdata(string json)
@@ -455,11 +467,11 @@ namespace LoginRegisterSystem
             void OnUserRetriveError(string message)
             {
                 ui.ShowLoadingPage(false);
-                ui.ShowToast("User not found", 2f, Color.red);
+                ui.ShowToast("Fail", 2f, Color.red);
 
                 if (message == RestApiHandeler.InternetError)
                 {
-                    ui.Warning_Haler.ConnnectionError();
+                   ui.Warning_Haler.ConnnectionError();
                 }
             }
         }

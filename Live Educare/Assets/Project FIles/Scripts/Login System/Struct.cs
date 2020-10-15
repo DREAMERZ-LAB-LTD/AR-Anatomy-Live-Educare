@@ -255,3 +255,49 @@ public class SuccessVerifyEmail
 }
 
 #endregion ReAuthentication
+
+/*
+#region RemoteConfig
+[System.Serializable]
+public struct UrlHolder
+{
+    public string BaseURL;
+    public string SignUp;
+    public string EmailVerification;
+    public string ResedOTP;
+    public string Login;
+    public string PasswordResetRequest;
+    public string PasswordResetRequestVerication;
+    public string PasswordReset;
+    public string GetUserInfo;
+    public string GetCategoryResponse;
+    public string GetFurnitureFromCategory;
+    public string company_id;
+}
+#endregion
+*/
+
+#region Structs
+public struct userAttributes
+{
+    // Optionally declare variables for any custom user attributes:
+    public bool expansionFlag;
+}
+[System.Serializable]
+public struct appAttributes
+{
+    // Optionally declare variables for any custom app attributes:
+    public string BaseURL;
+    public string SignUp;
+    public string EmailVerification;
+    public string ResedOTP;
+    public string Login;
+    public string PasswordResetRequest;
+    public string PasswordResetRequestVerication;
+    public string PasswordReset;
+    public string GetUserInfo;
+    public string GetCategoryResponse;
+    public string GetFurnitureFromCategory;
+    public string company_id;
+}
+#endregion Structs
