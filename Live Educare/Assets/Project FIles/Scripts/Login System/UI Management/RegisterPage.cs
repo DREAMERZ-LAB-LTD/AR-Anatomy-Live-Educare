@@ -37,6 +37,7 @@ namespace UI
         [SerializeField] private GameObject RequiredPhoneMessage;
         [SerializeField] private GameObject RequiredPasswordMessage;
         [SerializeField] private GameObject RequiredConfirmPasswordMessage;
+        [SerializeField] private GameObject Required_Terms_Message;
 
         [Header("Passwor visile & Hide Button Sprite")]
         [SerializeField] private Sprite VisileSign;
@@ -50,6 +51,10 @@ namespace UI
         [SerializeField] private Button CountryCodeChangeBtn;
         [SerializeField] private Button CloseBtn;
 
+        [Header("Terms & Condition Property's")]
+        [SerializeField] private Toggle Terms_And_Condition;
+
+
         private ISO3166Country CurrentCountry;//currcent country information where user stay now
 
 #pragma warning restore 649
@@ -59,6 +64,7 @@ namespace UI
         {
             CurrentCountry = CountryCode.GeneratorFromAlpha2("GB");
             CountryCodeChangeBtn.GetComponentInChildren<TMP_Text>().text = CurrentCountry.DialCodes[0];
+
             Countrypopup(false);
             CloseBtn.onClick.RemoveAllListeners();
             CloseBtn.onClick.AddListener(delegate { Countrypopup(false); });
@@ -88,6 +94,7 @@ namespace UI
             ConfirmPasswordField.onValueChanged.AddListener(OnTypePassword);
 
         }
+
 
         //set country code popup sub panel active or deactive
         private void Countrypopup(bool show) => CountryCodePopup.SetActive(show);
@@ -198,6 +205,8 @@ namespace UI
 
             RequiredPasswordMessage.SetActive(PasswordField.text.Length < 8);
             RequiredConfirmPasswordMessage.SetActive(ConfirmPasswordField.text.Length < 8);
+
+            Required_Terms_Message.SetActive(!Terms_And_Condition.isOn);
         }
 
         //deactive all of the register null message
@@ -206,6 +215,7 @@ namespace UI
             RequiredNameMessage.SetActive(false);
             RequiredEmailMessage.SetActive(false);
             RequiredPhoneMessage.SetActive(false);
+            Required_Terms_Message.SetActive(false);
         }
         private void HideRequiredPassword()
         {
@@ -220,7 +230,7 @@ namespace UI
             get
             {
                 bool isvalidPhone = PhoneNoField.text.Length == CurrentCountry.limit || (CurrentCountry.limit < 0 && PhoneNoField.text != "");
-                bool hasInfo = GetUerName != "" && GetUserEmail != "" && isvalidPhone;
+                bool hasInfo = GetUerName != "" && GetUserEmail != "" && isvalidPhone && Terms_And_Condition.isOn;
                 if (!hasInfo)
                 {
                     ShowRegisterRequiredInfo();
