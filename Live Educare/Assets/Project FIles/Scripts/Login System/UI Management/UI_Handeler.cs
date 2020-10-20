@@ -135,7 +135,10 @@ namespace UI
         public void ShowLoadingPage(bool show) => LoadingPanel.SetActive(show); //Popup Loadin Page On Ui Screen
 
 #pragma warning disable 4014
-        public void ShowToast(string message, float duration, Color color) => activity.ShowToast(message, duration, color);
+        public void ShowToast(string message, float duration, Color color)
+        { 
+            //activity.ShowToast(message, duration, color);
+        }
 #pragma warning restore 4014
 #endregion Activity Panel Transiction
 

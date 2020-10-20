@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: 
+  rsKeyList:
+  - metadata:
+      entityId: 8830c06f-286d-42c3-9569-725710b923c4
+    rs:
+      key: SignUp
+      type: string
+      value: /auth/register
+  - metadata:
+      entityId: 001d8830-9cab-413e-ab5a-db7248094aa3
+    rs:
+      key: company_id
+      type: string
+      value: company_id=
+  - metadata:
+      entityId: 78697af5-93eb-46a8-9fb7-ff2bf6442035
+    rs:
+      key: GetFurnitureFromCategory
+      type: string
+      value: /v1/getProduct?category_id=
+  - metadata:
+      entityId: 5d4cae4a-945a-4554-98f9-62410fcb9b0f
+    rs:
+      key: GetCategoryResponse
+      type: string
+      value: /v1/getProductCategory
+  - metadata:
+      entityId: d2a7e44b-fca8-45a2-8e79-5b458d08dfcd
+    rs:
+      key: GetUserInfo
+      type: string
+      value: /details
+  - metadata:
+      entityId: df41faab-0bfb-4af9-8e0b-10116f4fb665
+    rs:
+      key: PasswordReset
+      type: string
+      value: /password/reset
+  - metadata:
+      entityId: f2681110-c786-491a-983a-cc167dc200e8
+    rs:
+      key: PasswordResetRequestVerication
+      type: string
+      value: /password/find
+  - metadata:
+      entityId: 1f2df7c5-0c4a-4471-82c5-27202e108168
+    rs:
+      key: PasswordResetRequest
+      type: string
+      value: /password/create
+  - metadata:
+      entityId: aaa1c264-70a1-4c72-a738-cd61f5ca36a4
+    rs:
+      key: Login
+      type: string
+      value: /auth/login
+  - metadata:
+      entityId: a1845ad2-ccf5-44fc-a53b-bdecac47d9c0
+    rs:
+      key: ResedOTP
+      type: string
+      value: /auth/resend/otp
+  - metadata:
+      entityId: 207eb207-1e8d-4848-9a0d-ecb0276c81b9
+    rs:
+      key: EmailVerification
+      type: string
+      value: /auth/signup/verify
+  - metadata:
+      entityId: 70c74444-e0b6-47ba-bdf1-b7a6ee9e2ce5
+    rs:
+      key: BaseURL
+      type: string
+      value: http://54.254.22.111/live-educare/public/api
+  - metadata:
+      entityId: 4f14fe59-3e1f-4326-a316-30d25443abd3
+    rs:
+      key: SocialLogin
+      type: string
+      value: http://54.254.22.111/live-educare/public/social-login
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: 8830c06f-286d-42c3-9569-725710b923c4
+    rs:
+      key: SignUp
+      type: string
+      value: /auth/register
+  - metadata:
+      entityId: 001d8830-9cab-413e-ab5a-db7248094aa3
+    rs:
+      key: company_id
+      type: string
+      value: company_id=
+  - metadata:
+      entityId: 78697af5-93eb-46a8-9fb7-ff2bf6442035
+    rs:
+      key: GetFurnitureFromCategory
+      type: string
+      value: /v1/getProduct?category_id=
+  - metadata:
+      entityId: 5d4cae4a-945a-4554-98f9-62410fcb9b0f
+    rs:
+      key: GetCategoryResponse
+      type: string
+      value: /v1/getProductCategory
+  - metadata:
+      entityId: d2a7e44b-fca8-45a2-8e79-5b458d08dfcd
+    rs:
+      key: GetUserInfo
+      type: string
+      value: /details
+  - metadata:
+      entityId: df41faab-0bfb-4af9-8e0b-10116f4fb665
+    rs:
+      key: PasswordReset
+      type: string
+      value: /password/reset
+  - metadata:
+      entityId: f2681110-c786-491a-983a-cc167dc200e8
+    rs:
+      key: PasswordResetRequestVerication
+      type: string
+      value: /password/find
+  - metadata:
+      entityId: 1f2df7c5-0c4a-4471-82c5-27202e108168
+    rs:
+      key: PasswordResetRequest
+      type: string
+      value: /password/create
+  - metadata:
+      entityId: aaa1c264-70a1-4c72-a738-cd61f5ca36a4
+    rs:
+      key: Login
+      type: string
+      value: /auth/login
+  - metadata:
+      entityId: a1845ad2-ccf5-44fc-a53b-bdecac47d9c0
+    rs:
+      key: ResedOTP
+      type: string
+      value: /auth/resend/otp
+  - metadata:
+      entityId: 207eb207-1e8d-4848-9a0d-ecb0276c81b9
+    rs:
+      key: EmailVerification
+      type: string
+      value: /auth/signup/verify
+  - metadata:
+      entityId: 70c74444-e0b6-47ba-bdf1-b7a6ee9e2ce5
+    rs:
+      key: BaseURL
+      type: string
+      value: http://54.254.22.111/live-educare/public/api
+  - metadata:
+      entityId: 4f14fe59-3e1f-4326-a316-30d25443abd3
+    rs:
+      key: SocialLogin
+      type: string
+      value: http://54.254.22.111/live-educare/public/social-login
+  configId: 13f5c4bc-c493-4b46-878d-e2a83254deb2
+  currentEnvironmentId: d190731d-dfb1-4aab-aff2-134da405db82
+  environments:
+  - id: 4d76a7eb-dc41-498d-b988-8a95473b0272
+    appId: 
+    name: Release (Default)
+    description: 
+    createdAt: 2020-10-14T10:50:24Z
+    updatedAt: 2020-10-14T10:50:24Z
+  - id: 480eb53f-9007-4376-bacf-782ce0d9bad5
+    appId: 
+    name: Production
+    description: 
+    createdAt: 2020-10-14T10:53:10Z
+    updatedAt: 2020-10-14T10:53:10Z
+  - id: d190731d-dfb1-4aab-aff2-134da405db82
+    appId: 
+    name: Development
+    description: 
+    createdAt: 2020-10-14T10:56:13Z
+    updatedAt: 2020-10-14T10:56:13Z
+  rulesList: []
+  lastCachedRulesList: []
+  addedRulesIDs: []
+  updatedRulesIDs: []
+  deletedRulesIDs: []
