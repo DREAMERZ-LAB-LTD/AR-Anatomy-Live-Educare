@@ -18,13 +18,13 @@ MonoBehaviour:
   appIds:
   - 2696378337298401
   appLabels:
-  - App Name
+  - AR Anatomy
   cookie: 1
   logging: 1
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: 
+  androidKeystorePath: D:\Unity Projects\OnProgress\Dreamerz Lab Ltd\AR Anatomy\KeyStore\anatomykey.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

@@ -23,9 +23,14 @@ public class ARPlacement : MonoBehaviour
     [SerializeField, Header("3D Anatomy Avater")] 
     private GameObject AnatomyAvater;
 
-    [SerializeField, Header("Selection Delay Time"), Range(0.25f, 2.00f)] private float MaxSelectionDelay;
+    [SerializeField, Header("Selection Delay Time"), Range(0.25f, 2.00f)] 
+    private float MaxSelectionDelay;
+
+
     private float SelectionCounter = 0;
     private bool PlacedOnAR = false;
+    private bool TapOnUI = false;
+
 
     private void Start()
     {
@@ -44,18 +49,24 @@ public class ARPlacement : MonoBehaviour
             {
                 placementIndicator.SetActive(true);
                 PlacedOnAR = Input.GetMouseButtonDown(0);
+
                 if (PlacedOnAR)
                 {
+                    MeshRenderer[] rends = placementIndicator.GetComponentsInChildren<MeshRenderer>();
+                    foreach (var r in rends)
+                    {
+                        r.enabled = false;
+                    }
                     placementIndicator.SetActive(false);
                     AnatomyAvater.SetActive(true);
                 }
             }
-         
-            ARPlacementIndicator(new Vector3(Screen.width / 2, Screen.height / 4));
+
+            SetARPlacementPosition(new Vector3(Screen.width / 2, Screen.height / 4));
 
         } else
         {
-            ARPlacementIndicator(Input.mousePosition);
+            SetARPlacementPosition(Input.mousePosition);
             ObjectSelection();
         }
 
@@ -63,41 +74,39 @@ public class ARPlacement : MonoBehaviour
 
     }
 
-
     private void ObjectSelection()
     {
-
         if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
-            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
-                return;
-            if (touch.phase == TouchPhase.Moved)
+           
+            switch (touch.phase)
             {
-                SelectionCounter += Time.deltaTime;
+                case TouchPhase.Began:
+                    TapOnUI = EventSystem.current.IsPointerOverGameObject(touch.fingerId);
+                    break;
 
-                //placementIndicator.SetActive(SelectionCounter > MaxSelectionDelay);
-                InticatorStatus(SelectionCounter > MaxSelectionDelay);
+                case TouchPhase.Stationary:
+                    if (TapOnUI) return;
+
+                    if(isAvaterDetected)
+                        SelectionCounter += Time.deltaTime;
+                    placementIndicator.SetActive(SelectionCounter > MaxSelectionDelay);//object selected and ready to move position
+                    break;
+
+                case TouchPhase.Ended:
+                    SelectionCounter = 0;
+                    placementIndicator.SetActive(false);//object deselected and stop moveing
+                    break;
             }
+        
         }
-        else
-        {
-            SelectionCounter = 0;
-            // placementIndicator.SetActive(false);
-            InticatorStatus(false);
-        }
-    }
-    private void InticatorStatus(bool show, bool meshShow = false)
-    {
-        MeshRenderer[] rends = placementIndicator.GetComponentsInChildren<MeshRenderer>();
-        foreach (var r in rends)
-        {
-            r.enabled = meshShow;
-        }
-        placementIndicator.SetActive(show);
+   
     }
 
-    private void ARPlacementIndicator(Vector3 ScreenPoint)
+
+    //set AR Placement Intdicator on ar plane to raycast point
+    private void SetARPlacementPosition(Vector3 ScreenPoint)
     {
         if (!placementIndicator.activeSelf) return;
 
@@ -111,16 +120,16 @@ public class ARPlacement : MonoBehaviour
     }
 
 
+    //update avater position and orientation With Respect To placementIndicator
     private void UpdateAnatomyPosiotion()
     {
         if (!placementIndicator.activeSelf) return;
 
         float angle = placementIndicator.transform.rotation.eulerAngles.y;
         Vector3 rot = AnatomyAvater.transform.eulerAngles;
-
+        //When object will moveing y axis rotation for faceing to camera direction
         AnatomyAvater.transform.rotation = Quaternion.Euler(new Vector3(rot.x, angle, rot.z));
 
-        //AnatomyAvater.transform.position = placementIndicator.transform.position;
         AnatomyAvater.transform.DOMove(placementIndicator.transform.position, 0.25f);
     }
 
@@ -134,5 +143,17 @@ public class ARPlacement : MonoBehaviour
             return hitpoints;
         }
         return null;
+    }
+
+    //return true if racast detect any collider
+    //in this case we have just avate thats why no need to layer masking
+    private bool isAvaterDetected
+    {
+        get 
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            return Physics.Raycast(ray, out hit, 1000.0f); 
+        }
     }
 }

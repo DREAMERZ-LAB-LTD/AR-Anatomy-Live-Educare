@@ -13,15 +13,17 @@ public class AnatomyManager : MonoBehaviour
     public GameObject[] bodyParts;
     public Slider layerSlider;
     public GameObject selectedPart;
-    public TextMeshProUGUI nameText;
-    public TextMeshProUGUI detailsText;
     public GameObject detailedButton;
-    public GameObject detailPanel;
     public GameObject rootMaleAnatomy;
-  
+
+    [SerializeField, Header("Anatomy Detail Panel")]
+    private DetailPanel Detail;
+//    public TextMeshProUGUI nameText;
+//    public TextMeshProUGUI detailsText;
+//    public GameObject detailPanel;
+    [Space]
 
     public Material tempMaterial;
-
 
     public float fadeDelay = 0.0f;
     public float fadeTime = 0.5f;
@@ -54,56 +56,34 @@ public class AnatomyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        if(Input.GetMouseButtonDown(0))
+            SelectBodyParts();
+#else
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.touchCount == 1)
         {
-            if (IsPointerOverUIObject())
+            bool OnMoveing = false;
+            switch (Input.GetTouch(0).phase)
             {
-                return;
+                case TouchPhase.Began:
+                    break;
+                case TouchPhase.Stationary:
+                    OnMoveing = true;
+                    break;
+                case TouchPhase.Moved:
+                    OnMoveing = true;
+                    break;
+                case TouchPhase.Ended:
+                    if (!OnMoveing)
+                    {
+                        SelectBodyParts();
+                    }
+                    break;
             }
-            else
-            {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, 100.0f))
-                {
-                    if (selectedPart != null)
-                    {
-                        selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                        tempMaterial.color = Color.white;
-                    }
-                    selectedPart = hit.transform.gameObject;
-                    selectedPart.GetComponent<Renderer>().material.color = Color.green;
-                    if (selectedPart.name == "Body_Skin")
-                    {
-                        tempMaterial.color = Color.green;
-                    }
-                    nameText.text = hit.transform.name;
-                    detailsText.text = "This is a " + hit.transform.name;
-                    if (selectedPart.tag == "Interactable")
-                    {
-                        detailedButton.SetActive(true);
-                    }
-                    else
-                    {
-                        detailedButton.SetActive(false);
-                    }
-                    detailPanel.SetActive(true);
-                }
-                else
-                {
-                    if (selectedPart != null)
-                    {
-                        selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                        tempMaterial.color = Color.white;
-
-                        selectedPart = null;
-                    }
-                    detailPanel.SetActive(false);
-                }
-            }
-
         }
+#endif     
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (heart.activeSelf)
@@ -120,6 +100,62 @@ public class AnatomyManager : MonoBehaviour
             scaneBarPanel.SetActive(true);
 
     }
+    private void SelectBodyParts()
+    {
+
+        if (IsPointerOverUIObject() )
+        {
+            return;
+        }
+        else
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100.0f))
+            {
+                if (selectedPart != null)
+                {
+                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
+                    tempMaterial.color = Color.white;
+                }
+                selectedPart = hit.transform.gameObject;
+                selectedPart.GetComponent<Renderer>().material.color = Color.green;
+                if (selectedPart.name == "Body_Skin")
+                {
+                    tempMaterial.color = Color.green;
+                }
+                //                    nameText.text = hit.transform.name;
+                //                    detailsText.text = "This is a " + hit.transform.name;
+
+                string title = hit.transform.name;
+                string info = "This is a " + title;
+                Detail.SetMessage(title, info);
+                Detail.PopUp(true);
+                if (selectedPart.tag == "Interactable")
+                {
+                    detailedButton.SetActive(true);
+                }
+                else
+                {
+                    detailedButton.SetActive(false);
+                }
+                //                    detailPanel.SetActive(true);
+            }
+            else
+            {
+                if (selectedPart != null)
+                {
+                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
+                    tempMaterial.color = Color.white;
+
+                    selectedPart = null;
+                }
+                //                    detailPanel.SetActive(false);
+                Detail.PopUp(false);
+            }
+        }
+
+    }
 
     public void OnBackButtonClick()
     {
@@ -134,7 +170,8 @@ public class AnatomyManager : MonoBehaviour
 
     public void ShowLayer()
     {
-        detailPanel.SetActive(false);
+//        detailPanel.SetActive(false);
+        Detail.PopUp(false);
 
         for (int i = 0; i < bodyParts.Length; i++)
         {
@@ -159,7 +196,8 @@ public class AnatomyManager : MonoBehaviour
         organBackButton.SetActive(true);
         fullBody.SetActive(false);
         heart.SetActive(true);
-        detailPanel.SetActive(false);
+//        detailPanel.SetActive(false);
+        Detail.PopUp(false);
         layerSlider.gameObject.SetActive(false);
     }
 
