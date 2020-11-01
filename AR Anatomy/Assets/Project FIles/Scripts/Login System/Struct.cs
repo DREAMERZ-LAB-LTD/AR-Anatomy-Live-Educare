@@ -223,12 +223,31 @@ public struct AppleLoginFirstTime
     public string name;
     public string token;
 }
+
+
+[System.Serializable]
+public struct AppleLoginStruct
+{
+    public string provider;
+    public string token;
+}
+[System.Serializable]
+public struct AppleSignUpStruct
+{
+    public string email;
+    public string name;
+    public string provider;
+    public string token;
+}
+
+/*
 [System.Serializable]
 public struct AppleLogin
 {
     public string provider;
     public string token;
 }
+*/
 #endregion
 
 
@@ -256,28 +275,9 @@ public class SuccessVerifyEmail
 
 #endregion ReAuthentication
 
-/*
-#region RemoteConfig
-[System.Serializable]
-public struct UrlHolder
-{
-    public string BaseURL;
-    public string SignUp;
-    public string EmailVerification;
-    public string ResedOTP;
-    public string Login;
-    public string PasswordResetRequest;
-    public string PasswordResetRequestVerication;
-    public string PasswordReset;
-    public string GetUserInfo;
-    public string GetCategoryResponse;
-    public string GetFurnitureFromCategory;
-    public string company_id;
-}
-#endregion
-*/
 
-#region Structs
+
+#region RemoteConfig
 public struct userAttributes
 {
     // Optionally declare variables for any custom user attributes:
@@ -301,4 +301,4 @@ public struct appAttributes
     public string company_id;
     public string SocialLogin;
 }
-#endregion Structs
+#endregion RemoteConfig

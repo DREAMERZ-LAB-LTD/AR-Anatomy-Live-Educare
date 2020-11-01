@@ -624,8 +624,66 @@ namespace LoginRegisterSystem
         {
            // ui.ShowToast("Coming soon", 2, Color.yellow);
         }
-        #endregion AppleLogin
 
+        string backupJSON;
+        public void AppleSignUP(AppleSignUpStruct appleStruct)
+        {
+            ui.ShowLoadingPage(true);
+            appleStruct.provider = "Apple";
+            string json = JsonUtility.ToJson(appleStruct);
+            backupJSON = json;
+            string url = URLData.BaseURL + "/auth/apple-login";
+            StartCoroutine(RestApiHandeler.PostData(url, null, json, AppleLoginSuccessCallBack, AppleLoginErrorCallBack));
+
+            Show.Log(json);
+        }
+
+
+        public void AppleLogin(AppleLoginStruct appleStruct)
+        {
+            ui.ShowLoadingPage(true);
+            appleStruct.provider = "Apple";
+            string json = JsonUtility.ToJson(appleStruct);
+            backupJSON = json;
+            string url = URLData.BaseURL + "/auth/apple-login";
+            StartCoroutine(RestApiHandeler.PostData(url, null, json, AppleLoginSuccessCallBack, AppleLoginErrorCallBack));
+
+            Show.Log(json);
+        }
+
+
+
+        // [SerializeField] SuccessFacebookStruct successFacebookStruct;
+        public void AppleLoginSuccessCallBack(string val)
+        {
+            ui.ShowLoadingPage(false);
+            Show.Log(val);
+
+            successFacebookStruct = JsonUtility.FromJson<SuccessFacebookStruct>(val);
+            Token = successFacebookStruct.access_token;
+            GetUserInfo();
+        }
+        public void AppleLoginErrorCallBack(string val)
+        {
+            ui.ShowLoadingPage(false);
+            // calling the popupwith message
+            if (val == "0")
+            {
+                ui.Warning_Haler.ConnnectionError();
+                Show.Log(val);
+            }
+            else
+            {
+                ui.Warning_Haler.PasswordError();/*********************************it will change******************************/
+                Show.Log(val);
+            }
+
+            ui.ShowLoginPage();
+            Token = "";
+            Show.Log(val);
+        }
+
+        #endregion AppleLogin
 
     }
 }
