@@ -16,7 +16,7 @@ namespace UI
 
         [Header("Button's")]
         [SerializeField] private Button Login_Btn;
-        [SerializeField] private Button AppleLogin_Btn;
+ //       [SerializeField] private Button AppleLogin_Btn;
         [SerializeField] private Button FacebookLogin_Btn;
         [SerializeField] private Button ForgotPassword_Btn;
         [SerializeField] private Button GotoRegisterPage_Btn;
@@ -88,12 +88,12 @@ namespace UI
         {
             //remove event from button 
             Login_Btn.onClick.RemoveAllListeners();
-            AppleLogin_Btn.onClick.RemoveAllListeners();
+ //           AppleLogin_Btn.onClick.RemoveAllListeners();
             FacebookLogin_Btn.onClick.RemoveAllListeners();
 
             //set button's event
             Login_Btn.onClick.AddListener(OnClickLogin);
-            AppleLogin_Btn.onClick.AddListener(OnClickAppleLogin);
+ //           AppleLogin_Btn.onClick.AddListener(OnClickAppleLogin);
             FacebookLogin_Btn.onClick.AddListener(OnClickFaceBookLogin);
         }
 

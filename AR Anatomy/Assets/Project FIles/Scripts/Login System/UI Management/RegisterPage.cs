@@ -23,7 +23,7 @@ namespace UI
 
         [Header("Buttons's")]
         [SerializeField] private Button Register_Btn;
-        [SerializeField] private Button AppleRegister_Btn;
+  //      [SerializeField] private Button AppleRegister_Btn;
         [SerializeField] private Button FacebookRegister_Btn;
         [SerializeField] private Button RegisterToLogin_Btn;
         [SerializeField] private Button RegisterToLoginNow_Btn;
@@ -288,11 +288,11 @@ namespace UI
         public void SetButtonEvents(UnityAction OnClickRegister, UnityAction OnClickAppleRegister, UnityAction OnClickFacebookRegister)
         {
             Register_Btn.onClick.RemoveAllListeners();
-            AppleRegister_Btn.onClick.RemoveAllListeners();
+//            AppleRegister_Btn.onClick.RemoveAllListeners();
             FacebookRegister_Btn.onClick.RemoveAllListeners();
 
             Register_Btn.onClick.AddListener(OnClickRegister);
-            AppleRegister_Btn.onClick.AddListener(OnClickAppleRegister);
+ //           AppleRegister_Btn.onClick.AddListener(OnClickAppleRegister);
             FacebookRegister_Btn.onClick.AddListener(OnClickFacebookRegister);
         }
 
