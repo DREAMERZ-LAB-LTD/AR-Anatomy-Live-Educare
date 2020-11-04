@@ -1,0 +1,7 @@
+
+Keystore info:
+Alias: aranatomy
+Pass: aa470525
+organization : Dreamerz Lab
+
+/*****************************************/
