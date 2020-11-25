@@ -9,12 +9,14 @@ using UI;
 
 public class AnatomyManager : MonoBehaviour
 {
+    [Header("Anatomy Setup")]
     public GameObject fullBody;
     public GameObject[] bodyParts;
     public Slider layerSlider;
     public GameObject selectedPart;
     public GameObject detailedButton;
     public GameObject rootMaleAnatomy;
+
 
     [SerializeField, Header("Anatomy Detail Panel")]
     private DetailPanel Detail;

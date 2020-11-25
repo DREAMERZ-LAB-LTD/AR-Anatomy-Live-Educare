@@ -25,7 +25,6 @@ namespace UI
         private void OnEnable()
         {
             ClearFields();
-            Debug.Log("Enaled " + this.gameObject.name);
         }
         //clear input field
         private void ClearFields()

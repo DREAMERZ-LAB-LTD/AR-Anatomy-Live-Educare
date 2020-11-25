@@ -20,19 +20,51 @@ public class HomeSceneButtnController : MonoBehaviour
     //public Slider sliderBar;
     public Image imageFillArea;
 
+    
+
     [Header("Safety warning Panel Property")]
     public GameObject SafetyWarningPanel;
     public Button CloseBtn;
     public Button I_UnderstandBtn;
+    public Toggle IAggre;
+    [SerializeField] private Button StartBtn;
 
     void Start()
     {
+
+        Debug.Log("Agre" + IUnderstood);
+
         CloseBtn.onClick.RemoveAllListeners();
         CloseBtn.onClick.AddListener(delegate { SafetyWarningPanel.SetActive(false); });
 
         I_UnderstandBtn.onClick.RemoveAllListeners();
         I_UnderstandBtn.onClick.AddListener(OnClickloadARScene);
+        I_UnderstandBtn.onClick.AddListener(delegate { if(!IUnderstood) IUnderstood = IAggre.isOn; });
+
+        StartBtn.onClick.RemoveAllListeners();
+        if (IUnderstood)
+        {
+            StartBtn.onClick.AddListener(OnClickloadARScene);
+        }
+        else 
+        {
+            StartBtn.onClick.AddListener(OnStartButtonClick);
+        }
+
         SafetyWarningPanel.SetActive(false);
+    }
+
+    private bool IUnderstood
+    {
+        get
+        {
+            return 1 == PlayerPrefs.GetInt("Understand");
+        }
+        set
+        {
+            int u = value ? 1 : 0;
+            PlayerPrefs.SetInt("Understand", u);
+        }
     }
 
     public void OnClickloadARScene ()

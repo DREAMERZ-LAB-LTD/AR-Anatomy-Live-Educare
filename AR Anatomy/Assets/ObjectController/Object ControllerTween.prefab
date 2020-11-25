@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2737903914683862665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992071475795411661}
+  - component: {fileID: 1211874744192770941}
+  m_Layer: 0
+  m_Name: Object ControllerTween
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992071475795411661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737903914683862665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1211874744192770941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2737903914683862665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d92804e2c559447846130dfd89bd9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enableEditorLogs: 1
+  target: {fileID: 0}
+  useHorizontal: 1
+  horizontalSpeed: 5
+  useVertical: 1
+  verticalTarget: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  verticalSpeed: 3
+  minimumVerticalMovement: 0.6
+  useScaleChange: 1
+  scaleSpeed: 1
+  minSize: 0.25
+  maxSize: 3
+  minimumScaleSensitivity: 30
+  scaleSmoothness: 0.1
+  useMovement: 1
+  raycastLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  moveSpeed: 20
+  minimumMovementSensitivity: 5
+  movementSmoothness: 0.25
+  useTap: 1
+  singleTapMaxDuration: 0.15
+  maxDelayBetweenSecondTap: 0.25
+  oneTapEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  twoTapEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1211874744192770941}
+        m_MethodName: ResetRotations
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onTapHoldDuration: 2
+  onTapHoldEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  resetRotationSmoothness: 0.5

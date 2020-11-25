@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RotationHandler : MonoBehaviour
+public class VerticalRotationHandler : MonoBehaviour
 {
     [SerializeField] private float Speed;
     public GameObject rootMaleAnatomy;
-    private bool _rotate;
+    [SerializeField] private bool isStanding = true;
 
+    [Header("Anatomy Shadow Controller Reference")]
+    [SerializeField] ShadowController Shadow;
+
+    [Header("UI Reference")]
     [SerializeField] private Button RotateBtn;
     [SerializeField] private Sprite UpImg;
     [SerializeField] private Sprite DownImg;
@@ -19,12 +23,12 @@ public class RotationHandler : MonoBehaviour
         RotateBtn.onClick.RemoveAllListeners();
         RotateBtn.onClick.AddListener(MaleAnatomyRotateToggle);
 
+        isStanding = true;
+        Shadow.SetMode(isStanding);
     }
 
-    private void OnEnable()
-    {
-        rootMaleAnatomy.transform.rotation = LookTo(rootMaleAnatomy.transform, Camera.main.transform);
-    }
+    private void OnEnable()=>rootMaleAnatomy.transform.rotation = LookTo(rootMaleAnatomy.transform, Camera.main.transform);
+    
 
     public static Quaternion LookTo(Transform A, Transform B)
     {
@@ -35,37 +39,19 @@ public class RotationHandler : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        VerticalRotation();
-        HorizontalRotation();
-    }
+    void Update()=>VerticalRotation();
+    
     public void MaleAnatomyRotateToggle()
     { 
-        _rotate = !_rotate;
-    
+        isStanding = !isStanding;
+        Shadow.SetMode(isStanding);
     }
     
-
     private void VerticalRotation()
     {
         Vector3 rot = rootMaleAnatomy.transform.localEulerAngles;
-        rot.x = _rotate ? 90 : 0;
-        RotateBtn.GetComponent<Image>().sprite = _rotate ? UpImg : DownImg;
+        rot.x = isStanding ? 0 : 90;
+        RotateBtn.GetComponent<Image>().sprite = isStanding ? UpImg : DownImg;
         rootMaleAnatomy.transform.rotation = Quaternion.Slerp(rootMaleAnatomy.transform.rotation,Quaternion.Euler(rot), Speed * Time.deltaTime);
-    }
-
-    private void HorizontalRotation()
-    {
-        int touchCount = Input.touchCount;
-        if (touchCount < 2) return;// return from here when less than 2 touches on screen
-
-        Touch touch = Input.GetTouch(touchCount - 1);
-
-        float fraction = -touch.deltaPosition.x;
-
-        Vector3 rot = rootMaleAnatomy.transform.rotation.eulerAngles;
-        rot.y += fraction * Speed * Time.deltaTime;
-        rootMaleAnatomy.transform.rotation = Quaternion.Euler(rot);
     }
 }

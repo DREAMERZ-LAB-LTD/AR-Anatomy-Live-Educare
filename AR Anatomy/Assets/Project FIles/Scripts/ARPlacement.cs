@@ -114,7 +114,7 @@ public class ARPlacement : MonoBehaviour
         if (hits != null)
         {
             var hitPose = hits[0].pose;
-            Quaternion rot = RotationHandler.LookTo(placementIndicator.transform, Camera.main.transform);
+            Quaternion rot = VerticalRotationHandler.LookTo(placementIndicator.transform, Camera.main.transform);
             placementIndicator.transform.SetPositionAndRotation(hitPose.position, rot);
         }
     }
