@@ -16,7 +16,7 @@ namespace UI
 
         public static bool isBackFromARScene = false;
 
-        private Activity activity;//handel all of ui transiction system
+//        private Activity activity;//handel all of ui transition system
 
 
         [Header("Rerence All Of The Panel's")]
@@ -28,6 +28,8 @@ namespace UI
         public ResetPasswordSuccessPage ResetPasswordSuccessPanel;
         public SavedUserPage SaveduserPanel;
         [SerializeField] private GameObject GamePanel;
+        //this object handle the animation of ui elements
+        [SerializeField] private DL.UI.UIManager ui_manager;
 
         [Header("Reference all of the Sub panel's")]
         public WarningHaler Warning_Haler;//handel warning panel
@@ -53,9 +55,9 @@ namespace UI
 
         private void InitilizePanel()
         {
+            /*
             //it will controll all of ui transitions
             activity = new Activity(TostMessage);
-
             //initialy deactive all of the panel
             LoginPanel.Activity.SetActive(false);
             RegisterPanel.Activity.SetActive(false);
@@ -66,7 +68,7 @@ namespace UI
             SaveduserPanel.Activity.SetActive(false);
             TostMessage.SetActive(false);
             GamePanel.SetActive(false);
-
+            */
 
             if (!AuthManager.isLoggedin)
             {
@@ -88,14 +90,14 @@ namespace UI
 
         }
 
-        public void ShowSavedUser() => activity.Show(SaveduserPanel.Activity);
 
         /// <summary>
         /// initilize all of the default button event as default
-        ///default ui only control ui page trasition No other Logic execute with this buttons
+        ///default ui only control ui page trasition No other Logic to execute with this buttons
         /// </summary>
         private void InitilizeDefaultBtnEvent()
         {
+            
             //remove button's event
             LoginPanel.SetButtonEvents(ShowForgotPasswordPage, ShowRegisterPage);
             RegisterPanel.SetButtonEvents(ShowLoginPage);
@@ -103,7 +105,8 @@ namespace UI
             ForgotPasswordPanel.SetButtonEvents(ShowLoginPage, ShowLoginPage);
             ResetPasswordSuccessPanel.SetButtonEvents(ShowLoginPage, ShowLoginPage);
             SaveduserPanel.SetAnotherButtonEvents(ShowLoginPage);
-            NewPasswordPanel.SetBackuBtnEvent(ShowForgotPasswordPage);//From Set New Password page
+            NewPasswordPanel.SetBackuBtnEvent(ShowForgotPasswordPage);//From Set New Password 
+            
         }
 
 
@@ -115,25 +118,56 @@ namespace UI
         {
             LogOutBtn.onClick.RemoveAllListeners();
             LogOutBtn.onClick.AddListener(OnClickLogOut);
+            LogOutBtn.onClick.AddListener(ShowLoginPage);
         }
 
         #endregion Initilize Zone
 
 
         #region Activity Panel Transiction
-        public void ShowLoginPage()=>activity.Show(LoginPanel.Activity);
+        public void ShowLoginPage()
+        { 
+            ui_manager.SwitchMenuScene(0);
+            //activity.Show(LoginPanel.Activity);
+        }
+
+        public void ShowRegisterPage()
+        {
+            ui_manager.SwitchMenuScene(1);
+            //activity.Show(RegisterPanel.Activity);
+        }
+        public void ShowVerificationPage()
+        {
+            ui_manager.SwitchMenuScene(2);
+            //activity.Show(VerificationPage.Activity);
         
-        public void ShowRegisterPage()=>activity.Show(RegisterPanel.Activity);
-        
-        public void ShowVerificationPage()=>activity.Show(VerificationPage.Activity);
-        
-        public void ShowForgotPasswordPage()=>activity.Show(ForgotPasswordPanel.Activity);
-        
-        public void ShowSetNewPasswordPage()=> activity.Show(NewPasswordPanel.Activity);
-        
-        public void ShowPasswordResetSuccessPage()=>activity.Show(ResetPasswordSuccessPanel.Activity);
-        
-        public void ShowGamePage()=> activity.Show(GamePanel);
+        }
+        public void ShowForgotPasswordPage()
+        {
+            ui_manager.SwitchMenuScene(3);
+            //activity.Show(ForgotPasswordPanel.Activity);
+        }
+        public void ShowSetNewPasswordPage()
+        {
+            ui_manager.SwitchMenuScene(4);
+            //activity.Show(NewPasswordPanel.Activity);
+        }
+        public void ShowPasswordResetSuccessPage()
+        {
+            ui_manager.SwitchMenuScene(5);
+            //activity.Show(ResetPasswordSuccessPanel.Activity);
+        }
+        public void ShowSavedUser()
+        {
+            ui_manager.SwitchMenuScene(6);
+            //activity.Show(SaveduserPanel.Activity);
+        }
+
+        public void ShowGamePage()
+        {
+            ui_manager.SwitchMenuScene(7);
+            //activity.Show(GamePanel);
+        }
         
         public void ShowLoadingPage(bool show) => LoadingPanel.SetActive(show); //Popup Loadin Page On Ui Screen
 

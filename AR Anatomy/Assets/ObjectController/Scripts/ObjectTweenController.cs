@@ -145,8 +145,7 @@ namespace DreamerzLab.Controller
             if (useHorizontal)
             {
                 float rotY = _currentPrimaryTouch.deltaPosition.x * -horizontalSpeed * 3 * Mathf.Deg2Rad;
-                //target.Rotate(0, rotY, 0);
-                target.DORotate(new Vector3(0, rotY, 0), 0.15f, RotateMode.LocalAxisAdd);
+                target.DORotate(new Vector3(0, rotY, 0), 0.15f, RotateMode.WorldAxisAdd);
 
 #if UNITY_EDITOR
                 if (_enableEditorLogs)

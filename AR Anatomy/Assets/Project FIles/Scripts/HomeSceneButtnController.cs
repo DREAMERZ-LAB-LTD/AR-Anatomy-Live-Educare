@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DL.UI;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,20 +7,11 @@ using UnityEngine.UI;
 
 public class HomeSceneButtnController : MonoBehaviour
 {
-    public GameObject homeScreen;
-    public GameObject instructionScreen;
-    public GameObject aboutScreen;
-    public GameObject settingScreen;
-    public GameObject textCommingSoon;
-
-    public string imageDownloadLink;
-
+    [SerializeField] private UIContentAnimatorList SafetyWarning;
+    [Header("Scene Loading Visual Elements")]
     public GameObject loadingPanel;
     public TextMeshProUGUI loadingText;
-    //public Slider sliderBar;
     public Image imageFillArea;
-
-    
 
     [Header("Safety warning Panel Property")]
     public GameObject SafetyWarningPanel;
@@ -31,15 +22,15 @@ public class HomeSceneButtnController : MonoBehaviour
 
     void Start()
     {
-
-        Debug.Log("Agre" + IUnderstood);
-
         CloseBtn.onClick.RemoveAllListeners();
-        CloseBtn.onClick.AddListener(delegate { SafetyWarningPanel.SetActive(false); });
+        CloseBtn.onClick.AddListener(OnclickClose);
 
         I_UnderstandBtn.onClick.RemoveAllListeners();
         I_UnderstandBtn.onClick.AddListener(OnClickloadARScene);
-        I_UnderstandBtn.onClick.AddListener(delegate { if(!IUnderstood) IUnderstood = IAggre.isOn; });
+        I_UnderstandBtn.onClick.AddListener(delegate
+        { 
+            if(!IUnderstood) IUnderstood = IAggre.isOn; 
+        });
 
         StartBtn.onClick.RemoveAllListeners();
         if (IUnderstood)
@@ -58,28 +49,36 @@ public class HomeSceneButtnController : MonoBehaviour
     {
         get
         {
-            return 1 == PlayerPrefs.GetInt("Understand");
+            return 1 == PlayerPrefs.GetInt("understand");
         }
         set
         {
             int u = value ? 1 : 0;
-            PlayerPrefs.SetInt("Understand", u);
+            PlayerPrefs.SetInt("understand", u);
         }
     }
 
     public void OnClickloadARScene ()
     {
-        homeScreen.SetActive(false);
         loadingPanel.SetActive(true);
         loadingText.text = "Loading...";
 
-        //SceneManager.LoadScene("ARScene");
         StartCoroutine(LoadNewScene("ARScene"));
     }
 
     public void OnStartButtonClick()
     {
         SafetyWarningPanel.SetActive(true);
+        SafetyWarning.Appear();
+    }
+    private void OnclickClose()
+    {
+        SafetyWarning.DisAppear();
+        Invoke("DisableSafetyPanel", 0.25f);
+    }
+    private void DisableSafetyPanel()
+    {
+        SafetyWarningPanel.SetActive(false);
     }
 
     IEnumerator LoadNewScene(string sceneName)
@@ -89,68 +88,17 @@ public class HomeSceneButtnController : MonoBehaviour
         while (!async.isDone)
         {
             float progress = (Mathf.Clamp01(async.progress / 0.9f));
-            //sliderBar.value = progress;
             loadingText.text = (int)(progress * 100f) + "%";
-            //sliderBar.value = async.progress;
 
             imageFillArea.fillAmount = async.progress;
 
             if (async.progress==0.9f)
             {
                 imageFillArea.fillAmount = 1f;
-                //sliderBar.value = 1f;
                 async.allowSceneActivation = true;
             }
             yield return null;
         }
     }
 
-    public void OnInstructionButtonClick()
-    {
-        if (homeScreen.activeSelf)
-            homeScreen.SetActive(false);
-        if (!instructionScreen.activeSelf)
-            instructionScreen.SetActive(true);
-    }
-
-    public void OnAboutButtonClick()
-    {
-        if (homeScreen.activeSelf)
-            homeScreen.SetActive(false);
-        if (!aboutScreen.activeSelf)
-            aboutScreen.SetActive(true);
-    }
-
-    public void OnSettingsButtonClick()
-    {
-        StartCoroutine(WaitSomeTime());
-    }
-
-    private IEnumerator WaitSomeTime()
-    {
-        textCommingSoon.SetActive(true);
-        yield return new WaitForSeconds(1);
-        textCommingSoon.SetActive(false);
-    }
-
-    public void OnBackButtonClick()
-    {
-        if (!homeScreen.activeSelf)
-        {
-            homeScreen.SetActive(true);
-        }
-        if (instructionScreen.activeSelf)
-        {
-            instructionScreen.SetActive(false);
-        }
-        if (aboutScreen.activeSelf)
-        {
-            aboutScreen.SetActive(false);
-        }
-    }
-
-    public void OnDownloadButtonClick()
-    {
-        Application.OpenURL(imageDownloadLink);
-    }
 }

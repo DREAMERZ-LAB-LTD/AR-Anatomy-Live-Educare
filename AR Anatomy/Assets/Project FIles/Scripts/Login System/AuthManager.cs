@@ -148,7 +148,6 @@ namespace LoginRegisterSystem
         {
             Token = "";
             SavedUser = new GetUserInfoStruct();
-            ui.ShowLoginPage();
             ui.ShowToast("Logout success", 2, Color.green);
         }
         #endregion User LogOut
