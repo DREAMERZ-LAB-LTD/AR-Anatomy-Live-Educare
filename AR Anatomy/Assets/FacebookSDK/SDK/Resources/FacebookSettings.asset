@@ -25,7 +25,7 @@ MonoBehaviour:
   xfbml: 0
   frictionlessRequests: 1
   androidKeystorePath: D:\Unity Projects\OnProgress\Dreamerz Lab Ltd\live-educare\AR
-    Anatomy\KeyStore\anatomykey.keystore
+    Anatomy\KeyStore\dreamerzlab.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []

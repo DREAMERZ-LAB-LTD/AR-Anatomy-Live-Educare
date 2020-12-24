@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DL
+  companyName: dreamerz lab ltd
   productName: AR Anatomy
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -167,7 +167,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.dreamerzlab.aranatomy
+    Android: com.dreamerzlab.anatomy
     iPhone: com.coronationtechnologies.liveeducare
   buildNumber:
     iPhone: 12
@@ -248,8 +248,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{inproject}: KeyStore/anatomykey.keystore'
-  AndroidKeyaliasName: aranatomy
+  AndroidKeystoreName: '{inproject}: KeyStore/dreamerzlab.keystore'
+  AndroidKeyaliasName: dl103949
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

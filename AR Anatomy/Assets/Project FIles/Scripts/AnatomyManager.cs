@@ -172,24 +172,46 @@ public class AnatomyManager : MonoBehaviour
 
     public void ShowLayer()
     {
-//        detailPanel.SetActive(false);
         Detail.PopUp(false);
 
-        for (int i = 0; i < bodyParts.Length; i++)
+        //for (int i = 0; i < bodyParts.Length; i++)
+        //{
+        //    if (i == layerSlider.value)
+        //    {
+        //        bodyParts[i].SetActive(true);
+        //    }
+        //    else if (i < layerSlider.value)
+        //    {
+        //        bodyParts[i].SetActive(false);
+        //    }
+        //    if (selectedPart != null)
+        //    {
+        //        selectedPart.GetComponent<Renderer>().material.color = Color.white;
+        //        tempMaterial.color = Color.white;
+        //    }
+        //}
+
+
+        int currentIndx = (int)layerSlider.value;
+     
+        bodyParts[currentIndx].SetActive(true);
+
+        for (int i = 0; i < currentIndx; i++)
         {
-            if (i == layerSlider.value)
-            {
-                bodyParts[i].SetActive(true);
-            }
-            else if (i < layerSlider.value)
-            {
-                bodyParts[i].SetActive(false);
-            }
-            if (selectedPart != null)
-            {
-                selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                tempMaterial.color = Color.white;
-            }
+            bodyParts[i].SetActive(false);
+        }
+
+        bool isOnlySkeletnLayer = currentIndx == 3;
+        for (int i = currentIndx + 1; i < bodyParts.Length; i++)
+        {
+            bodyParts[i].SetActive(!isOnlySkeletnLayer);
+        }
+
+
+        if (selectedPart != null)
+        {
+            selectedPart.GetComponent<Renderer>().material.color = Color.white;
+            tempMaterial.color = Color.white;
         }
     }
 
