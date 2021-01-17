@@ -17,10 +17,10 @@ namespace UI
         [SerializeField] private TMP_Text WarningSubject;
         [SerializeField] private TMP_Text WarningSolution;
 
-        [Header("Warning Sign")]
-        [SerializeField] private Sprite Connnection_Sign;
-        [SerializeField] private Sprite PasswordIncorrect_Sign;
-        [SerializeField] private Sprite CanNotRegister_Sign;
+        [Header("Warnings Data")]
+        [SerializeField] private Warning connectionError;
+        [SerializeField] private Warning passwordError;
+        [SerializeField] private Warning registerError;
 #pragma warning restore 649
         private void Awake()
         {
@@ -30,21 +30,15 @@ namespace UI
         }
         public void ConnnectionError()
         {
-            Warning warniing = new Warning("No internet connection", "Please make sure that wifi or mobile data", Connnection_Sign);
-            ShowWarning(warniing);
+            ShowWarning(connectionError);
         }
         public void PasswordError()
         {
-            Warning warniing = new Warning("Your username or passrword does not match",
-                                          "Please try again with proper credential",
-                                          PasswordIncorrect_Sign);
-            ShowWarning(warniing);
+            ShowWarning(passwordError);
         }
-
-        public void RegisterError(string message)
+        public void RegisterError()
         {
-            Warning warniing = new Warning("Can not register",message, CanNotRegister_Sign);
-            ShowWarning(warniing);
+            ShowWarning(registerError);
         }
 
 
@@ -59,6 +53,7 @@ namespace UI
         public void Disable() => WarningPanelObj.SetActive(false);
     }
 
+    [System.Serializable]
     public class Warning 
     {
         public string Subject;

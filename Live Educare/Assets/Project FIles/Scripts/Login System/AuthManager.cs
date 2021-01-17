@@ -161,7 +161,7 @@ namespace LoginRegisterSystem
         {
             if (!ui.RegisterPanel.isValidinInfo)
             {
-                ui.Warning_Haler.RegisterError("Please complete the form with valid information & submit again");
+                ui.Warning_Haler.RegisterError();
                 return;
             } else if (!ui.RegisterPanel.isMached_Password())
             {
