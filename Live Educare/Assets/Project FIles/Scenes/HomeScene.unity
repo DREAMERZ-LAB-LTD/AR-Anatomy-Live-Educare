@@ -15396,6 +15396,7 @@ MonoBehaviour:
   RequiredNameMessage: {fileID: 3897552902200568268}
   RequiredEmailMessage: {fileID: 331927758}
   RequiredPhoneMessage: {fileID: 1197890966}
+  RequiredPhoneTxt: {fileID: 1446933081}
   RequiredPasswordMessage: {fileID: 1959552181}
   RequiredConfirmPasswordMessage: {fileID: 722099138}
   Required_Terms_Message: {fileID: 1662049553}

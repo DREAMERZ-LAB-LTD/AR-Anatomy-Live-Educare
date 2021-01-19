@@ -35,6 +35,7 @@ namespace UI
         [SerializeField] private GameObject RequiredNameMessage;
         [SerializeField] private GameObject RequiredEmailMessage;
         [SerializeField] private GameObject RequiredPhoneMessage;
+        [SerializeField] private TextMeshProUGUI RequiredPhoneTxt;
         [SerializeField] private GameObject RequiredPasswordMessage;
         [SerializeField] private GameObject RequiredConfirmPasswordMessage;
         [SerializeField] private GameObject Required_Terms_Message;
@@ -198,11 +199,14 @@ namespace UI
         //if user ignore required fields then popup required fields that user ignored
         private void ShowRegisterRequiredInfo()
         {
-            bool isvalidPhone = PhoneNoField.text.Length == CurrentCountry.limit || (CurrentCountry.limit < 0 && PhoneNoField.text != "");
+            bool actualPhoneNo = PhoneNoField.text.Length == CurrentCountry.limit;
+            bool isvalidPhone = actualPhoneNo || (CurrentCountry.limit < 0 && PhoneNoField.text != "");
+            RequiredPhoneMessage.SetActive(!isvalidPhone);
+            RequiredPhoneTxt.text = "Please enter a " + CurrentCountry.limit.ToString() + " digit number";
+
+
             RequiredNameMessage.SetActive(NameField.text == "");
             RequiredEmailMessage.SetActive(EmailField.text == "");
-            RequiredPhoneMessage.SetActive(!isvalidPhone);
-
             RequiredPasswordMessage.SetActive(PasswordField.text.Length < 8);
             RequiredConfirmPasswordMessage.SetActive(ConfirmPasswordField.text.Length < 8);
 
