@@ -14,7 +14,7 @@ namespace LoginRegisterSystem
         [SerializeField] private UI_Handeler ui;
     
 
-       private appAttributes URLData => RemoteConfig.URLData;
+       private appAttributes URLData => RemoteConfig.API.URLData;
 #pragma warning restore 649
 
 

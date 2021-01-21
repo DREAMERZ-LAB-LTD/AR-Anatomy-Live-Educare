@@ -14,158 +14,158 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rsKeyList:
   - metadata:
-      entityId: fa1bd16b-32b0-41d7-b2d7-c4a75e35d54a
+      entityId: dcc7dcb7-2698-4ced-8105-242467cbdeb6
     rs:
       key: SignUp
       type: string
       value: /auth/register
   - metadata:
-      entityId: 9f4052d6-02c9-445c-83f2-8df962d25529
+      entityId: 4161b3b0-f0d2-4fd6-8a12-63f2d4ee89b0
     rs:
       key: company_id
       type: string
       value: company_id=
   - metadata:
-      entityId: 36063590-a48e-468d-b76b-df7ea0be0b1c
+      entityId: 2dd39886-a304-4b32-8c7a-6daf5baf5dc2
     rs:
       key: GetFurnitureFromCategory
       type: string
       value: /v1/getProduct?category_id=
   - metadata:
-      entityId: 998f8e43-0268-410c-b19c-a02fcc6a1593
+      entityId: ea4f71c4-c5d3-4a44-93e7-5e43ad3ec5a0
     rs:
       key: GetCategoryResponse
       type: string
       value: /v1/getProductCategory
   - metadata:
-      entityId: 4361e7e7-d2f9-46df-a2c2-389b5268586a
+      entityId: 32043208-993c-4855-b5f3-d0221a048a1d
     rs:
       key: GetUserInfo
       type: string
       value: /details
   - metadata:
-      entityId: b04f291d-ad0b-46ef-b323-24440459a84c
+      entityId: 61faf801-f3be-41be-8841-65f085bf1c8a
     rs:
       key: PasswordReset
       type: string
       value: /password/reset
   - metadata:
-      entityId: 43b654c0-aac4-4938-b585-ac16bed1c35e
+      entityId: d5790519-c824-427f-a426-f167aceb54ea
     rs:
       key: PasswordResetRequestVerication
       type: string
       value: /password/find
   - metadata:
-      entityId: 88254166-d7a2-4e09-a24e-dd6e8fc02b51
+      entityId: c6f090d2-63e9-4be8-8603-0bdf9431061e
     rs:
       key: PasswordResetRequest
       type: string
       value: /password/create
   - metadata:
-      entityId: 3c2218e6-1d11-4e08-bfcf-e419f8748724
+      entityId: 331abf6c-ada7-4d0f-bcef-f84af711f7f0
     rs:
       key: Login
       type: string
       value: /auth/login
   - metadata:
-      entityId: ad46d79a-5054-4983-bad7-48a750e66447
+      entityId: 5fb03cb9-f96c-4cdd-80cd-eaa7bd9e811f
     rs:
       key: ResedOTP
       type: string
       value: /auth/resend/otp
   - metadata:
-      entityId: c224e87f-ab89-47e6-8a8b-f5b7c5d7e254
+      entityId: 49b8eb04-7ef8-4f7a-926c-6088bd0768b2
     rs:
       key: EmailVerification
       type: string
       value: /auth/signup/verify
   - metadata:
-      entityId: af497186-505d-43b5-9a4b-a3378d153dd8
+      entityId: 17fc5355-e452-4d59-a5d1-595003b3ec61
     rs:
       key: BaseURL
       type: string
       value: http://54.254.22.111/live-educare/public/api
   - metadata:
-      entityId: d81b5021-df6c-4361-863e-7c8f0990d596
+      entityId: cebae143-aa73-4ea5-9d03-e8a6da79727d
     rs:
       key: SocialLogin
       type: string
       value: http://54.254.22.111/live-educare/public/social-login
   rsLastCachedKeyList:
   - metadata:
-      entityId: fa1bd16b-32b0-41d7-b2d7-c4a75e35d54a
+      entityId: dcc7dcb7-2698-4ced-8105-242467cbdeb6
     rs:
       key: SignUp
       type: string
       value: /auth/register
   - metadata:
-      entityId: 9f4052d6-02c9-445c-83f2-8df962d25529
+      entityId: 4161b3b0-f0d2-4fd6-8a12-63f2d4ee89b0
     rs:
       key: company_id
       type: string
       value: company_id=
   - metadata:
-      entityId: 36063590-a48e-468d-b76b-df7ea0be0b1c
+      entityId: 2dd39886-a304-4b32-8c7a-6daf5baf5dc2
     rs:
       key: GetFurnitureFromCategory
       type: string
       value: /v1/getProduct?category_id=
   - metadata:
-      entityId: 998f8e43-0268-410c-b19c-a02fcc6a1593
+      entityId: ea4f71c4-c5d3-4a44-93e7-5e43ad3ec5a0
     rs:
       key: GetCategoryResponse
       type: string
       value: /v1/getProductCategory
   - metadata:
-      entityId: 4361e7e7-d2f9-46df-a2c2-389b5268586a
+      entityId: 32043208-993c-4855-b5f3-d0221a048a1d
     rs:
       key: GetUserInfo
       type: string
       value: /details
   - metadata:
-      entityId: b04f291d-ad0b-46ef-b323-24440459a84c
+      entityId: 61faf801-f3be-41be-8841-65f085bf1c8a
     rs:
       key: PasswordReset
       type: string
       value: /password/reset
   - metadata:
-      entityId: 43b654c0-aac4-4938-b585-ac16bed1c35e
+      entityId: d5790519-c824-427f-a426-f167aceb54ea
     rs:
       key: PasswordResetRequestVerication
       type: string
       value: /password/find
   - metadata:
-      entityId: 88254166-d7a2-4e09-a24e-dd6e8fc02b51
+      entityId: c6f090d2-63e9-4be8-8603-0bdf9431061e
     rs:
       key: PasswordResetRequest
       type: string
       value: /password/create
   - metadata:
-      entityId: 3c2218e6-1d11-4e08-bfcf-e419f8748724
+      entityId: 331abf6c-ada7-4d0f-bcef-f84af711f7f0
     rs:
       key: Login
       type: string
       value: /auth/login
   - metadata:
-      entityId: ad46d79a-5054-4983-bad7-48a750e66447
+      entityId: 5fb03cb9-f96c-4cdd-80cd-eaa7bd9e811f
     rs:
       key: ResedOTP
       type: string
       value: /auth/resend/otp
   - metadata:
-      entityId: c224e87f-ab89-47e6-8a8b-f5b7c5d7e254
+      entityId: 49b8eb04-7ef8-4f7a-926c-6088bd0768b2
     rs:
       key: EmailVerification
       type: string
       value: /auth/signup/verify
   - metadata:
-      entityId: af497186-505d-43b5-9a4b-a3378d153dd8
+      entityId: 17fc5355-e452-4d59-a5d1-595003b3ec61
     rs:
       key: BaseURL
       type: string
       value: http://54.254.22.111/live-educare/public/api
   - metadata:
-      entityId: d81b5021-df6c-4361-863e-7c8f0990d596
+      entityId: cebae143-aa73-4ea5-9d03-e8a6da79727d
     rs:
       key: SocialLogin
       type: string

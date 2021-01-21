@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: D:\Unity Projects\OnProgress\Dreamerz Lab Ltd\live-educare\AR
+  androidKeystorePath: C:\Users\OLY\Desktop\Live Educare Repo\AR-Anatomy-Live-Educare\AR
     Anatomy\KeyStore\dreamerzlab.keystore
   iosURLSuffix: 
   appLinkSchemes:

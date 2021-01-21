@@ -2253,7 +2253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.034375, y: 0}
   m_AnchorMax: {x: 0.97812504, y: 1}
-  m_AnchoredPosition: {x: -1.9999542, y: 0}
+  m_AnchoredPosition: {x: -1.999939, y: 0}
   m_SizeDelta: {x: 18, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464180590
@@ -2539,7 +2539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0452265, y: 0.069577724}
   m_AnchorMax: {x: 0.9543962, y: 0.120000005}
-  m_AnchoredPosition: {x: 0, y: -1.8999634}
+  m_AnchoredPosition: {x: 0, y: -1.9000244}
   m_SizeDelta: {x: 0, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &491930748
@@ -11178,7 +11178,6 @@ GameObject:
   - component: {fileID: 2023108770}
   - component: {fileID: 2023108769}
   - component: {fileID: 2023108772}
-  - component: {fileID: 2023108771}
   m_Layer: 0
   m_Name: Authentication Handeler
   m_TagString: Untagged
@@ -11216,18 +11215,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2023108771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023108768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f68b4759e3644c49910e5ba4615fdaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2023108772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28435,6 +28422,75 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1001 &7513371044408516503
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 540
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 934.0193
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3214409632433543022, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207717646113193213, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_Name
+      value: Remote Config URL Loader (API)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0d98a3c96e3e5cc45af45f23850b7db0, type: 3}
 --- !u!1 &8351749497194643444
 GameObject:
   m_ObjectHideFlags: 0

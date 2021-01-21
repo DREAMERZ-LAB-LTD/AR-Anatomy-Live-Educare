@@ -15,7 +15,7 @@ namespace LoginRegisterSystem
         [SerializeField] private UI_Handeler ui;
     
 
-       private appAttributes URLData => RemoteConfig.URLData;
+       private appAttributes URLData => RemoteConfig.API.URLData;
 #pragma warning restore 649
 
         #region Initilize
@@ -580,7 +580,7 @@ namespace LoginRegisterSystem
             ui.ShowLoadingPage(true);
 
             string json = JsonUtility.ToJson(facebookStruct);
-            string url = RemoteConfig.URLData.SocialLogin;
+            string url = RemoteConfig.API.URLData.SocialLogin;
             StartCoroutine(RestApiHandeler.PostData(url, null, json, FacebookLoginSuccessCallBack, FacebookLoginErrorCallBack));
 
             Show.Log(json);
