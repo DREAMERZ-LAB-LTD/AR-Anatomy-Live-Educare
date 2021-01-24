@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.299988, y: 8.299927}
+  m_AnchoredPosition: {x: 6.2999268, y: 8.299927}
   m_SizeDelta: {x: 61.6, y: 73.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &617665422
@@ -404,6 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5015bd95594b8da469844fe0fed92b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NextSceneNo: 1
   splashImage: {fileID: 617665422}
 --- !u!1 &1496887370
 GameObject:
@@ -545,6 +546,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Remote Config URL Loader (API)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207717646113193213, guid: 0d98a3c96e3e5cc45af45f23850b7db0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d98a3c96e3e5cc45af45f23850b7db0, type: 3}

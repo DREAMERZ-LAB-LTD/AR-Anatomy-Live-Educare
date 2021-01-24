@@ -16,8 +16,6 @@ namespace UI
 
         public static bool isBackFromARScene = false;
 
-//        private Activity activity;//handel all of ui transition system
-
 
         [Header("Rerence All Of The Panel's")]
         public LoginPage LoginPanel;
@@ -36,10 +34,7 @@ namespace UI
         [SerializeField] private GameObject TostMessage;
         [SerializeField] private GameObject LoadingPanel;
 
-        [Header("Game Menu Panel's Property ")]
-        [SerializeField] private Button LogOutBtn;
-
-        
+  
 #pragma warning restore 649
         #endregion Property
 
@@ -55,20 +50,7 @@ namespace UI
 
         private void InitilizePanel()
         {
-            /*
-            //it will controll all of ui transitions
-            activity = new Activity(TostMessage);
-            //initialy deactive all of the panel
-            LoginPanel.Activity.SetActive(false);
-            RegisterPanel.Activity.SetActive(false);
-            VerificationPage.Activity.SetActive(false);
-            ForgotPasswordPanel.Activity.SetActive(false);
-            NewPasswordPanel.Activity.SetActive(false);
-            ResetPasswordSuccessPanel.Activity.SetActive(false);
-            SaveduserPanel.Activity.SetActive(false);
-            TostMessage.SetActive(false);
-            GamePanel.SetActive(false);
-            */
+           
 
             if (!AuthManager.isLoggedin)
             {
@@ -79,7 +61,7 @@ namespace UI
             if (isBackFromARScene)
             {
                 //when user back from AR scene, we need to show game menu panel in run time because an user allready login
-                ShowGamePage();
+                OpenMenuScene();
             }
             else
             {
@@ -110,16 +92,6 @@ namespace UI
         }
 
 
-        /// <summary>
-        /// Set Logout button event where from control Logout systm
-        /// </summary>
-        /// <param name="OnClickLogOut">Logout action method</param>
-        public void SetLogOutBtnEvent(UnityAction OnClickLogOut)
-        {
-            LogOutBtn.onClick.RemoveAllListeners();
-            LogOutBtn.onClick.AddListener(OnClickLogOut);
-            LogOutBtn.onClick.AddListener(ShowLoginPage);
-        }
 
         #endregion Initilize Zone
 
@@ -128,45 +100,37 @@ namespace UI
         public void ShowLoginPage()
         { 
             ui_manager.SwitchMenuScene(0);
-            //activity.Show(LoginPanel.Activity);
         }
 
         public void ShowRegisterPage()
         {
             ui_manager.SwitchMenuScene(1);
-            //activity.Show(RegisterPanel.Activity);
         }
         public void ShowVerificationPage()
         {
             ui_manager.SwitchMenuScene(2);
-            //activity.Show(VerificationPage.Activity);
         
         }
         public void ShowForgotPasswordPage()
         {
             ui_manager.SwitchMenuScene(3);
-            //activity.Show(ForgotPasswordPanel.Activity);
         }
         public void ShowSetNewPasswordPage()
         {
             ui_manager.SwitchMenuScene(4);
-            //activity.Show(NewPasswordPanel.Activity);
         }
         public void ShowPasswordResetSuccessPage()
         {
             ui_manager.SwitchMenuScene(5);
-            //activity.Show(ResetPasswordSuccessPanel.Activity);
         }
         public void ShowSavedUser()
         {
             ui_manager.SwitchMenuScene(6);
-            //activity.Show(SaveduserPanel.Activity);
         }
 
-        public void ShowGamePage()
+        public void OpenMenuScene()
         {
-            ui_manager.SwitchMenuScene(7);
-            //activity.Show(GamePanel);
+            SceneManager.LoadScene(2);
         }
         
         public void ShowLoadingPage(bool show) => LoadingPanel.SetActive(show); //Popup Loadin Page On Ui Screen

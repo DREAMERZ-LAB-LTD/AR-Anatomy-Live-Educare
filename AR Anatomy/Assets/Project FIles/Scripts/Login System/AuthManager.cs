@@ -26,7 +26,7 @@ namespace LoginRegisterSystem
             ui.ForgotPasswordPanel.SetButtonEvents(OnClickResetPasswordRequest);
             ui.NewPasswordPanel.SetResetBtnEvent(OnClickSetNewPassword);
             ui.SaveduserPanel.SetButtonEvents(delegate { GetUserInfo(false); });
-            ui.SetLogOutBtnEvent(OnClickLogOut);
+
             InitilizeFaceook();
         }
         #endregion Initilize
@@ -110,7 +110,7 @@ namespace LoginRegisterSystem
             //Login Success Callack
             void OnLoginSuccess(string json)
             {
-                OnClickLogOut();
+                LogOut();
                 ui.ShowLoadingPage(false);
                 
                 loginresponse = JsonUtility.FromJson<SuccessLogIn>(json);
@@ -144,11 +144,10 @@ namespace LoginRegisterSystem
         #endregion User Login
 
         #region User LogOut
-        private void OnClickLogOut()
+        public static void LogOut()
         {
             Token = "";
             SavedUser = new GetUserInfoStruct();
-            ui.ShowToast("Logout success", 2, Color.green);
         }
         #endregion User LogOut
 
@@ -442,14 +441,6 @@ namespace LoginRegisterSystem
         {
             ui.ShowLoadingPage(true);
 
-          /*  //if saved user was loagged in from facebook then no need to retrive from our akend server, Couse user will be exist in faceook server
-            if (SavedUser.data.email == "Facebook")
-            {
-                ui.ShowLoadingPage(false);
-                ui.ShowGamePage();
-                return;
-            }
-          */
             string url = URLData.BaseURL + URLData.GetUserInfo;
             StartCoroutine(RestApiHandeler.PostData(url, Token, null, OnSuccessRetriveUserdata, OnUserRetriveError));
        
@@ -466,7 +457,7 @@ namespace LoginRegisterSystem
                 }
                 else
                 { 
-                    ui.ShowGamePage();
+                    ui.OpenMenuScene();
                 }
             }
             void OnUserRetriveError(string message)

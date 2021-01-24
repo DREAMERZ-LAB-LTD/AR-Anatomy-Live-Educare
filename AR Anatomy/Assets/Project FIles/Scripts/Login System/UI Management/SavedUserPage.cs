@@ -53,8 +53,8 @@ namespace UI
         /// <param name="OnClickContinue"></param>
         public void SetButtonEvents(UnityAction OnClickContinue)
         {
-                SavedUserContinue.onClick.RemoveAllListeners(); //From saved user page
-                SavedUserContinue.onClick.AddListener(OnClickContinue); 
+            SavedUserContinue.onClick.RemoveAllListeners(); //From saved user page
+            SavedUserContinue.onClick.AddListener(OnClickContinue);
         }
     }
 

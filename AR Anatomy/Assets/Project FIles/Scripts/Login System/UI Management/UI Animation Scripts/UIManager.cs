@@ -6,14 +6,27 @@ namespace DL.UI
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private float disableDelay = 0.25f;
+        [Header("Default Active Page Not Necessary")]
+        [SerializeField] private UIContentAnimatorList DefaultActivePage;
+       
+        [Header("Animationable Pages")]
         [SerializeField] List<UIContentAnimatorList> animatorLists = new List<UIContentAnimatorList>();
+
+        [SerializeField] private float disableDelay = 0.25f;
         [HideInInspector] public int currentScene = 0;
         [Space]
         [SerializeField] AudioSource _audioSource;
         [SerializeField] AudioClip _uiClickSound;
         public void ButtonClick() => _audioSource.PlayOneShot(_uiClickSound, Random.Range(0.5f, 0.8f));
 
+
+        private void Start()
+        {
+            if (DefaultActivePage != null)
+            {
+                DefaultActivePage.Appear();
+            }
+        }
 
         /// <summary>
         /// Call this method from button to switch menus

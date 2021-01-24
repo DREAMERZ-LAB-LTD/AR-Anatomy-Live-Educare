@@ -6,26 +6,25 @@ using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UI;
-
-public class AnatomyManager : MonoBehaviour
+using Anatomy.Body;
+public class AnatomyManager : AnatomySystem
 {
     [Header("Anatomy Setup")]
     public GameObject fullBody;
-    public GameObject[] bodyParts;
-    public Slider layerSlider;
-    public GameObject selectedPart;
+    private GameObject selectedPart;
     public GameObject detailedButton;
     public GameObject rootMaleAnatomy;
 
 
+    public Slider layerSlider;
+    public static int SelectedLAyer = 0;
+
     [SerializeField, Header("Anatomy Detail Panel")]
     private DetailPanel Detail;
-//    public TextMeshProUGUI nameText;
-//    public TextMeshProUGUI detailsText;
-//    public GameObject detailPanel;
-    [Space]
 
-    public Material tempMaterial;
+
+    [Space]
+    public Material bodySkinMat;
 
     public float fadeDelay = 0.0f;
     public float fadeTime = 0.5f;
@@ -39,11 +38,14 @@ public class AnatomyManager : MonoBehaviour
     public GameObject heart;
 
     private Color[] colors;
-    // Start is called before the first frame update
-    void Start()
-    {
-        layerSlider.maxValue = 8;
-    }
+
+
+
+
+    private void OnEnable()=>layerSlider.value = SelectedLAyer;
+    void Start()=> layerSlider.maxValue = bodyParts.Length - 1;
+
+    
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
@@ -118,21 +120,20 @@ public class AnatomyManager : MonoBehaviour
                 if (selectedPart != null)
                 {
                     selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                    tempMaterial.color = Color.white;
+                    bodySkinMat.color = Color.white;
                 }
                 selectedPart = hit.transform.gameObject;
                 selectedPart.GetComponent<Renderer>().material.color = Color.green;
                 if (selectedPart.name == "Body_Skin")
                 {
-                    tempMaterial.color = Color.green;
+                    bodySkinMat.color = Color.green;
                 }
-                //                    nameText.text = hit.transform.name;
-                //                    detailsText.text = "This is a " + hit.transform.name;
 
                 string title = hit.transform.name;
                 string info = "This is a " + title;
                 Detail.SetMessage(title, info);
                 Detail.PopUp(true);
+
                 if (selectedPart.tag == "Interactable")
                 {
                     detailedButton.SetActive(true);
@@ -141,14 +142,13 @@ public class AnatomyManager : MonoBehaviour
                 {
                     detailedButton.SetActive(false);
                 }
-                //                    detailPanel.SetActive(true);
             }
             else
             {
                 if (selectedPart != null)
                 {
                     selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                    tempMaterial.color = Color.white;
+                    bodySkinMat.color = Color.white;
 
                     selectedPart = null;
                 }
@@ -174,44 +174,14 @@ public class AnatomyManager : MonoBehaviour
     {
         Detail.PopUp(false);
 
-        //for (int i = 0; i < bodyParts.Length; i++)
-        //{
-        //    if (i == layerSlider.value)
-        //    {
-        //        bodyParts[i].SetActive(true);
-        //    }
-        //    else if (i < layerSlider.value)
-        //    {
-        //        bodyParts[i].SetActive(false);
-        //    }
-        //    if (selectedPart != null)
-        //    {
-        //        selectedPart.GetComponent<Renderer>().material.color = Color.white;
-        //        tempMaterial.color = Color.white;
-        //    }
-        //}
-
-
         int currentIndx = (int)layerSlider.value;
-     
-        bodyParts[currentIndx].SetActive(true);
 
-        for (int i = 0; i < currentIndx; i++)
-        {
-            bodyParts[i].SetActive(false);
-        }
-
-        bool isOnlySkeletnLayer = currentIndx == 3;
-        for (int i = currentIndx + 1; i < bodyParts.Length; i++)
-        {
-            bodyParts[i].SetActive(!isOnlySkeletnLayer);
-        }
-
+        ShowBodyLayer(currentIndx);
 
         if (selectedPart != null)
         {
             selectedPart.GetComponent<Renderer>().material.color = Color.white;
-            tempMaterial.color = Color.white;
+            bodySkinMat.color = Color.white;
         }
     }
 
@@ -329,9 +299,4 @@ public class AnatomyManager : MonoBehaviour
         StartCoroutine(FadeSequence(-newFadeTime, targetObject));
     }
 
-    public void OnHomeButtonClick()
-    {
-        UI_Handeler.isBackFromARScene = true;
-        SceneManager.LoadScene("HomeScene");
-    }
 }

@@ -16,31 +16,14 @@ public class HomeSceneButtnController : MonoBehaviour
     [Header("Safety warning Panel Property")]
     public GameObject SafetyWarningPanel;
     public Button CloseBtn;
-    public Button I_UnderstandBtn;
     public Toggle IAggre;
-    [SerializeField] private Button StartBtn;
+
 
     void Start()
     {
         CloseBtn.onClick.RemoveAllListeners();
         CloseBtn.onClick.AddListener(OnclickClose);
 
-        I_UnderstandBtn.onClick.RemoveAllListeners();
-        I_UnderstandBtn.onClick.AddListener(OnClickloadARScene);
-        I_UnderstandBtn.onClick.AddListener(delegate
-        { 
-            if(!IUnderstood) IUnderstood = IAggre.isOn; 
-        });
-
-        StartBtn.onClick.RemoveAllListeners();
-        if (IUnderstood)
-        {
-            StartBtn.onClick.AddListener(OnClickloadARScene);
-        }
-        else 
-        {
-            StartBtn.onClick.AddListener(OnStartButtonClick);
-        }
 
         SafetyWarningPanel.SetActive(false);
     }
@@ -58,7 +41,24 @@ public class HomeSceneButtnController : MonoBehaviour
         }
     }
 
-    public void OnClickloadARScene ()
+
+    public void OnClickShwoInAR()
+    {
+        if (IUnderstood)
+        {
+            LoadoadARScene();
+        }
+        else
+        {
+            ShowSafetyWarning();
+        }
+    }
+    public void OnClickI_UnderstandBtn()
+    {
+        if (!IUnderstood) IUnderstood = IAggre.isOn;
+        LoadoadARScene();
+    }
+    private void LoadoadARScene ()
     {
         loadingPanel.SetActive(true);
         loadingText.text = "Loading...";
@@ -66,7 +66,7 @@ public class HomeSceneButtnController : MonoBehaviour
         StartCoroutine(LoadNewScene("ARScene"));
     }
 
-    public void OnStartButtonClick()
+    private void ShowSafetyWarning()
     {
         SafetyWarningPanel.SetActive(true);
         SafetyWarning.Appear();
@@ -79,6 +79,11 @@ public class HomeSceneButtnController : MonoBehaviour
     private void DisableSafetyPanel()
     {
         SafetyWarningPanel.SetActive(false);
+    }
+    public void OnClickLogOut()
+    {
+        LoginRegisterSystem.AuthManager.LogOut();
+        SceneManager.LoadScene(1);
     }
 
     IEnumerator LoadNewScene(string sceneName)
