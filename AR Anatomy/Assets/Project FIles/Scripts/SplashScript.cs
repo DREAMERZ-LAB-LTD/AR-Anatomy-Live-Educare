@@ -16,7 +16,7 @@ public class SplashScript : SceneController
         yield return new WaitForSeconds(2.5f);
         FadeOut();
         yield return new WaitForSeconds(2f);
-        LoadScene(NextSceneNo);
+        Load_Scene(NextSceneNo);
     }
 
     private void FadeIn()

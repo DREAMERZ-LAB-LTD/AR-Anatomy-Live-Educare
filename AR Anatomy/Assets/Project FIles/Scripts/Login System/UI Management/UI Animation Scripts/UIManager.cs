@@ -6,9 +6,6 @@ namespace DL.UI
 {
     public class UIManager : MonoBehaviour
     {
-        [Header("Default Active Page Not Necessary")]
-        [SerializeField] private UIContentAnimatorList DefaultActivePage;
-       
         [Header("Animationable Pages")]
         [SerializeField] List<UIContentAnimatorList> animatorLists = new List<UIContentAnimatorList>();
 
@@ -20,13 +17,7 @@ namespace DL.UI
         public void ButtonClick() => _audioSource.PlayOneShot(_uiClickSound, Random.Range(0.5f, 0.8f));
 
 
-        private void Start()
-        {
-            if (DefaultActivePage != null)
-            {
-                DefaultActivePage.Appear();
-            }
-        }
+  
 
         /// <summary>
         /// Call this method from button to switch menus
@@ -34,6 +25,12 @@ namespace DL.UI
         /// <param name="newScene"></param>
         public void SwitchMenuScene(int newScene)
         {
+            if (newScene < 0 || newScene >= animatorLists.Count)
+            {
+                Debug.LogWarning("ANimator List Out of Range");
+                return;
+            }
+
             //Debug.Log("test");
             StopAllCoroutines(); //this is inefficient
             if (newScene != currentScene) DisappearScene(animatorLists[currentScene]);

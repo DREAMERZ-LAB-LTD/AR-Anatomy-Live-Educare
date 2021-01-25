@@ -6,6 +6,7 @@ namespace Anatomy.Body
 {
     public class AnatomySystem : MonoBehaviour
     {
+        [Header("Anatomy Body Layers")]
         [SerializeField] protected GameObject[] bodyParts;
 
 

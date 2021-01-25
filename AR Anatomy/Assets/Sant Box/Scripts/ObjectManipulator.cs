@@ -1,15 +1,16 @@
-﻿using UnityEngine;
-
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Anatomy
 {
     public class ObjectManipulator : MonoBehaviour
     {
         [SerializeField] private Camera cam;
-        [SerializeField] private Transform centerObject;
+        [SerializeField] private Transform centerPivotObject;
 
         [SerializeField] private bool useRotation = true;
-        private float offsetFromTarget = 5;
+        private float offsetFromPivot = 5;
         private Vector3 previousMousePosition;
 
         [SerializeField] private bool useMovement = true;
@@ -21,22 +22,29 @@ namespace Anatomy
         [SerializeField,Range(1.00f, 3.00f)] private float MinZoom = 1.00f;
         [SerializeField,Range(3.00f, 10.00f)] private float MaxZoom = 3.00f;
 
+        public float dot = 0;
+        private void Awake()=>UpdateOffset();
+        
 
-        private void Awake()
+        public static bool IsPointerOverUIObject()
         {
-            UpdateOffset();
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
         }
-
 
         private void Update()
         {
+            if (IsPointerOverUIObject()) return;
+
             DragToMove();
             RotateAround();
             OnZooming();
 
         }
-
-
+#region Zoom
         private void OnZooming()
         {
             if (!useZoom) return;
@@ -55,7 +63,7 @@ namespace Anatomy
                 previousMousePosition = cam.ScreenToViewportPoint(Input.mousePosition);
                 deltaFraction = direction.y;
 
-                Vector3 offset = cam.transform.localPosition - centerObject.localPosition;
+                Vector3 offset = cam.transform.localPosition - centerPivotObject.localPosition;
                 Vector3 deltaZoom = offset.normalized * deltaFraction * ZoomSpeed * Time.deltaTime;
 
                 cam.transform.localPosition -= deltaZoom;
@@ -80,7 +88,9 @@ namespace Anatomy
 
 
         }
+#endregion Zoom
 
+#region Movement
         private void DragToMove()
         {
             if (!useMovement) return;
@@ -108,38 +118,6 @@ namespace Anatomy
                 }
             }
         }
-   
-
-        private void RotateAround()
-        {
-
-            if (!useRotation) return;
-
-
-            if (Input.GetMouseButtonDown(0))
-            {
-              previousMousePosition = cam.ScreenToViewportPoint(Input.mousePosition);  
-            }
-            else if (Input.GetMouseButton(0) && !isMoveing)
-            {
-                Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
-                Vector3 direction = previousMousePosition - newPosition;
-
-                float rotationAroundYAxis = -direction.x * 180; // camera moves horizontally
-                float rotationAroundXAxis = direction.y * 180; // camera moves vertically
-
-                cam.transform.position = centerObject.position;
-
-                cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis);
-                cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis, Space.World);
-
-                cam.transform.Translate(new Vector3(0, 0, -offsetFromTarget));
-
-                previousMousePosition = newPosition;
-            }
-  
-        }
-        private void UpdateOffset() =>  offsetFromTarget = Vector3.Distance(cam.transform.position, centerObject.position);
 
         private bool GetRaycasthiInfo(out Vector3 hitPoint, out Transform hitObject)
         {
@@ -156,5 +134,58 @@ namespace Anatomy
             hitObject = null;
             return false;
         }
+        #endregion Movement
+
+
+#region Rotation
+        private void RotateAround()
+        {
+
+            if (!useRotation) return;
+
+
+            if (Input.GetMouseButtonDown(0))
+            {
+              previousMousePosition = cam.ScreenToViewportPoint(Input.mousePosition);  
+            }
+            else if (Input.GetMouseButton(0) && !isMoveing)
+            {
+
+                Vector3 newPosition = cam.ScreenToViewportPoint(Input.mousePosition);
+                Vector3 direction = previousMousePosition - newPosition;
+                previousMousePosition = newPosition;
+
+                float rotationAroundYAxis = -direction.x * 180; // camera moves horizontally
+                float rotationAroundXAxis = direction.y * 180; // camera moves vertically
+
+                if(rotationAroundXAxis != 0)
+                    Debug.Log("dir = "+ rotationAroundXAxis);
+
+                if (dot < 0)
+                {
+                    if (rotationAroundYAxis > 0)
+                    { 
+                        cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis);
+                    }
+                }
+                else
+                { 
+                    cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis);
+                }
+                cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis, Space.World);
+             
+                Vector3 pivotPoint = centerPivotObject.position;
+                Vector3 campos = cam.transform.position;
+                dot = Vector3.Dot(pivotPoint, campos);
+
+
+                cam.transform.position = centerPivotObject.position;
+                cam.transform.Translate(new Vector3(0, 0, -offsetFromPivot));
+
+            }
+  
+        }
+        private void UpdateOffset() =>  offsetFromPivot = Vector3.Distance(cam.transform.position, centerPivotObject.position);
+#endregion Rotation
     }
 }

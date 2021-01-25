@@ -33,7 +33,7 @@ public class AnatomyManager : AnatomySystem
     private bool logInitialFadeSequence = false;
     public GameObject organBackButton;
 
-    public GameObject scaneBarPanel;
+  
 
     public GameObject heart;
 
@@ -42,8 +42,8 @@ public class AnatomyManager : AnatomySystem
 
 
 
+    void Awake()=> layerSlider.maxValue = bodyParts.Length - 1;
     private void OnEnable()=>layerSlider.value = SelectedLAyer;
-    void Start()=> layerSlider.maxValue = bodyParts.Length - 1;
 
     
     private bool IsPointerOverUIObject()
@@ -98,10 +98,7 @@ public class AnatomyManager : AnatomySystem
             }
         }
 
-        if (heart.GetComponent<Renderer>().enabled && scaneBarPanel.activeSelf)
-            scaneBarPanel.SetActive(false);
-        else if (!heart.GetComponent<Renderer>().enabled && !scaneBarPanel.activeSelf)
-            scaneBarPanel.SetActive(true);
+
 
     }
     private void SelectBodyParts()
@@ -174,9 +171,9 @@ public class AnatomyManager : AnatomySystem
     {
         Detail.PopUp(false);
 
-        int currentIndx = (int)layerSlider.value;
-
-        ShowBodyLayer(currentIndx);
+        SelectedLAyer = (int)layerSlider.value;
+        
+        ShowBodyLayer(SelectedLAyer);
 
         if (selectedPart != null)
         {
@@ -270,10 +267,6 @@ public class AnatomyManager : AnatomySystem
                 rendererObjects[i].enabled = false;
             }
         }
-
-
-        Debug.Log("fade sequence end : " + fadingOut);
-
     }
 
 

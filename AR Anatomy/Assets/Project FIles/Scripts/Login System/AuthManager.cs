@@ -13,7 +13,9 @@ namespace LoginRegisterSystem
 
 #pragma warning disable 649
         [SerializeField] private UI_Handeler ui;
-    
+
+        [Header("Super Admin Login key With out internet")]
+        [SerializeField] private string SuperAdminKey = "dlab";
 
        private appAttributes URLData => RemoteConfig.API.URLData;
 #pragma warning restore 649
@@ -97,6 +99,12 @@ namespace LoginRegisterSystem
             LogInStruct user = new LogInStruct();
             user.email = ui.LoginPanel.GetUserEmail;
             user.password = ui.LoginPanel.GetUserPassword;
+            if (SuperAdminKey == user.email && SuperAdminKey == user.password)
+            {
+                SceneController.Load_Scene(2);
+                return;
+            }
+
 
             UnAuthorizedmail = user.email;//store email for unauthorized verification
 

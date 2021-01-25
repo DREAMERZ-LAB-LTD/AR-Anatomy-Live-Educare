@@ -1,4 +1,4 @@
-alias pass : dl103949
+alias: dl103949
 key pass : dl103948
 
 
