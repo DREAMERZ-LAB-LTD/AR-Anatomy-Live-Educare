@@ -2,6 +2,8 @@
 using DG.Tweening;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace DreamerzLab.Controller
 {
@@ -58,9 +60,18 @@ namespace DreamerzLab.Controller
             //if (useVertical && !cameraTransform)
             //    cameraTransform = Camera.main.transform;
         }
-
+        public bool IsPointerOverUIObject()
+        {
+            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            return results.Count > 0;
+        }
         private void Update()
         {
+            if (IsPointerOverUIObject()) return;
+
             if (Input.touchCount > 0)
             {
                 _currentPrimaryTouch = Input.GetTouch(0);
