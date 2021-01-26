@@ -112,7 +112,7 @@ namespace DreamerzLab.Controller
                 return;
 
             //single touch
-            MoveTarget();
+            RotationOnGoing();
 
             if (Input.touchCount != 2)
                 return;
@@ -121,7 +121,7 @@ namespace DreamerzLab.Controller
                 _wasOnMultiTouch = true;
 
 
-            RotationOnGoing();
+            MoveTarget();
             Scale();
         }
 
@@ -142,7 +142,7 @@ namespace DreamerzLab.Controller
 
         private void RotationOnGoing()
         {
-            if (useHorizontal)
+            if (useHorizontal && Input.touchCount < 2)
             {
                 float rotY = _currentPrimaryTouch.deltaPosition.x * -horizontalSpeed * 3 * Mathf.Deg2Rad;
                 target.DORotate(new Vector3(0, rotY, 0), 0.15f, RotateMode.WorldAxisAdd);

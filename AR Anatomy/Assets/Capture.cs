@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ public class Capture : MonoBehaviour
 
     void Update()
 	{
-		if (Input.GetMouseButtonDown(1))
+		if (Input.GetKeyDown(KeyCode.Space))
 		{
 			StartCoroutine(Captutre());
 		}
@@ -35,7 +34,7 @@ public class Capture : MonoBehaviour
 
 
 		string filename = "Photo"+ counter + ".png";
-		var path = Application.dataPath + "/" + filename;
+		var path = Application.persistentDataPath + "/" + filename;
 		File.WriteAllBytes(path, bytes);
 		counter++;
 		Debug.Log("Path : " + path);

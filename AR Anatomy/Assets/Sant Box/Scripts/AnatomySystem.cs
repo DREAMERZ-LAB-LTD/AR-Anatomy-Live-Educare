@@ -20,7 +20,7 @@ namespace Anatomy.Body
                 bodyParts[i].SetActive(false);
             }
 
-            bool isOnlySkeletnLayer = currentIndx == 3;
+            bool isOnlySkeletnLayer = currentIndx == 2;
             for (int i = currentIndx + 1; i < bodyParts.Length; i++)
             {
                 bodyParts[i].SetActive(!isOnlySkeletnLayer);
