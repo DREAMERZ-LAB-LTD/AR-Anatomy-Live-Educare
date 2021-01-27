@@ -7,7 +7,9 @@ public class AnatomyInformationShower : MonoBehaviour
 {
     [SerializeField] private DetailPanel display;
     [SerializeField] private Camera cam;
-
+    [Space]
+    [SerializeField] private Material bodySkinMat;
+    private GameObject selectedPart;
     private void Start()
     {
         cam = Camera.main;
@@ -20,25 +22,79 @@ public class AnatomyInformationShower : MonoBehaviour
         if (IsPointerOverUIObject()) return;
         if (!Input.GetMouseButtonUp(0)) return;
 
+        SelectBodyParts();
+//        return;
+//        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+//        if (Physics.Raycast(ray, out RaycastHit hit, 200.0f))
+//        {
+//            string title = hit.transform.name;
+//            string info = "This is a " + title;
+//            display.SetMessage(title, info);
+//            display.PopUp(true);
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 200.0f))
-        {
-            string title = hit.transform.name;
-            string info = "This is a " + title;
-            display.SetMessage(title, info);
-            display.PopUp(true);
-
-#if UNITY_EDITOR
-            Debug.DrawLine(cam.transform.position, hit.point, Color.green);
-#endif
-        }
-        else 
-        {
-            display.PopUp(false);
-        }
+//#if UNITY_EDITOR
+//            Debug.DrawLine(cam.transform.position, hit.point, Color.green);
+//#endif
+//        }
+//        else 
+//        {
+//            display.PopUp(false);
+//        }
     }
+    private void SelectBodyParts()
+    {
 
+        if (IsPointerOverUIObject())
+        {
+            return;
+        }
+        else
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100.0f))
+            {
+                if (selectedPart != null)
+                {
+                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
+                    bodySkinMat.color = Color.white;
+                }
+                selectedPart = hit.transform.gameObject;
+                selectedPart.GetComponent<Renderer>().material.color = Color.green;
+                if (selectedPart.name == "Body_Skin")
+                {
+                    bodySkinMat.color = Color.green;
+                }
+
+                string title = hit.transform.name;
+                string info = "This is a " + title;
+                display.SetMessage(title, info);
+                display.PopUp(true);
+
+                //if (selectedPart.tag == "Interactable")
+                //{
+                //    detailedButton.SetActive(true);
+                //}
+                //else
+                //{
+                //    detailedButton.SetActive(false);
+                //}
+            }
+            else
+            {
+                if (selectedPart != null)
+                {
+                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
+                    bodySkinMat.color = Color.white;
+
+                    selectedPart = null;
+                }
+                //                    detailPanel.SetActive(false);
+                display.PopUp(false);
+            }
+        }
+
+    }
     private bool IsPointerOverUIObject()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
