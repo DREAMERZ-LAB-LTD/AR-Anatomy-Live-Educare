@@ -13,6 +13,8 @@ public class AnatomyInformationShower : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
+        bodySkinMat.color = Color.white;
+
     }
 
     // Update is called once per frame
@@ -23,75 +25,54 @@ public class AnatomyInformationShower : MonoBehaviour
         if (!Input.GetMouseButtonUp(0)) return;
 
         SelectBodyParts();
-//        return;
-//        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-//        if (Physics.Raycast(ray, out RaycastHit hit, 200.0f))
-//        {
-//            string title = hit.transform.name;
-//            string info = "This is a " + title;
-//            display.SetMessage(title, info);
-//            display.PopUp(true);
 
-//#if UNITY_EDITOR
-//            Debug.DrawLine(cam.transform.position, hit.point, Color.green);
-//#endif
-//        }
-//        else 
-//        {
-//            display.PopUp(false);
-//        }
     }
     private void SelectBodyParts()
     {
 
-        if (IsPointerOverUIObject())
+        if (IsPointerOverUIObject()) return;
+
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, 100.0f))
         {
-            return;
+            if (selectedPart != null)
+            {
+                selectedPart.GetComponent<Renderer>().material.color = Color.white;
+                bodySkinMat.color = Color.white;
+            }
+            selectedPart = hit.transform.gameObject;
+            selectedPart.GetComponent<Renderer>().material.color = Color.green;
+            if (selectedPart.name == "Body_Skin")
+            {
+                bodySkinMat.color = Color.green;
+            }
+
+            string title = hit.transform.name;
+            string info = "This is a " + title;
+            display.SetMessage(title, info);
+            display.PopUp(true);
+
+            //if (selectedPart.tag == "Interactable")
+            //{
+            //    detailedButton.SetActive(true);
+            //}
+            //else
+            //{
+            //    detailedButton.SetActive(false);
+            //}
         }
         else
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100.0f))
+            if (selectedPart != null)
             {
-                if (selectedPart != null)
-                {
-                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                    bodySkinMat.color = Color.white;
-                }
-                selectedPart = hit.transform.gameObject;
-                selectedPart.GetComponent<Renderer>().material.color = Color.green;
-                if (selectedPart.name == "Body_Skin")
-                {
-                    bodySkinMat.color = Color.green;
-                }
+                selectedPart.GetComponent<Renderer>().material.color = Color.white;
+                bodySkinMat.color = Color.white;
 
-                string title = hit.transform.name;
-                string info = "This is a " + title;
-                display.SetMessage(title, info);
-                display.PopUp(true);
-
-                //if (selectedPart.tag == "Interactable")
-                //{
-                //    detailedButton.SetActive(true);
-                //}
-                //else
-                //{
-                //    detailedButton.SetActive(false);
-                //}
+                selectedPart = null;
             }
-            else
-            {
-                if (selectedPart != null)
-                {
-                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                    bodySkinMat.color = Color.white;
-
-                    selectedPart = null;
-                }
-                //                    detailPanel.SetActive(false);
-                display.PopUp(false);
-            }
+            //                    detailPanel.SetActive(false);
+            display.PopUp(false);
         }
 
     }

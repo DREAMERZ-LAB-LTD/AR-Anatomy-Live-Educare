@@ -7,16 +7,16 @@ using UnityEngine.UI;
 
 public class HomeSceneButtnController : MonoBehaviour
 {
+    [Header("Safety warning Panel Property")]
     [SerializeField] private UIContentAnimatorList SafetyWarning;
+    //public GameObject SafetyWarningPanel;
+    public Button CloseBtn;
+    public Toggle IAggre;
+
     [Header("Scene Loading Visual Elements")]
     public GameObject loadingPanel;
     public TextMeshProUGUI loadingText;
     public Image imageFillArea;
-
-    [Header("Safety warning Panel Property")]
-    public GameObject SafetyWarningPanel;
-    public Button CloseBtn;
-    public Toggle IAggre;
 
 
     void Start()
@@ -25,7 +25,7 @@ public class HomeSceneButtnController : MonoBehaviour
         CloseBtn.onClick.AddListener(OnclickClose);
 
 
-        SafetyWarningPanel.SetActive(false);
+        SafetyWarning.gameObject.SetActive(false);
     }
 
     private bool IUnderstood
@@ -68,7 +68,7 @@ public class HomeSceneButtnController : MonoBehaviour
 
     private void ShowSafetyWarning()
     {
-        SafetyWarningPanel.SetActive(true);
+        SafetyWarning.gameObject.SetActive(true);
         SafetyWarning.Appear();
     }
     private void OnclickClose()
@@ -78,7 +78,7 @@ public class HomeSceneButtnController : MonoBehaviour
     }
     private void DisableSafetyPanel()
     {
-        SafetyWarningPanel.SetActive(false);
+        SafetyWarning.gameObject.SetActive(false);
     }
     public void OnClickLogOut()
     {

@@ -12,9 +12,7 @@ public class Rotator : MonoBehaviour
     private float offsetFromPivot = 5;
     private Vector3 previousMousePosition;
 
-
-    private Vector3 InitialCamPos;
-    private Quaternion InitialCamRot;
+    [SerializeField] private Transform InitialPoint;
     private Vector3 InitialFocusPoint;
 
     private void Start()
@@ -22,18 +20,16 @@ public class Rotator : MonoBehaviour
         Vector3 dir = cam.transform.position - centerPivotObject.transform.position;
         cam.transform.forward = -dir;
         UpdateOffset();
-
-        InitialCamPos = cam.transform.position;
-        InitialCamRot = cam.transform.rotation;
-        InitialFocusPoint = centerPivotObject.position;
+     //   RestView();
+     //   InitialFocusPoint = centerPivotObject.position;
     }
 
 
     public void RestView()
     {
-        cam.transform.position = InitialCamPos;
-        cam.transform.rotation = InitialCamRot;
-        centerPivotObject.position = InitialFocusPoint;
+        cam.transform.position = InitialPoint.position;
+        cam.transform.rotation = InitialPoint.rotation;
+      //  centerPivotObject.position = InitialFocusPoint;
     }
 
 

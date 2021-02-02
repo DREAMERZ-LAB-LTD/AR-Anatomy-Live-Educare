@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Project FIles/Scenes/Authentication System.unity
     guid: 5b598fcd71854684fbab3d5d3901bfef
   - enabled: 1
-    path: Assets/Sant Box/Scenes/Anatomy 3D world.unity
+    path: Assets/Project FIles/Scenes/Anatomy 3D world.unity
     guid: 3781c2fdc54f2594e8ff4d912c13efea
   - enabled: 1
     path: Assets/Project FIles/Scenes/ARScene.unity
