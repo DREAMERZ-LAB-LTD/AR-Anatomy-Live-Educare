@@ -19,10 +19,6 @@ public class AnatomyManager : AnatomySystem
     public Slider layerSlider;
     public static int SelectedLAyer = 0;
 
-    [SerializeField, Header("Anatomy Detail Panel")]
-    private DetailPanel Detail;
-
-
     [Space]
     public Material bodySkinMat;
 
@@ -57,104 +53,20 @@ public class AnatomyManager : AnatomySystem
 
 
 
-    // Update is called once per frame
-    void Update()
-    {
-#if UNITY_EDITOR
-        if(Input.GetMouseButtonDown(0))
-            SelectBodyParts();
-#else
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Escape))
+    //    {
+    //        if (heart.activeSelf)
+    //        {
+    //            fullBody.SetActive(true);
+    //            heart.SetActive(false);
+    //            layerSlider.gameObject.SetActive(true);
+    //        }
+    //    }
+    //}
 
-        if (Input.touchCount == 1)
-        {
-            bool OnMoveing = false;
-            switch (Input.GetTouch(0).phase)
-            {
-                case TouchPhase.Began:
-                    break;
-                case TouchPhase.Stationary:
-                    OnMoveing = true;
-                    break;
-                case TouchPhase.Moved:
-                    OnMoveing = true;
-                    break;
-                case TouchPhase.Ended:
-                    if (!OnMoveing)
-                    {
-                        SelectBodyParts();
-                    }
-                    break;
-            }
-        }
-#endif     
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (heart.activeSelf)
-            {
-                fullBody.SetActive(true);
-                heart.SetActive(false);
-                layerSlider.gameObject.SetActive(true);
-            }
-        }
-
-
-
-    }
-    private void SelectBodyParts()
-    {
-
-        if (IsPointerOverUIObject() )
-        {
-            return;
-        }
-        else
-        {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, 100.0f))
-            {
-                if (selectedPart != null)
-                {
-                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                    bodySkinMat.color = Color.white;
-                }
-                selectedPart = hit.transform.gameObject;
-                selectedPart.GetComponent<Renderer>().material.color = Color.green;
-                if (selectedPart.name == "Body_Skin")
-                {
-                    bodySkinMat.color = Color.green;
-                }
-
-                string title = hit.transform.name;
-                string info = "This is a " + title;
-                Detail.SetMessage(title, info);
-                Detail.PopUp(true);
-
-                if (selectedPart.tag == "Interactable")
-                {
-                    detailedButton.SetActive(true);
-                }
-                else
-                {
-                    detailedButton.SetActive(false);
-                }
-            }
-            else
-            {
-                if (selectedPart != null)
-                {
-                    selectedPart.GetComponent<Renderer>().material.color = Color.white;
-                    bodySkinMat.color = Color.white;
-
-                    selectedPart = null;
-                }
-                //                    detailPanel.SetActive(false);
-                Detail.PopUp(false);
-            }
-        }
-
-    }
 
     public void OnBackButtonClick()
     {
@@ -163,14 +75,11 @@ public class AnatomyManager : AnatomySystem
             fullBody.SetActive(true);
             heart.SetActive(false);
             layerSlider.gameObject.SetActive(true);
-            organBackButton.SetActive(false);
         }
     }
 
     public void ShowLayer()
     {
-        Detail.PopUp(false);
-
         SelectedLAyer = (int)layerSlider.value;
         
         ShowBodyLayer(SelectedLAyer);
@@ -184,11 +93,9 @@ public class AnatomyManager : AnatomySystem
 
     public void ShowHeart()
     {
-        organBackButton.SetActive(true);
         fullBody.SetActive(false);
         heart.SetActive(true);
-//        detailPanel.SetActive(false);
-        Detail.PopUp(false);
+
         layerSlider.gameObject.SetActive(false);
     }
 
@@ -201,6 +108,29 @@ public class AnatomyManager : AnatomySystem
             maxAlpha = Mathf.Max(maxAlpha, item.material.color.a);
         }
         return maxAlpha;
+    }
+
+  
+    void FadeIn(GameObject targetObject)
+    {
+        FadeIn(fadeTime, targetObject);
+    }
+
+    void FadeOut(GameObject targetObject)
+    {
+        FadeOut(fadeTime, targetObject);
+    }
+
+    void FadeIn(float newFadeTime, GameObject targetObject)
+    {
+        StopAllCoroutines();
+        StartCoroutine(FadeSequence(newFadeTime, targetObject));
+    }
+
+    void FadeOut(float newFadeTime, GameObject targetObject)
+    {
+        StopAllCoroutines();
+        StartCoroutine(FadeSequence(-newFadeTime, targetObject));
     }
 
     // fade sequence
@@ -270,26 +200,5 @@ public class AnatomyManager : AnatomySystem
     }
 
 
-    void FadeIn(GameObject targetObject)
-    {
-        FadeIn(fadeTime, targetObject);
-    }
-
-    void FadeOut(GameObject targetObject)
-    {
-        FadeOut(fadeTime, targetObject);
-    }
-
-    void FadeIn(float newFadeTime, GameObject targetObject)
-    {
-        StopAllCoroutines();
-        StartCoroutine(FadeSequence(newFadeTime, targetObject));
-    }
-
-    void FadeOut(float newFadeTime, GameObject targetObject)
-    {
-        StopAllCoroutines();
-        StartCoroutine(FadeSequence(-newFadeTime, targetObject));
-    }
 
 }

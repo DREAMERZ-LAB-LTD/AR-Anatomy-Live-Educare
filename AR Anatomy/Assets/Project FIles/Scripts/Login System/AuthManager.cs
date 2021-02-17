@@ -513,7 +513,6 @@ namespace LoginRegisterSystem
             }
             else
             {
-                Show.Log("IsInitialized");
                 FB.ActivateApp();
             }
             
@@ -612,11 +611,6 @@ namespace LoginRegisterSystem
                 //_logInSystemUIHolder.OpenPoPup(1, redtext, blacktext);
                 Show.Log(val);
             }
-
-            //_logInSystemUIHolder.LogIn();
-           // PlayerPrefs.DeleteKey("token");
-           // Show.Log("Delete Player Prefs " + PlayerPrefs.GetString("token", ""));
-           // Show.Log(val);
         }
 
         

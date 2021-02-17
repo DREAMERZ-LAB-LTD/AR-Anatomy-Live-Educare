@@ -91,6 +91,12 @@ MonoBehaviour:
       key: SocialLogin
       type: string
       value: http://54.254.22.111/live-educare/public/social-login
+  - metadata:
+      entityId: a9f8ae78-dde2-49c0-9cc0-8d82e179f78c
+    rs:
+      key: Setting13
+      type: 
+      value: 
   rsLastCachedKeyList:
   - metadata:
       entityId: dcc7dcb7-2698-4ced-8105-242467cbdeb6

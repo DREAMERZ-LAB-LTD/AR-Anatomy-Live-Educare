@@ -31,7 +31,6 @@ public class RemoteConfig : MonoBehaviour
     void Awake()
     {
         SingleTone();
-
         // Add a listener to apply settings when successfully retrieved:
         ConfigManager.FetchCompleted += ApplyRemoteSettings;
 
@@ -56,9 +55,9 @@ public class RemoteConfig : MonoBehaviour
                 Show.Log("No settings loaded this session; using default values.");
                 break;
             case ConfigOrigin.Cached:
-                Show.Log("No settings loaded this session; using cached values from a previous session.");
-                Show.Log(ConfigManager.appConfig.GetString("SignUp"));
-
+#if UNITY_EDITOR
+                Debug.Log("No settings loaded this session; using cached values from a previous session.");
+#endif
                 urlData.BaseURL = ConfigManager.appConfig.GetString("BaseURL");
                 urlData.SignUp = ConfigManager.appConfig.GetString("SignUp");
                 urlData.EmailVerification = ConfigManager.appConfig.GetString("EmailVerification");
@@ -75,9 +74,9 @@ public class RemoteConfig : MonoBehaviour
 
                break;
             case ConfigOrigin.Remote:
-                Show.Log("New settings loaded this session; update values accordingly.");
-                Show.Log(ConfigManager.appConfig.GetString("Register"));
-
+#if UNITY_EDITOR
+                Debug.Log("New settings loaded this session; update values accordingly.");
+#endif
                 urlData.BaseURL = ConfigManager.appConfig.GetString("BaseURL");
                 urlData.SignUp = ConfigManager.appConfig.GetString("SignUp");
                 urlData.EmailVerification = ConfigManager.appConfig.GetString("EmailVerification");

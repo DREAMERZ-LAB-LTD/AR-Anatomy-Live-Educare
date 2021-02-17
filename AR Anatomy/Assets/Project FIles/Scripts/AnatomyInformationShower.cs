@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class AnatomyInformationShower : MonoBehaviour
 {
-    [SerializeField] private DetailPanel display;
     [SerializeField] private Camera cam;
+    [SerializeField] private DetailPanel display;
+    [Header("Raycast Layer Mask")]
+    [SerializeField] private int targetLayer = 0;
     [Space]
     [SerializeField] private Material bodySkinMat;
     private GameObject selectedPart;
@@ -20,21 +22,45 @@ public class AnatomyInformationShower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetMouseButtonDown(0))
+            SelectBodyParts(Input.mousePosition);
+# else
 
-        if (IsPointerOverUIObject()) return;
-        if (!Input.GetMouseButtonUp(0)) return;
-
-        SelectBodyParts();
+        if (Input.touchCount == 1)
+        {
+            bool OnMoveing = false;
+            switch (Input.GetTouch(0).phase)
+            {
+                case TouchPhase.Began:
+                    break;
+                case TouchPhase.Stationary:
+                    OnMoveing = true;
+                    break;
+                case TouchPhase.Moved:
+                    OnMoveing = true;
+                    break;
+                case TouchPhase.Ended:
+                    if (!OnMoveing)
+                    {
+                        Touch touch = Input.GetTouch(Input.touchCount - 1);
+                        SelectBodyParts(touch.position);
+                    }
+                    break;
+            }
+        }
+#endif 
 
     }
-    private void SelectBodyParts()
+    private void SelectBodyParts(Vector2 screenPoint)
     {
 
         if (IsPointerOverUIObject()) return;
 
         RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 100.0f))
+        Ray ray = Camera.main.ScreenPointToRay(screenPoint);
+        int layer = 1 << targetLayer;
+        if (Physics.Raycast(ray, out hit, 500.0f, layer))
         {
             if (selectedPart != null)
             {
