@@ -83,10 +83,11 @@ MonoBehaviour:
   maxZoom: 3
   rotateSpeed: 0.05
   selectionFocusLayer: 9
-  autoFocusSpeed: 1
-  doubleClickDelay: 0.8
-  maxClickOffset: 30
+  autoFocusSpeed: 2
   autoFocusOffset: 0
+  clickResponse:
+    doubleClickDelay: 0.3
+    maxClickOffset: 2
 --- !u!114 &8445914594191178365
 MonoBehaviour:
   m_ObjectHideFlags: 0
