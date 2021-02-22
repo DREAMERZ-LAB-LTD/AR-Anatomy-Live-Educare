@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DynamicFocusRotator : Rotator
 {
-    [Header("Focus Setup")]
+    [Tooltip("Raycast Layer Mask")]
     [SerializeField] int selectionFocusLayer = 0;
+    [Tooltip("")]
     [SerializeField]private float autoFocusSpeed = 1;
     [SerializeField]private float autoFocusOffset = 0;
     Vector3 selectedPoint;
@@ -33,16 +34,25 @@ public class DynamicFocusRotator : Rotator
             UpdateProjectionOffset(focusPoint);
             autoFocusOffset = projectionOffset;
 
+            Touch touch1 = Input.GetTouch(0);
+            Touch touch2 = Input.GetTouch(1);
+            Vector2 preOffset = touch1.position - touch2.position;
+            Vector2 currOffset = (touch1.position + touch1.deltaPosition) - (touch2.position + touch2.deltaPosition);
+            float preDistance = preOffset.magnitude;
+            float currDistance = currOffset.magnitude;
+            if (currDistance > preDistance) return;
+
             // back to initial projection distance when user try to fully zooming out
-            float availableZoomAmount = maxZoom - projectionOffset;
-            if (availableZoomAmount < maxZoom * 0.4f)
+            float availableZoomAmount = maxOffset - projectionOffset;
+            if (availableZoomAmount < maxOffset * 0.2f)
             {
                 selectedPoint = centerPivotObject.transform.position;
+                autoFocusOffset = maxOffset;
             }
         }
         else
         {
-            LearpProjection(autoFocusOffset, autoFocusSpeed);
+            LearpProjectionOffset(autoFocusOffset, autoFocusSpeed);
         }
         
         UpdateRotation();
@@ -59,13 +69,15 @@ public class DynamicFocusRotator : Rotator
         ProjectionInformation projectionInfo = GetProjectionInfo(Input.mousePosition, selectionFocusLayer);
         if (projectionInfo != null)
         {
+            //set focus point information to focus spacific point
             selectedPoint = projectionInfo.focusPoint;
             autoFocusOffset = projectionInfo.projectionOffset;
         }
         else
         {
+            //set focus point as default to view anatomy full body
             selectedPoint = centerPivotObject.transform.position;
-            autoFocusOffset = maxZoom;
+            autoFocusOffset = maxOffset;
         }
     }
 

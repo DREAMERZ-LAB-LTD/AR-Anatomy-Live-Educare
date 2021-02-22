@@ -6,21 +6,29 @@ using UnityEngine.EventSystems;
 public class Rotator : MonoBehaviour
 {
     [SerializeField] protected Camera cam;
-    [SerializeField] private Transform InitialPoint;
+    [Header("Rotation Setup")]
+    [SerializeField] Transform InitialPoint;
     [SerializeField] protected Transform centerPivotObject;
-    [SerializeField] protected float minZoom = 0.05f;
-    [SerializeField] protected float maxZoom = 2.5f;
-
     [Range(0.01f, 1.00f)]
-    [SerializeField] private float rotateSpeed = 0.05f;
-    protected Vector3 focusPoint;
+    [SerializeField] float rotateSpeed = 0.05f;
+
+
+    [Header("Focus Setup")]
+    [Tooltip("Vertical Projection Offset")]
+    [SerializeField, Range(-1.00f, 1.00f)] float  verticalOffset = 0;
+    [Tooltip("Total camera offset from focus point")]
     protected float projectionOffset = 3;
+    [Tooltip("Minimum Projection Offset")]
+    [SerializeField] protected float minOffset = 0.05f;
+    [Tooltip("Maximum Projection Offset")]
+    [SerializeField] protected float maxOffset = 2.5f;
+    protected Vector3 focusPoint;
 
     protected virtual void Start()
     {
         Vector3 initialFocus = centerPivotObject.position;
         focusPoint = initialFocus;
-        projectionOffset = maxZoom;
+        projectionOffset = maxOffset;
         
         Vector3 origin = cam.transform.position;
         Vector3 dir = origin - initialFocus;
@@ -69,17 +77,24 @@ public class Rotator : MonoBehaviour
     //update camera position to projection the focus point
     protected void UpdatePosition(Vector3 focusPoint, float projectionDistance)
     {
+        //update position
         Vector3 frontFacinPoint = cam.transform.forward * projectionDistance;
         Vector3 projectionPoint = focusPoint - frontFacinPoint;
         cam.transform.position = projectionPoint;
+
+        //set verical offset
+        Vector3 localdown = cam.transform.InverseTransformPoint(cam.transform.up);
+        Vector3 worldDown = cam.transform.TransformPoint(localdown);
+        Vector3 vertical_offset = worldDown * verticalOffset;
+        cam.transform.position += vertical_offset; 
     }
     protected void UpdateProjectionOffset(Vector3 focus)
     { 
         float offset = Vector3.Distance(cam.transform.position, focus);
-        projectionOffset = Mathf.Clamp(offset, minZoom, maxZoom);
+        projectionOffset = Mathf.Clamp(offset, minOffset, maxOffset);
     }
 
-    protected void LearpProjection(float newOffset, float speed)
+    protected void LearpProjectionOffset(float newOffset, float speed)
     { 
         projectionOffset = Mathf.Lerp(projectionOffset, newOffset, speed * Time.deltaTime);
     }
