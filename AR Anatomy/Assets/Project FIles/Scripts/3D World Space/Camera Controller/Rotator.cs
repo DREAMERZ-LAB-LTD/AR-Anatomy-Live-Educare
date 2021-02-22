@@ -7,8 +7,8 @@ public class Rotator : MonoBehaviour
 {
     [SerializeField] protected Camera cam;
     [Header("Rotation Setup")]
-    [SerializeField] Transform InitialPoint;
-    [SerializeField] protected Transform centerPivotObject;
+    [SerializeField] Transform camInitialPosition;
+    [SerializeField] protected Transform initialFocusPoint;
     [Range(0.01f, 1.00f)]
     [SerializeField] float rotateSpeed = 0.05f;
 
@@ -26,7 +26,8 @@ public class Rotator : MonoBehaviour
 
     protected virtual void Start()
     {
-        Vector3 initialFocus = centerPivotObject.position;
+        RestView();
+        Vector3 initialFocus = initialFocusPoint.position;
         focusPoint = initialFocus;
         projectionOffset = maxOffset;
         
@@ -34,13 +35,12 @@ public class Rotator : MonoBehaviour
         Vector3 dir = origin - initialFocus;
         cam.transform.forward = -dir;
         UpdateProjectionOffset(initialFocus);
-        RestView();
     }
 
     public void RestView()
     {
-        cam.transform.position = InitialPoint.position;
-        cam.transform.rotation = InitialPoint.rotation;
+        cam.transform.position = camInitialPosition.position;
+        cam.transform.rotation = camInitialPosition.rotation;
     }
 
     protected virtual void Update()
@@ -53,7 +53,7 @@ public class Rotator : MonoBehaviour
 
     protected void UpdateRotation()
     {
-        if (IsPointerOverUIObject()) return;
+        if (Utility.IsPointerOverUIObject()) return;
 
         if (Input.touchCount != 1) return;
         Touch touch = Input.GetTouch(Input.touchCount - 1);
@@ -98,16 +98,4 @@ public class Rotator : MonoBehaviour
     { 
         projectionOffset = Mathf.Lerp(projectionOffset, newOffset, speed * Time.deltaTime);
     }
- 
-
-    public bool IsPointerOverUIObject()
-    {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
-    }
-
-  
 }

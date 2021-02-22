@@ -46,7 +46,7 @@ public class DynamicFocusRotator : Rotator
             float availableZoomAmount = maxOffset - projectionOffset;
             if (availableZoomAmount < maxOffset * 0.2f)
             {
-                selectedPoint = centerPivotObject.transform.position;
+                selectedPoint = initialFocusPoint.transform.position;
                 autoFocusOffset = maxOffset;
             }
         }
@@ -63,7 +63,7 @@ public class DynamicFocusRotator : Rotator
     //set focus point and make it the center pivote point of projection
     public void SetFocusPoint()
     {
-        if (IsPointerOverUIObject()) return;
+        if (Utility.IsPointerOverUIObject()) return;
         if (!clickResponse.isDoubleClicked) return;
 
         ProjectionInformation projectionInfo = GetProjectionInfo(Input.mousePosition, selectionFocusLayer);
@@ -76,7 +76,7 @@ public class DynamicFocusRotator : Rotator
         else
         {
             //set focus point as default to view anatomy full body
-            selectedPoint = centerPivotObject.transform.position;
+            selectedPoint = initialFocusPoint.transform.position;
             autoFocusOffset = maxOffset;
         }
     }

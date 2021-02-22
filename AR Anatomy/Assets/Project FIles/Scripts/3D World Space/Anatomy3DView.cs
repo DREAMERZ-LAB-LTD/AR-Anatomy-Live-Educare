@@ -16,7 +16,6 @@ public class Anatomy3DView : AnatomySystem
     private void OnEnable()
     {
         ShowBodyLayer(AnatomyManager.SelectedLAyer);
-       // SetActive_AllLayers(false);
     }
 
     public void OnSliderChange()

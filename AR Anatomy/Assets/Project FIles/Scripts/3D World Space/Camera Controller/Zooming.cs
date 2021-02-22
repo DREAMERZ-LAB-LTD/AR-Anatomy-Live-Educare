@@ -16,7 +16,7 @@ public class Zooming : MonoBehaviour
     private void OnZooming()
     {
 
-        if (IsPointerOverUIObject()) return;
+        if (Utility.IsPointerOverUIObject()) return;
         if (Input.touchCount < 2) return;
 
 
@@ -47,13 +47,5 @@ public class Zooming : MonoBehaviour
         }
     }
 
-    public bool IsPointerOverUIObject()
-    {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
-    }
 
 }
