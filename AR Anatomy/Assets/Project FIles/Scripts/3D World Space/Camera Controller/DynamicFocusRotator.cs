@@ -35,26 +35,29 @@ public class DynamicFocusRotator : Rotator
         SetFocusPoint();
         focusPoint = Vector3.Lerp(focusPoint, selectedPoint, autoFocusSpeed * Time.deltaTime);
 
-        //stop going to selexted focus when user tyr to rezoom to show diffrent point of view 
-        if (Input.touchCount == 2)
+        
+        if (Input.touchCount == 2)//updating manual zooming offset data
         {
             UpdateProjectionOffset(focusPoint);
             autoFocusOffset = projectionOffset;
 
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
-            Vector2 preOffset = touch1.position - touch2.position;
-            Vector2 currOffset = (touch1.position + touch1.deltaPosition) - (touch2.position + touch2.deltaPosition);
-            float preDistance = preOffset.magnitude;
-            float currDistance = currOffset.magnitude;
-            if (currDistance > preDistance) return;
-
-            // back to initial projection distance when user try to fully zooming out
-            float availableZoomAmount = maxOffset - projectionOffset;
-            if (availableZoomAmount < maxOffset * 0.2f)
-            {
-                selectedPoint = initialFocusPoint.transform.position;
-                autoFocusOffset = maxOffset;
+            Vector2 t1PrePos = touch1.position - touch1.deltaPosition;
+            Vector2 t2PrePos = touch2.position - touch2.deltaPosition;
+            float preOffset = (t1PrePos - t2PrePos).magnitude;
+            float currOffset = (touch1.position  - touch2.position).magnitude;
+            bool isZoomingOut = currOffset < preOffset;
+           
+            if (isZoomingOut)
+            {       
+                // back to initial projection distance when user try to fully zooming out
+                float availableZoomAmount = maxOffset - projectionOffset;
+                if (availableZoomAmount < maxOffset * 0.2f)
+                {
+                    selectedPoint = initialFocusPoint.transform.position;
+                    autoFocusOffset = maxOffset;
+                }
             }
         }
         else

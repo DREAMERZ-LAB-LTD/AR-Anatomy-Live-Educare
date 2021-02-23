@@ -13,6 +13,8 @@ public class AnatomyInformationShower : MonoBehaviour
     [Space]
     [SerializeField] private Material bodySkinMat;
     private GameObject preSelectedObject;
+    [SerializeField] float touchOffset = 10.00f;
+    private Vector2 clickDownPoint;
 
     private void Start()
     {
@@ -33,29 +35,27 @@ public class AnatomyInformationShower : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
             SelectBodyParts(Input.mousePosition);
-# else
-
-        if (Input.touchCount == 1)
+ # else
+        Touch touch = Input.GetTouch(0);
+        switch (touch.phase)
         {
-            bool OnMoveing = false;
-            switch (Input.GetTouch(0).phase)
-            {
-                case TouchPhase.Began:
-                    break;
-                case TouchPhase.Stationary:
-                    OnMoveing = true;
-                    break;
-                case TouchPhase.Moved:
-                    OnMoveing = true;
-                    break;
-                case TouchPhase.Ended:
-                    if (!OnMoveing)
-                    {
-                        Touch touch = Input.GetTouch(Input.touchCount - 1);
-                        SelectBodyParts(touch.position);
-                    }
-                    break;
-            }
+            case TouchPhase.Began:
+                clickDownPoint = touch.position;
+                break;
+
+            case TouchPhase.Ended:
+                Vector2 clickUpPoint = touch.position;
+                Vector2 offset = clickDownPoint - clickUpPoint;
+                if (offset.magnitude < touchOffset)//Valid selection input
+                {
+                    SelectBodyParts(clickUpPoint);
+                }
+                else//Click cancel and hide information popup
+                {
+                    SetSelectedColor(null, Color.green);
+                    ShowInfo(null);
+                }
+                break;
         }
 #endif 
 

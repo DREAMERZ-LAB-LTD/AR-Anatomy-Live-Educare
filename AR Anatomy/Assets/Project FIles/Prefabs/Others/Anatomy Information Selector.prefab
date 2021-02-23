@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e36c0b67ee1554982fc5e50175f591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  display: {fileID: 0}
   cam: {fileID: 0}
+  display: {fileID: 0}
+  targetLayer: 0
   bodySkinMat: {fileID: 2100000, guid: 7d2fa6da0b29f2f4db6e8c3f7c0ff36b, type: 2}
+  touchOffset: 10

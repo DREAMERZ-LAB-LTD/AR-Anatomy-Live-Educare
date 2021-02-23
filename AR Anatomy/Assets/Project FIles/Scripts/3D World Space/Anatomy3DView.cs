@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Anatomy3DView : AnatomySystem
 {
-    [Header("Parent Of Full Anatomy System")]
-    [SerializeField] GameObject anatomyRoot;
     [Header("Layer Selector Slider")]
     [SerializeField] private Slider LayerSlider;
 
@@ -19,10 +17,7 @@ public class Anatomy3DView : AnatomySystem
     {
         ShowBodyLayer(AnatomyManager.SelectedLAyer);
     }
-    public void ActiveAnatomyRoot(bool enable)
-    {
-        anatomyRoot.SetActive(enable);
-    }
+  
     public void OnSliderChange()
     {
         int currentLayer = (int)LayerSlider.value;
