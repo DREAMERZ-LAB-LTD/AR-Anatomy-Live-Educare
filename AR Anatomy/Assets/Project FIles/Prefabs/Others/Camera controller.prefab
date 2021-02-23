@@ -40,8 +40,8 @@ GameObject:
   m_Component:
   - component: {fileID: 469093622141976557}
   - component: {fileID: 469093622141976556}
-  - component: {fileID: 469093622141976562}
   - component: {fileID: 1402539960}
+  - component: {fileID: 469093622141976562}
   - component: {fileID: 8445914594191178365}
   m_Layer: 0
   m_Name: Camera controller
@@ -80,21 +80,6 @@ MonoBehaviour:
   cam: {fileID: 0}
   minimumScaleSensitivity: 4
   ZoomSpeed: 0.05
---- !u!114 &469093622141976562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469093622141976563}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ff89fac3231c845b4dc45767166168, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  MoveSpeed: 0.05
-  minTouchCount: 1
 --- !u!114 &1402539960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +105,21 @@ MonoBehaviour:
   clickResponse:
     doubleClickDelay: 0.3
     maxClickOffset: 2
+--- !u!114 &469093622141976562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469093622141976563}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ff89fac3231c845b4dc45767166168, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  MoveSpeed: 0.05
+  minTouchCount: 1
 --- !u!114 &8445914594191178365
 MonoBehaviour:
   m_ObjectHideFlags: 0

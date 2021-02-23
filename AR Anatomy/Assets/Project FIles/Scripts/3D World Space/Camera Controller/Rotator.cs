@@ -37,7 +37,7 @@ public class Rotator : MonoBehaviour
         UpdateProjectionOffset(initialFocus);
     }
 
-    public void RestView()
+    public virtual void RestView()
     {
         cam.transform.position = camInitialPosition.position;
         cam.transform.rotation = camInitialPosition.rotation;

@@ -14,9 +14,6 @@ public class AnatomyInformationShower : MonoBehaviour
     [SerializeField] private Material bodySkinMat;
     private GameObject preSelectedObject;
 
-    [Header("Selection Events")]
-    [SerializeField] UnityEvent OnSelectObject;
-    [SerializeField] UnityEvent OnDeSelectObject;
     private void Start()
     {
         if (cam == null)
@@ -65,21 +62,18 @@ public class AnatomyInformationShower : MonoBehaviour
     }
     private void SelectBodyParts(Vector2 screenPoint)
     {
-        GameObject newSelectedObject = GetRaycastInfo(screenPoint);
-        OrganSubDetailSwitcher.exploreOrgan = newSelectedObject;
-
+        GameObject newSelectedObject = GetRaycastInfo(screenPoint, targetLayer);;
+        Debug.Log(newSelectedObject == null);
 
         if (newSelectedObject != null)
         {
             SetSelectedColor(newSelectedObject, Color.green);
             ShowInfo(newSelectedObject);
-            OnSelectObject.Invoke();
         }
         else
         {
             SetSelectedColor(null, Color.green);
             ShowInfo(null);
-            OnDeSelectObject.Invoke();
         }
 
     }
@@ -120,10 +114,10 @@ public class AnatomyInformationShower : MonoBehaviour
 
     }
 
-    protected GameObject GetRaycastInfo(Vector2 screenPoint)
+    private GameObject GetRaycastInfo(Vector2 screenPoint, int layermask)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPoint);
-        int layer = 1 << targetLayer;
+        int layer = 1 << layermask;
         if (Physics.Raycast(ray, out RaycastHit hit, 500.0f, layer))
         {
             return hit.collider.gameObject;

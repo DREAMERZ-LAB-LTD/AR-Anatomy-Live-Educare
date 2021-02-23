@@ -23,6 +23,13 @@ public class DynamicFocusRotator : Rotator
         autoFocusOffset = projectionOffset;
     }
 
+    public override void RestView()
+    {
+        autoFocusOffset = maxOffset;
+        selectedPoint = initialFocusPoint.position;
+        base.RestView();
+    }
+
     protected override void Update()
     {
         SetFocusPoint();
