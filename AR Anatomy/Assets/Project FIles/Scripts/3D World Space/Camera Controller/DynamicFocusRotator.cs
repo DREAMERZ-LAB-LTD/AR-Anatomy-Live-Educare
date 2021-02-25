@@ -11,10 +11,6 @@ public class DynamicFocusRotator : Rotator
     [SerializeField]private float autoFocusOffset = 0;
     Vector3 selectedPoint;
 
-    [Header("Double Click Setup")]
-    [SerializeField] ClickResponse clickResponse;
-
-    
     protected override void Start()
     {
         base.Start();
@@ -32,10 +28,15 @@ public class DynamicFocusRotator : Rotator
 
     protected override void Update()
     {
-        SetFocusPoint();
         focusPoint = Vector3.Lerp(focusPoint, selectedPoint, autoFocusSpeed * Time.deltaTime);
+        ControllManualZoom();
 
-        
+        UpdateRotation();
+        UpdatePosition(focusPoint, projectionOffset);
+    }
+
+    private void ControllManualZoom()
+    {
         if (Input.touchCount == 2)//updating manual zooming offset data
         {
             UpdateProjectionOffset(focusPoint);
@@ -46,11 +47,11 @@ public class DynamicFocusRotator : Rotator
             Vector2 t1PrePos = touch1.position - touch1.deltaPosition;
             Vector2 t2PrePos = touch2.position - touch2.deltaPosition;
             float preOffset = (t1PrePos - t2PrePos).magnitude;
-            float currOffset = (touch1.position  - touch2.position).magnitude;
+            float currOffset = (touch1.position - touch2.position).magnitude;
             bool isZoomingOut = currOffset < preOffset;
-           
+
             if (isZoomingOut)
-            {       
+            {
                 // back to initial projection distance when user try to fully zooming out
                 float availableZoomAmount = maxOffset - projectionOffset;
                 if (availableZoomAmount < maxOffset * 0.2f)
@@ -64,17 +65,13 @@ public class DynamicFocusRotator : Rotator
         {
             LearpProjectionOffset(autoFocusOffset, autoFocusSpeed);
         }
-        
-        UpdateRotation();
-        UpdatePosition(focusPoint, projectionOffset);
     }
-
    
     //set focus point and make it the center pivote point of projection
+    //call from double click event
     public void SetFocusPoint()
     {
         if (Utility.IsPointerOverUIObject()) return;
-        if (!clickResponse.isDoubleClicked) return;
 
         ProjectionInformation projectionInfo = GetProjectionInfo(Input.mousePosition, selectionFocusLayer);
         if (projectionInfo != null)

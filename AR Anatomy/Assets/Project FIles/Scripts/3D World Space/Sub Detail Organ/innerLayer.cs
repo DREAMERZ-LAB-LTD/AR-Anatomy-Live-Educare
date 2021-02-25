@@ -6,20 +6,25 @@ public class innerLayer : MonoBehaviour
 {
     [SerializeField] Transform destination;
     [SerializeField] float movingSpeed = 1.00f;
-
+    [HideInInspector] public bool isExtraced = false;
     Vector3 initialPositoion;
     Coroutine onMoveing;
 
 
     private void Awake()=>initialPositoion = transform.position;
-    
-    private void OnEnable()
+
+    private void OnDisable()
     {
         transform.position = initialPositoion;
+        isExtraced = false;
+    } 
+    
+    public void Extract()
+    {
+        isExtraced = true;
         StopGoing();
-        StartCoroutine(setPosition(destination.position));
+        onMoveing = StartCoroutine(setPosition(destination.position));
     }
-
 
     private void StopGoing()
     {

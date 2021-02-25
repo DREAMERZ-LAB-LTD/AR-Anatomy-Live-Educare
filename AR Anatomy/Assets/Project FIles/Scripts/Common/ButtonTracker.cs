@@ -19,8 +19,6 @@ public class ButtonTracker : MonoBehaviour
 
         defaultPostion = new Vector3(ViewModeBtn.position.x, totalHeight, ViewModeBtn.position.z);
         ViewModeBtn.transform.position = defaultPostion + new Vector3(0, offset, 0);
-        Debug.Log(BackgroundRect.anchorMax.y);
-        Debug.Log(backgroundHeight);
     }
     void Update()
     {

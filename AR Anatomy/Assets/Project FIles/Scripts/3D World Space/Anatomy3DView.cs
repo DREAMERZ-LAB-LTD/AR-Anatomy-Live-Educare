@@ -13,8 +13,10 @@ public class Anatomy3DView : AnatomySystem
     {
         LayerSlider.maxValue = bodyParts.Length - 1;
     }
+
     private void OnEnable()
     {
+        //show same layer that we had selected in AR scene
         ShowBodyLayer(AnatomyManager.SelectedLAyer);
     }
   

@@ -80,22 +80,28 @@ public class Rotator : MonoBehaviour
         //update position
         Vector3 frontFacinPoint = cam.transform.forward * projectionDistance;
         Vector3 projectionPoint = focusPoint - frontFacinPoint;
-        cam.transform.position = projectionPoint;
+        Vector3 newPosition = projectionPoint + GetVerticalOffset();
+        cam.transform.position = newPosition;
 
-        //set verical offset
-        Vector3 localdown = cam.transform.InverseTransformPoint(cam.transform.up);
-        Vector3 worldDown = cam.transform.TransformPoint(localdown);
-        Vector3 vertical_offset = worldDown * verticalOffset;
-        cam.transform.position += vertical_offset; 
+
+      //  cam.transform.position += GetVerticalOffset(); 
     }
     protected void UpdateProjectionOffset(Vector3 focus)
-    { 
-        float offset = Vector3.Distance(cam.transform.position, focus);
+    {
+        Vector3 focusWithOffset = focus + GetVerticalOffset();
+        float offset = Vector3.Distance(cam.transform.position, focusWithOffset);
         projectionOffset = Mathf.Clamp(offset, minOffset, maxOffset);
     }
 
     protected void LearpProjectionOffset(float newOffset, float speed)
     { 
         projectionOffset = Mathf.Lerp(projectionOffset, newOffset, speed * Time.deltaTime);
+    }
+
+    protected Vector3 GetVerticalOffset()
+    {
+        Vector3 localdown = cam.transform.InverseTransformPoint(cam.transform.up);
+        Vector3 worldDown = cam.transform.TransformPoint(localdown);
+        return worldDown * verticalOffset;
     }
 }

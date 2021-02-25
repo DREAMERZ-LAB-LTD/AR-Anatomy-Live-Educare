@@ -7,7 +7,8 @@ public class OrganSubDetailSwitcher : MonoBehaviour
 {
     [Header("Raycast Layer Mask")]
     [SerializeField] private int targetLayer = 0;
-
+    [Space]
+    [SerializeField] InnerOrganHandler innerOrganHandler;
 
 
     [Header("Action Response")]
@@ -16,8 +17,6 @@ public class OrganSubDetailSwitcher : MonoBehaviour
     [SerializeField] UnityEvent onExploringStart;
     [SerializeField] UnityEvent onExploringClose;
 
-    [Tooltip("Current Explored Organ")]
-    private ExploreableOrgan exploreOrgan = null;
 
 
     private bool isSeletionMode = true;
@@ -37,14 +36,15 @@ public class OrganSubDetailSwitcher : MonoBehaviour
     private void SelectOrgan()
     {
         ExploreableOrgan organ = GetRaycastInfo(Input.mousePosition, targetLayer);
-        //  ExploreableOrgan organ = GetRaycastInfo(Input.mousePosition, targetLayer);
-        if (isSeletionMode)
-        { 
-            exploreOrgan = organ;
-        }
+        if (organ != null) 
+        {
+            if (isSeletionMode)
+            {
+                innerOrganHandler.SelectInnerOrgan(organ.organIndex);
+            }
 
-        if (organ != null)
             onExploreableDetected.Invoke();
+        }
         else
             onExploreableNotDetected.Invoke();
 
@@ -54,32 +54,15 @@ public class OrganSubDetailSwitcher : MonoBehaviour
 
     public void OnClickExploreOrgan()
     {
-        if (exploreOrgan == null)
-        {
-#if UNITY_EDITOR
-            Debug.LogWarning("Organ Not Selected");
-#endif
-            return;
-        }
         onExploringStart.Invoke();
-        exploreOrgan.Explore(true);
+        innerOrganHandler.ShowInnerLayer(true);
     }
     public void OnClickBackTo3DAnatomy()
     {
-        if (exploreOrgan == null)
-        {
-#if UNITY_EDITOR
-            Debug.LogWarning("Organ Not Selected");
-#endif
-            return;
-        }
-
-        exploreOrgan.Explore(false);
-        exploreOrgan = null;
+        innerOrganHandler.ShowInnerLayer(false);
         onExploringClose.Invoke();
     }
 
-   
     private ExploreableOrgan GetRaycastInfo(Vector2 screenPoint, int layermask)
     {
         Ray ray = Camera.main.ScreenPointToRay(screenPoint);

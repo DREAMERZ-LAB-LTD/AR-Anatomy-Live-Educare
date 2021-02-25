@@ -10,21 +10,21 @@ public class AnatomyInformationShower : MonoBehaviour
     [SerializeField] private DetailPanel display;
     [Header("Raycast Layer Mask")]
     [SerializeField] private int targetLayer = 0;
-    [Space]
-    [SerializeField] private Material bodySkinMat;
     private GameObject preSelectedObject;
+
+    [Header("Touch Input Setup")]
     [SerializeField] float touchOffset = 10.00f;
+#if !UNITY_EDITOR
     private Vector2 clickDownPoint;
+#endif
 
     private void Start()
     {
+        preSelectedObject = null;
         if (cam == null)
         { 
             cam = Camera.main;
         }
-        bodySkinMat.color = Color.white;
-        preSelectedObject = null;
-
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class AnatomyInformationShower : MonoBehaviour
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
             SelectBodyParts(Input.mousePosition);
- # else
+#else
         Touch touch = Input.GetTouch(0);
         switch (touch.phase)
         {
@@ -52,55 +52,49 @@ public class AnatomyInformationShower : MonoBehaviour
                 }
                 else//Click cancel and hide information popup
                 {
-                    SetSelectedColor(null, Color.green);
+                    ApplyColor(preSelectedObject, Color.white);
                     ShowInfo(null);
                 }
                 break;
         }
-#endif 
+#endif
 
     }
     private void SelectBodyParts(Vector2 screenPoint)
     {
         GameObject newSelectedObject = GetRaycastInfo(screenPoint, targetLayer);;
-        Debug.Log(newSelectedObject == null);
+
 
         if (newSelectedObject != null)
         {
-            SetSelectedColor(newSelectedObject, Color.green);
+            ApplyColor(preSelectedObject, Color.white);
+            ApplyColor(newSelectedObject, Color.green);
             ShowInfo(newSelectedObject);
+            //assign new selected object to previous selected object for next click
+            preSelectedObject = newSelectedObject;
         }
         else
         {
-            SetSelectedColor(null, Color.green);
+            ApplyColor(preSelectedObject, Color.white);
             ShowInfo(null);
         }
 
     }
 
-    private void SetSelectedColor(GameObject newSelectedObject, Color color)
+    private void ApplyColor(GameObject newSelectedObject, Color color)
     {
-        //make default color of previous selected object when try to select another object
-        if (preSelectedObject != null)
-        {
-            preSelectedObject.GetComponent<Renderer>().material.color = Color.white;
-            bodySkinMat.color = Color.white;
-        }
-
         //set color of new selected object
         if (newSelectedObject != null)
         {
-            newSelectedObject.GetComponent<Renderer>().material.color = color;
-            if (newSelectedObject.name == "Body_Skin")
+            Material[] newSelectedMats = newSelectedObject.GetComponent<Renderer>().materials;
+            for (int i = 0; i < newSelectedMats.Length; i++)
             {
-                bodySkinMat.color = color;
+                newSelectedMats[i].color = color;
             }
         }
-
-        //assign new selected object to previous selected object for next click
-        preSelectedObject = newSelectedObject;
     }
 
+    //pass selected organ information to show on the screen
     private void ShowInfo(GameObject selectedObject)
     {
         bool hasSelectedObject = selectedObject != null;
