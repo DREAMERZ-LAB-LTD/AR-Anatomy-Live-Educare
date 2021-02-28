@@ -6,33 +6,63 @@ public class innerLayer : MonoBehaviour
 {
     [SerializeField] Transform destination;
     [SerializeField] float movingSpeed = 1.00f;
-    [HideInInspector] public bool isExtraced = false;
+
+    private bool isCompressed = true;
     Vector3 initialPositoion;
     Coroutine onMoveing;
 
-
-    private void Awake()=>initialPositoion = transform.position;
-
-    private void OnDisable()
+    #region Initilizing
+    private void Awake() 
     {
-        transform.position = initialPositoion;
-        isExtraced = false;
-    } 
-    
-    public void Extract()
-    {
-        isExtraced = true;
-        StopGoing();
-        onMoveing = StartCoroutine(setPosition(destination.position));
+        isCompressed = true;
+        initialPositoion = transform.position;
     }
 
-    private void StopGoing()
+    private void OnDisable() => ResetPosition();
+
+    #endregion Initilizing
+
+    /// <summary>
+    /// object will linearly moveing to destination position to explore the organ
+    /// </summary>
+    public void Extracting(Vector3 destination)
+    {
+        if (isCompressed)
+        {
+            isCompressed = false;
+            StopMoving();
+            onMoveing = StartCoroutine(setPosition(destination));
+        }
+    }
+
+    /// <summary>
+    /// object will linearly moveing to initial position to compress the organ
+    /// </summary>
+    public void Compressing()
+    {
+        if (!isCompressed)
+        {
+            isCompressed = true;
+            StopMoving();
+            onMoveing = StartCoroutine(setPosition(initialPositoion));
+        }
+    }
+
+    public void ResetPosition()
+    {
+        isCompressed = true;
+        StopMoving();
+        transform.position = initialPositoion;
+    }
+
+
+    #region ObjectMovement
+    private void StopMoving()
     {
         if (onMoveing != null)
         {
             StopCoroutine(onMoveing);
         }
-    
     }
     IEnumerator setPosition(Vector3 destination)
     {
@@ -42,5 +72,5 @@ public class innerLayer : MonoBehaviour
             yield return null;
         }
     }
-
+    #endregion ObjectMovement
 }

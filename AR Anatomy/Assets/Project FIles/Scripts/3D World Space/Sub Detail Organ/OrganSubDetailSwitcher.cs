@@ -47,9 +47,6 @@ public class OrganSubDetailSwitcher : MonoBehaviour
         }
         else
             onExploreableNotDetected.Invoke();
-
-       
-        
     }
 
     public void OnClickExploreOrgan()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InnerOrgan : MonoBehaviour
 {
 
+    [SerializeField] private GameObject fullOrgan;
     [SerializeField] private List<innerLayer> layers = new List<innerLayer>();
 
     /// <summary>
@@ -14,21 +15,50 @@ public class InnerOrgan : MonoBehaviour
     public void Show(bool show)
     {
         gameObject.SetActive(show);
-    
+        if (fullOrgan != null)
+        {
+            fullOrgan.SetActive(true);
+        }
     }
 
     /// <summary>
     /// Extract the inner organ child objects object to explore
     /// </summary>
-    public void Extract()
+    public void Extract(Vector3 leftThreshold, Vector3 rightThreshold)
     {
+        if (fullOrgan != null)
+        {
+            fullOrgan.SetActive(false);
+        }
+
+        for (int i = 0; i < layers.Count; i++)
+        {
+            float t = i / (float)(layers.Count - 1);
+            Vector3 layerPoit = Vector3.Lerp(leftThreshold, rightThreshold, t);
+
+            Debug.Log(layerPoit + "time " + t);
+
+            var layer = layers[i];
+            layer.Extracting(layerPoit);
+
+        }
+    }
+
+
+    public void Compress()
+    {
+        if (fullOrgan != null)
+        {
+            fullOrgan.SetActive(true);
+        }
+
         for (int i = 0; i < layers.Count; i++)
         {
             var layer = layers[i];
-            if (layer.isExtraced) continue;
-
-            layer.Extract();
+            layer.ResetPosition();
         }
     }
+
+
 
 }

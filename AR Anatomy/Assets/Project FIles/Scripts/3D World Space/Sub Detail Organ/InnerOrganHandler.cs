@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class InnerOrganHandler : MonoBehaviour
 {
+    [SerializeField] OffsetCalculator offsetCalculator;
+    [SerializeField] Transform center;
     [SerializeField] List<InnerOrgan> innerOrgans = new List<InnerOrgan>();
     private int OrganIndx = -1;
+    [SerializeField] int innerOrganLayer = 0;
 
     //Set inner organ index from exploreable organ of 3D anatomy body
     public void SelectInnerOrgan(int indx)
@@ -30,10 +33,22 @@ public class InnerOrganHandler : MonoBehaviour
 
     public void OnDoubleClick_ExtractOrgan()
     {
+        bool tapOnInnerOrgan = GetRaycastInfo(Input.mousePosition, innerOrganLayer);
+        if (!tapOnInnerOrgan)
+        {
+
+            Debug.LogWarning("not clicked on inner organ to explore in detail");
+            return;
+        }
+
         InnerOrgan organ = GetInnerOrgan(OrganIndx);
         if (organ == null) return;
         if (!organ.gameObject.activeSelf) return;
-        organ.Extract();
+
+        offsetCalculator.GetThresholds(out Vector3 a, out Vector3 b);
+        a.y = center.position.y;
+        b.y = center.position.y;
+        organ.Extract(a, b);
     }
 
     public InnerOrgan GetInnerOrgan(int indx)
@@ -46,5 +61,17 @@ public class InnerOrganHandler : MonoBehaviour
             return null;
         }
         return innerOrgans[indx];
+    }
+
+
+    private GameObject GetRaycastInfo(Vector2 screenPoint, int layermask)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(screenPoint);
+        int layer = 1 << layermask;
+        if (Physics.Raycast(ray, out RaycastHit hit, 500.0f, layer))
+        {
+            return hit.collider.gameObject;
+        }
+        return null;
     }
 }
