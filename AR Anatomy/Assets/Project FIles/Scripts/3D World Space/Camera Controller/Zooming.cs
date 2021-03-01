@@ -5,10 +5,11 @@ using UnityEngine.EventSystems;
 
 public class Zooming : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] private Transform cam;
     [SerializeField] private float minimumScaleSensitivity;
     [SerializeField] private float ZoomSpeed;
-
+#pragma warning restore 649
     private void Update()
     {
         OnZooming();

@@ -5,13 +5,14 @@ using UnityEngine.EventSystems;
 
 public class Rotator : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] protected Camera cam;
     [Header("Rotation Setup")]
     [SerializeField] Transform camInitialPosition;
     [SerializeField] protected Transform initialFocusPoint;
     [Range(0.01f, 1.00f)]
     [SerializeField] float rotateSpeed = 0.05f;
-
+#pragma warning restore 649
 
     [Header("Focus Setup")]
     [Tooltip("Vertical Projection Offset")]
@@ -22,7 +23,9 @@ public class Rotator : MonoBehaviour
     [SerializeField] protected float minOffset = 0.05f;
     [Tooltip("Maximum Projection Offset")]
     [SerializeField] protected float maxOffset = 2.5f;
+#pragma warning disable 649
     protected Vector3 focusPoint;
+#pragma warning restore 649
 
     protected virtual void Start()
     {

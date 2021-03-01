@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class SplashScript : SceneController
 {
     [SerializeField]private int NextSceneNo = 1;
+#pragma warning disable 649
     [SerializeField]private Image splashImage;
+#pragma warning restore 649
 
     // Use this for initialization
     private IEnumerator Start()

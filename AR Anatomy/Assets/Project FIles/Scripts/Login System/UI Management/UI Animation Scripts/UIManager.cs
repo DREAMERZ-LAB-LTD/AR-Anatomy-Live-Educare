@@ -11,9 +11,11 @@ namespace DL.UI
 
         [SerializeField] private float disableDelay = 0.25f;
         [HideInInspector] public int currentScene = 0;
+#pragma warning disable 649
         [Space]
         [SerializeField] AudioSource _audioSource;
         [SerializeField] AudioClip _uiClickSound;
+#pragma warning restore 649
         public void ButtonClick() => _audioSource.PlayOneShot(_uiClickSound, Random.Range(0.5f, 0.8f));
 
 

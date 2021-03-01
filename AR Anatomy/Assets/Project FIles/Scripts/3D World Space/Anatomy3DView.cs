@@ -6,9 +6,10 @@ using UnityEngine.UI;
 
 public class Anatomy3DView : AnatomySystem
 {
+#pragma warning disable 649
     [Header("Layer Selector Slider")]
     [SerializeField] private Slider LayerSlider;
-
+#pragma warning restore 649
     private void Awake()
     {
         LayerSlider.maxValue = bodyParts.Length - 1;

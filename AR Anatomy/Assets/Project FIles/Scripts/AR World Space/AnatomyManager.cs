@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
-using UnityEngine.SceneManagement;
-using UI;
 using Anatomy.Body;
 public class AnatomyManager : AnatomySystem
 {
+#pragma warning disable 649
     [Header("Anatomy Setup")]
     public GameObject fullBody;
-    private GameObject selectedPart;
     public GameObject detailedButton;
     public GameObject rootMaleAnatomy;
 
@@ -19,8 +16,7 @@ public class AnatomyManager : AnatomySystem
     public Slider layerSlider;
     public static int SelectedLAyer = 0;
 
-    [Space]
-    public Material bodySkinMat;
+
 
     public float fadeDelay = 0.0f;
     public float fadeTime = 0.5f;
@@ -29,44 +25,12 @@ public class AnatomyManager : AnatomySystem
     private bool logInitialFadeSequence = false;
     public GameObject organBackButton;
 
-  
-
     public GameObject heart;
-
     private Color[] colors;
-
-
-
+#pragma warning restore 649
 
     void Awake()=> layerSlider.maxValue = bodyParts.Length - 1;
     private void OnEnable()=>layerSlider.value = SelectedLAyer;
-
-    
-    private bool IsPointerOverUIObject()
-    {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
-    }
-
-
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Escape))
-    //    {
-    //        if (heart.activeSelf)
-    //        {
-    //            fullBody.SetActive(true);
-    //            heart.SetActive(false);
-    //            layerSlider.gameObject.SetActive(true);
-    //        }
-    //    }
-    //}
-
 
     public void OnBackButtonClick()
     {
@@ -84,11 +48,6 @@ public class AnatomyManager : AnatomySystem
         
         ShowBodyLayer(SelectedLAyer);
 
-        if (selectedPart != null)
-        {
-            selectedPart.GetComponent<Renderer>().material.color = Color.white;
-            bodySkinMat.color = Color.white;
-        }
     }
 
     public void ShowHeart()
@@ -110,7 +69,6 @@ public class AnatomyManager : AnatomySystem
         return maxAlpha;
     }
 
-  
     void FadeIn(GameObject targetObject)
     {
         FadeIn(fadeTime, targetObject);
@@ -198,7 +156,4 @@ public class AnatomyManager : AnatomySystem
             }
         }
     }
-
-
-
 }

@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class InnerOrganHandler : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] OffsetCalculator offsetCalculator;
     [SerializeField] Transform center;
+#pragma warning restore 649
     [SerializeField] List<InnerOrgan> innerOrgans = new List<InnerOrgan>();
     private int OrganIndx = -1;
     [SerializeField] int innerOrganLayer = 0;
-
+#if UNITY_EDITOR
+    [Header("Unity Debug Log")]
+    [SerializeField] bool showDebug = false;
+#endif
     //Set inner organ index from exploreable organ of 3D anatomy body
-    public void SelectInnerOrgan(int indx)
+    public void SetInnerOrganIndex(int indx)
     {
         InnerOrgan organ = GetInnerOrgan(indx);
         if (organ == null) return;
@@ -21,23 +26,27 @@ public class InnerOrganHandler : MonoBehaviour
     /// <summary>
     /// only set active inner organ to explore
     /// </summary>
-    /// <param name="show">enable and disable state</param>
-    public void ShowInnerLayer(bool show)
+    /// <param name="enable">enable and disable state</param>
+    public void SetActiveInnerOrgan(bool enable)
     {
         InnerOrgan organ = GetInnerOrgan(OrganIndx);
         if (organ == null) return;
 
-        organ.Show(show);
+        organ.SetActive(enable);
     }
 
 
     public void OnDoubleClick_ExtractOrgan()
     {
-        bool tapOnInnerOrgan = GetRaycastInfo(Input.mousePosition, innerOrganLayer);
+        bool tapOnInnerOrgan = GetRaycastInfo(Input.mousePosition, innerOrganLayer) != null;
         if (!tapOnInnerOrgan)
         {
-
-            Debug.LogWarning("not clicked on inner organ to explore in detail");
+#if UNITY_EDITOR
+            if (showDebug)
+            { 
+                Debug.LogWarning("not clicked on inner organ to explore in detail");
+            }
+#endif
             return;
         }
 
@@ -51,12 +60,27 @@ public class InnerOrganHandler : MonoBehaviour
         organ.Extract(a, b);
     }
 
+    public void Compress()
+    {
+        bool tapOnInnerOrgan = GetRaycastInfo(Input.mousePosition, innerOrganLayer) != null;
+        if (tapOnInnerOrgan) return;
+       
+        InnerOrgan organ = GetInnerOrgan(OrganIndx);
+        if (organ == null) return;
+        if (!organ.gameObject.activeSelf) return;
+
+        organ.Compress();
+    }
+
     public InnerOrgan GetInnerOrgan(int indx)
     {
         if (indx < 0 || indx >= innerOrgans.Count)
         {
 #if UNITY_EDITOR
-            Debug.LogWarning("inner Organ Out Of Range");
+            if (showDebug)
+            {
+                Debug.LogWarning("inner Organ Out Of Range");
+            }
 #endif
             return null;
         }

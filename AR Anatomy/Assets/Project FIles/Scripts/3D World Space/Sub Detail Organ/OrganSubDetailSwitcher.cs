@@ -7,6 +7,7 @@ public class OrganSubDetailSwitcher : MonoBehaviour
 {
     [Header("Raycast Layer Mask")]
     [SerializeField] private int targetLayer = 0;
+#pragma warning disable 649
     [Space]
     [SerializeField] InnerOrganHandler innerOrganHandler;
 
@@ -16,7 +17,7 @@ public class OrganSubDetailSwitcher : MonoBehaviour
     [SerializeField] UnityEvent onExploreableNotDetected;
     [SerializeField] UnityEvent onExploringStart;
     [SerializeField] UnityEvent onExploringClose;
-
+#pragma warning restore 649
 
 
     private bool isSeletionMode = true;
@@ -40,7 +41,7 @@ public class OrganSubDetailSwitcher : MonoBehaviour
         {
             if (isSeletionMode)
             {
-                innerOrganHandler.SelectInnerOrgan(organ.organIndex);
+                innerOrganHandler.SetInnerOrganIndex(organ.organIndex);
             }
 
             onExploreableDetected.Invoke();
@@ -52,11 +53,11 @@ public class OrganSubDetailSwitcher : MonoBehaviour
     public void OnClickExploreOrgan()
     {
         onExploringStart.Invoke();
-        innerOrganHandler.ShowInnerLayer(true);
+        innerOrganHandler.SetActiveInnerOrgan(true);
     }
     public void OnClickBackTo3DAnatomy()
     {
-        innerOrganHandler.ShowInnerLayer(false);
+        innerOrganHandler.SetActiveInnerOrgan(false);
         onExploringClose.Invoke();
     }
 

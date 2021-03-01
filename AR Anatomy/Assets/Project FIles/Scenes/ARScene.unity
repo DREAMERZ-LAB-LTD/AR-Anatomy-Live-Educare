@@ -3505,6 +3505,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7822ef31a3910b49971cb7b5e128ced, type: 3}
+--- !u!114 &268829848 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5127965294997374888, guid: b7822ef31a3910b49971cb7b5e128ced,
+    type: 3}
+  m_PrefabInstance: {fileID: 268829847}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e36c0b67ee1554982fc5e50175f591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &300216085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3750,7 +3762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 473126049}
   m_Layer: 0
-  m_Name: Placment 3D Inticator
+  m_Name: Placment 3D Inticator (Transparent Anatomy )
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3899,7 +3911,6 @@ MonoBehaviour:
   detailedButton: {fileID: 1675846105}
   rootMaleAnatomy: {fileID: 18876572}
   layerSlider: {fileID: 977680911}
-  bodySkinMat: {fileID: 2100000, guid: 7d2fa6da0b29f2f4db6e8c3f7c0ff36b, type: 2}
   fadeDelay: 0
   fadeTime: 0.5
   fadeInOnStart: 0
@@ -29957,9 +29968,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 537163745}
+    - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 268829848}
+    - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DeselectOrgan
+      objectReference: {fileID: 0}
+    - target: {fileID: 6168035696123105815, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6168035696323645306, guid: 8ba02d43bf31fbd40916bd8a94791fcf,
         type: 3}
       propertyPath: m_Name

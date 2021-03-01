@@ -5,13 +5,14 @@ using UnityEngine;
 public class ButtonTracker : MonoBehaviour
 {
     public bool useUpdate = true;
+#pragma warning disable 649
     [SerializeField]private RectTransform ViewModeBtn;
     [SerializeField]private RectTransform DynamicRect;
     [SerializeField]private RectTransform BackgroundRect;
     [SerializeField]private float offset;
 
     private Vector3 defaultPostion;
-    
+#pragma warning disable 649
     private void Start()
     {
         float btnBodyHeight = ViewModeBtn.rect.height;

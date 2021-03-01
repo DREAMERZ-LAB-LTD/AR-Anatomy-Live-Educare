@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 public class ControlleSwitcher : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] float selectionDelay;
     [SerializeField] float minTouchFraction;
     [SerializeField] DynamicFocusRotator rotator;
     [SerializeField] Movement movement;
 
     private Coroutine existingCounter;
+#pragma warning restore 649
     private bool dragOnCounteing = false;
 
     private void Update()

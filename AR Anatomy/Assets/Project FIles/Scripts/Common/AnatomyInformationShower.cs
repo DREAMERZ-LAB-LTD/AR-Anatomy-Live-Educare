@@ -6,14 +6,18 @@ using UnityEngine.EventSystems;
 
 public class AnatomyInformationShower : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] private Camera cam;
     [SerializeField] private DetailPanel display;
     [Header("Raycast Layer Mask")]
     [SerializeField] private int targetLayer = 0;
     private GameObject preSelectedObject;
+#pragma warning restore 649
 
+#pragma warning disable 414
     [Header("Touch Input Setup")]
     [SerializeField] float touchOffset = 10.00f;
+#pragma warning restore 414
 #if !UNITY_EDITOR
     private Vector2 clickDownPoint;
 #endif
@@ -75,10 +79,15 @@ public class AnatomyInformationShower : MonoBehaviour
         }
         else
         {
-            ApplyColor(preSelectedObject, Color.white);
-            ShowInfo(null);
+            DeselectOrgan();
         }
 
+    }
+
+    public void DeselectOrgan()
+    {
+        ApplyColor(preSelectedObject, Color.white);
+        ShowInfo(null);
     }
 
     private void ApplyColor(GameObject newSelectedObject, Color color)

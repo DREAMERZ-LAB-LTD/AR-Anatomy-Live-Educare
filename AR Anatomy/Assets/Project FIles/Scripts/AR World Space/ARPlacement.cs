@@ -9,9 +9,8 @@ using Debug = UnityEngine.Debug;
 
 public class ARPlacement : MonoBehaviour
 {
+#pragma warning disable 649
 
-
-  //  [SerializeField] ARSessionOrigin sessionOrigin;
     [SerializeField] ARRaycastManager raycastManager;
     [SerializeField] ARPlaneManager planeManager;
 
@@ -26,6 +25,7 @@ public class ARPlacement : MonoBehaviour
     [SerializeField, Header("Selection Delay Time"), Range(0.25f, 2.00f)] 
     private float MaxSelectionDelay;
 
+#pragma warning restore 649
 
     private float SelectionCounter = 0;
     private bool PlacedOnAR = false;

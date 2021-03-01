@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] private Camera cam;
     [SerializeField] private float MoveSpeed;
+#pragma warning restore 649
 
     [Header("Input Touch Count")]
     [SerializeField] private int minTouchCount = 1;

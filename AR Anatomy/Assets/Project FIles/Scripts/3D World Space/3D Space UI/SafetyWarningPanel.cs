@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 public class SafetyWarningPanel : MonoBehaviour
 {
+#pragma warning disable 649
     [Header("Safety warning Panel Property")]
     [SerializeField] private UIContentAnimatorList SafetyWarning;
     public Toggle IAggre;
-
     [SerializeField] UnityEvent OnLoadARScene;
+#pragma warning restore 649
 
 
     public void OnClickShwoInAR()

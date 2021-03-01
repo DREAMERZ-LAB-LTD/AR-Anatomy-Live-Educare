@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class VerticalRotationHandler : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] private float Speed;
     public GameObject rootMaleAnatomy;
     [SerializeField] private bool isStanding = true;
@@ -16,6 +17,7 @@ public class VerticalRotationHandler : MonoBehaviour
     [SerializeField] private Button RotateBtn;
     [SerializeField] private Sprite UpImg;
     [SerializeField] private Sprite DownImg;
+#pragma warning restore 649
     
 
     private void Start()

@@ -6,9 +6,11 @@ public class OffsetCalculator : MonoBehaviour
 {
     [Header("Camera Field Of View Angle")]
     [SerializeField] int cameraFieldOfView = 60;
+#pragma warning disable 649
     [Header("Camera Max Zoom Out Point")]
     [SerializeField] Transform projectionPoint;
     [SerializeField] Transform center;
+#pragma warning restore 649
     [SerializeField, Range(0.00f, 100.00f)] float thresholdOffset = 0;
 
 
@@ -39,6 +41,10 @@ public class OffsetCalculator : MonoBehaviour
 
 
 
+    /*
+     * formula :
+     * opposite = adjacent * tan(theta)
+     */
     private Vector3 GetRithtThreshold(Transform center, Vector3 lookPoint, int cameraFieldOfView = 60)
     {
 
@@ -46,10 +52,6 @@ public class OffsetCalculator : MonoBehaviour
         float angleInRad = angleInDeg * Mathf.Deg2Rad;
 
         float adjacent = Vector3.Distance(center.position, lookPoint);
-        /*
-         * formula :
-         * opposite = adjacent * tan(theta)
-         */
         float opposite = Mathf.Tan(angleInRad) * adjacent;
 
         float heightOffset = (opposite / 100) * thresholdOffset;
@@ -67,13 +69,13 @@ public class OffsetCalculator : MonoBehaviour
 #if UNITY_EDITOR
     [Header("Draw Threshold Points Debug")]
     [SerializeField] bool showGizmos = true;
+
     private void OnDrawGizmosSelected()
     {
         if (!showGizmos) return;
         GetThresholds(out Vector3 a, out Vector3 b);
         a.y = center.position.y;
         b.y = center.position.y;
-
 
         Gizmos.DrawSphere(a, 0.1f);
         Gizmos.DrawSphere(b, 0.1f);

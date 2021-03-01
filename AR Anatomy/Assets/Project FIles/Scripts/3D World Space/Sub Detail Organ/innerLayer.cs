@@ -42,16 +42,16 @@ public class innerLayer : MonoBehaviour
     {
         if (!isCompressed)
         {
-            isCompressed = true;
             StopMoving();
+            isCompressed = true;
             onMoveing = StartCoroutine(setPosition(initialPositoion));
         }
     }
 
     public void ResetPosition()
     {
-        isCompressed = true;
         StopMoving();
+        isCompressed = true;
         transform.position = initialPositoion;
     }
 
