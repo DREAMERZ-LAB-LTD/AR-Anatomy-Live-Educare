@@ -23,6 +23,8 @@ public class Rotator : MonoBehaviour
     [SerializeField] protected float minOffset = 0.05f;
     [Tooltip("Maximum Projection Offset")]
     [SerializeField] protected float maxOffset = 2.5f;
+
+    protected bool isClickedOnUI = false;
 #pragma warning disable 649
     protected Vector3 focusPoint;
 #pragma warning restore 649
@@ -56,11 +58,36 @@ public class Rotator : MonoBehaviour
 
     protected void UpdateRotation()
     {
-        if (Utility.IsPointerOverUIObject()) return;
+      //  if (Utility.IsPointerOverUIObject()) return;
 
         if (Input.touchCount != 1) return;
         Touch touch = Input.GetTouch(Input.touchCount - 1);
 
+
+        switch (touch.phase)
+        {
+            case TouchPhase.Began:
+                isClickedOnUI = Utility.IsPointerOverUIObject();
+                break;
+            case TouchPhase.Ended:
+                isClickedOnUI = false;
+                break;
+            case TouchPhase.Moved:
+
+                if (isClickedOnUI) break;
+
+                Vector2 currentPos = touch.position;
+                Vector2 prePos = currentPos - touch.deltaPosition;
+                Vector3 direction = prePos - currentPos;
+
+                float rotationAroundYAxis = -direction.x * 180;
+                float rotationAroundXAxis = direction.y * 180;
+
+                cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis * Time.deltaTime * rotateSpeed);
+                cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis * Time.deltaTime * rotateSpeed, Space.World);
+                break;
+        }
+        /*
         if (touch.phase == TouchPhase.Moved)
         {
             Vector2 currentPos = touch.position;
@@ -75,6 +102,7 @@ public class Rotator : MonoBehaviour
 
 
         }
+        */
     }
  
     //update camera position to projection the focus point

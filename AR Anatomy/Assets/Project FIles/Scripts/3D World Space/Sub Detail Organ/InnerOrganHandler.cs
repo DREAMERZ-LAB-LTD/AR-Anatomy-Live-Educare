@@ -9,33 +9,45 @@ public class InnerOrganHandler : MonoBehaviour
     [SerializeField] Transform center;
 #pragma warning restore 649
     [SerializeField] List<InnerOrgan> innerOrgans = new List<InnerOrgan>();
-    private int OrganIndx = -1;
+    private InnerOrgan activatedOrgan = null;
     [SerializeField] int innerOrganLayer = 0;
 #if UNITY_EDITOR
     [Header("Unity Debug Log")]
     [SerializeField] bool showDebug = false;
 #endif
-    //Set inner organ index from exploreable organ of 3D anatomy body
-    public void SetInnerOrganIndex(int indx)
-    {
-        InnerOrgan organ = GetInnerOrgan(indx);
-        if (organ == null) return;
 
-        OrganIndx = indx;
-    }
+    
     /// <summary>
-    /// only set active inner organ to explore
+    /// only set active inner organ to ready to explore by double tap
     /// </summary>
     /// <param name="enable">enable and disable state</param>
-    public void SetActiveInnerOrgan(bool enable)
+    public void OnClickeActiveOrgan(int index)
     {
-        InnerOrgan organ = GetInnerOrgan(OrganIndx);
+
+        InnerOrgan organ = GetInnerOrgan(index);
+        if (organ == null) return;
+#if UNITY_EDITOR
+        if (showDebug)
+        {
+            Debug.Log("Select organ Name: " + organ.name);
+        }
+#endif
+        activatedOrgan = organ;
+        organ.SetActive(true);
+    }
+    public void OnClickeDeactiveOrgan()
+    {
+        InnerOrgan organ = activatedOrgan;
         if (organ == null) return;
 
-        organ.SetActive(enable);
+        organ.SetActive(false);
+        activatedOrgan = null;
     }
 
 
+    /// <summary>
+    /// explore the inner organ part by part
+    /// </summary>
     public void OnDoubleClick_ExtractOrgan()
     {
         bool tapOnInnerOrgan = GetRaycastInfo(Input.mousePosition, innerOrganLayer) != null;
@@ -50,7 +62,7 @@ public class InnerOrganHandler : MonoBehaviour
             return;
         }
 
-        InnerOrgan organ = GetInnerOrgan(OrganIndx);
+        InnerOrgan organ = activatedOrgan;
         if (organ == null) return;
         if (!organ.gameObject.activeSelf) return;
 
@@ -60,18 +72,27 @@ public class InnerOrganHandler : MonoBehaviour
         organ.Extract(a, b);
     }
 
-    public void Compress()
+    /// <summary>
+    /// will compressing the explored organ as default
+    /// </summary>
+    public void OnDoubleClick_Compress()
     {
         bool tapOnInnerOrgan = GetRaycastInfo(Input.mousePosition, innerOrganLayer) != null;
         if (tapOnInnerOrgan) return;
-       
-        InnerOrgan organ = GetInnerOrgan(OrganIndx);
+
+        InnerOrgan organ = activatedOrgan;
         if (organ == null) return;
         if (!organ.gameObject.activeSelf) return;
 
         organ.Compress();
     }
 
+
+    /// <summary>
+    /// return inner organ by index of the list
+    /// </summary>
+    /// <param name="indx"></param>
+    /// <returns></returns>
     public InnerOrgan GetInnerOrgan(int indx)
     {
         if (indx < 0 || indx >= innerOrgans.Count)

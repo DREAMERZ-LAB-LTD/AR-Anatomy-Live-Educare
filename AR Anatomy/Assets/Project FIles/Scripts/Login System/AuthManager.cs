@@ -523,7 +523,7 @@ namespace LoginRegisterSystem
 
             ui.ShowLoadingPage(true);
 
-            IEnumerable<string> Permissions = new List<string>() { "public_profile", "email", "user_friends" };
+            IEnumerable<string> Permissions = new List<string>() { "public_profile", "email"/*, "user_friends" */};
             FB.LogInWithReadPermissions(Permissions, Auth_Callback);
 
             void Auth_Callback(ILoginResult result)
