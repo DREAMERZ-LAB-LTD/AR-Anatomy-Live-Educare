@@ -100,11 +100,8 @@ MonoBehaviour:
   minOffset: 0.4
   maxOffset: 3
   selectionFocusLayer: 9
-  autoFocusSpeed: 2
+  autoFocusSpeed: 2.2
   autoFocusOffset: 0
-  clickResponse:
-    doubleClickDelay: 0.3
-    maxClickOffset: 2
 --- !u!114 &469093622141976562
 MonoBehaviour:
   m_ObjectHideFlags: 0

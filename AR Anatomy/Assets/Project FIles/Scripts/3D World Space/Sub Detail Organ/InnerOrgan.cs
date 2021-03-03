@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InnerOrgan : MonoBehaviour
 {
+    [Header("Compression and Decompression Speed")]
+    [SerializeField] float Speed = 2.00f;
 #pragma warning disable 649
     [SerializeField] private GameObject fullOrgan;
 #pragma warning restore 649
@@ -44,7 +46,7 @@ public class InnerOrgan : MonoBehaviour
             layerPoit.x += fraction;
 
             var layer = layers[i];
-            layer.Extracting(layerPoit);
+            layer.Extracting(layerPoit, Speed);
         }
     }
 
@@ -56,7 +58,7 @@ public class InnerOrgan : MonoBehaviour
         for (int i = 0; i < layers.Count; i++)
         {
             var layer = layers[i];
-            layer.Compressing();
+            layer.Compressing(Speed);
         }
     }
 }

@@ -5,8 +5,7 @@ using UnityEngine;
 public class innerLayer : MonoBehaviour
 {
     [SerializeField] Transform destination;
-    [SerializeField] float movingSpeed = 1.00f;
-
+   
     private bool isCompressed = true;
     Vector3 initialPositoion;
     Coroutine onMoveing;
@@ -25,26 +24,26 @@ public class innerLayer : MonoBehaviour
     /// <summary>
     /// object will linearly moveing to destination position to explore the organ
     /// </summary>
-    public void Extracting(Vector3 destination)
+    public void Extracting(Vector3 destination, float exploreSpeed)
     {
         if (isCompressed)
         {
             isCompressed = false;
             StopMoving();
-            onMoveing = StartCoroutine(setPosition(destination));
+            onMoveing = StartCoroutine(setPosition(destination, exploreSpeed));
         }
     }
 
     /// <summary>
     /// object will linearly moveing to initial position to compress the organ
     /// </summary>
-    public void Compressing()
+    public void Compressing(float compressionSpeed)
     {
         if (!isCompressed)
         {
             StopMoving();
             isCompressed = true;
-            onMoveing = StartCoroutine(setPosition(initialPositoion));
+            onMoveing = StartCoroutine(setPosition(initialPositoion, compressionSpeed));
         }
     }
 
@@ -64,11 +63,11 @@ public class innerLayer : MonoBehaviour
             StopCoroutine(onMoveing);
         }
     }
-    IEnumerator setPosition(Vector3 destination)
+    IEnumerator setPosition(Vector3 destination, float speed)
     {
         while (transform.position != destination)
         {
-            transform.position = Vector3.Lerp(transform.position, destination, movingSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, destination, speed * Time.deltaTime);
             yield return null;
         }
     }

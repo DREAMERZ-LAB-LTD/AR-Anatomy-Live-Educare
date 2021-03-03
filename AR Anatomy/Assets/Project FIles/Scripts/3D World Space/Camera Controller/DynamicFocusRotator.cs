@@ -6,8 +6,8 @@ public class DynamicFocusRotator : Rotator
 {
     [Tooltip("Raycast Layer Mask")]
     [SerializeField] int selectionFocusLayer = 0;
-    [Tooltip("")]
-    [SerializeField]private float autoFocusSpeed = 1;
+    
+    [SerializeField, Range(1.00f, 5.00f)]private float autoFocusSpeed = 1;
     [SerializeField]private float autoFocusOffset = 0;
     Vector3 selectedPoint;
 

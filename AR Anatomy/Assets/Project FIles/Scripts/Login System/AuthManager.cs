@@ -560,8 +560,8 @@ namespace LoginRegisterSystem
                 facebookUser.data.email = "Facebook";
                 //facebookUser.data.id = userInfo.ResultDictionary["id"].ToString();
                 //facebookUser.data.email = userInfo.ResultDictionary["email"].ToString();
-               // Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
-
+                // Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
+ 
                 SavedUser = facebookUser;
                 ui.ShowSavedUser();
                 ui.ShowToast("Facebook Login Success", 2, Color.green);//pass error message
@@ -590,16 +590,16 @@ namespace LoginRegisterSystem
             ui.ShowLoadingPage(false);
             successFacebookStruct = JsonUtility.FromJson<SuccessFacebookStruct>(val);
             Token = successFacebookStruct.access_token;
+            Debug.Log(val);
             GetUserInfo();
         }
         private void FacebookLoginErrorCallBack(string val)
         {
+            Debug.Log(val);
             ui.ShowLoadingPage(false);
             // calling the popupwith message
             if (val == "0")
             {
-                string redtext = "No internet connection";
-                string blacktext = "Please make sure that Wi-Fi or mobile data is turned on, then try again";
                 ui.Warning_Haler.ConnnectionError();
                 Show.Log(val);
             }

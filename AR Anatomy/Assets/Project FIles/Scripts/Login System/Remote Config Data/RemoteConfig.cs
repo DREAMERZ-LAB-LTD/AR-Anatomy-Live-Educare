@@ -31,6 +31,7 @@ public class RemoteConfig : MonoBehaviour
     void Awake()
     {
         SingleTone();
+/*
         // Add a listener to apply settings when successfully retrieved:
         ConfigManager.FetchCompleted += ApplyRemoteSettings;
 
@@ -42,6 +43,7 @@ public class RemoteConfig : MonoBehaviour
 
         // Fetch configuration setting from the remote service:
         ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
+*/
     }
 
     void ApplyRemoteSettings(ConfigResponse configResponse)

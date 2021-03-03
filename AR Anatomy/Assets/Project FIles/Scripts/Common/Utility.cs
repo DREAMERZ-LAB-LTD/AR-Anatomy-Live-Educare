@@ -13,4 +13,15 @@ public class Utility
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
+
+    public static bool IsPointerOverCollider(int layermask = 0)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        int layer = 1 << layermask;
+        if (Physics.Raycast(ray, out RaycastHit hit, 500.0f, layer))
+        {
+           
+        }
+        return hit.collider != null;
+    }
 }
