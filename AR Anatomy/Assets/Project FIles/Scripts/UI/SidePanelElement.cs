@@ -6,6 +6,9 @@ using TMPro;
 
 public class SidePanelElement : MonoBehaviour
 {
+    [Header("Initial Active Status")]
+    public bool setActive = false;
+
     [Header("Transform Movemnet Offset")]
     [SerializeField] private Vector2 offset = new Vector2();
     [SerializeField] private float motionSpeed = 1;
@@ -16,11 +19,17 @@ public class SidePanelElement : MonoBehaviour
     [SerializeField] List<TextMeshProUGUI> textsTMP = new List<TextMeshProUGUI>();
     [SerializeField] List<Text> texts = new List<Text>();
 
+
     private Coroutine currentThread = null;
 
-
-    private void Awake() => initialPosition = transform.position;
-    
+    //initialize as default
+    private void Awake()
+    { 
+        initialPosition = transform.position;
+        float alpha = setActive ? 1 : 0;
+        StartAnimation(alpha, 1, setActive);
+    }
+  
     /// <summary>
     /// Play the UI transition animation
     /// </summary>
@@ -81,6 +90,10 @@ public class SidePanelElement : MonoBehaviour
         
         currentThread = null;
     }
+
+
+
+
 
     /// <summary>
     /// change alpha of the text color to visible and invisible

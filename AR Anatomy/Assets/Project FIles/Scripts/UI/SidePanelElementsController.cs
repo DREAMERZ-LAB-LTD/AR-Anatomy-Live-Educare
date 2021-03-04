@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class SidePanelElementsController : MonoBehaviour
 {
+
+
     [Header("Fade Duration")]
     [SerializeField] private float time = 1.00f;
     [Space]
@@ -12,11 +14,11 @@ public class SidePanelElementsController : MonoBehaviour
     [SerializeField] private List<SidePanelElement> sidepanelElements = new List<SidePanelElement>();
 
 
+
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0)) return;
         if (Utility.IsPointerOverUIObject()) return;
-        if (Utility.IsPointerOverCollider()) return;
 
         Close();
     }

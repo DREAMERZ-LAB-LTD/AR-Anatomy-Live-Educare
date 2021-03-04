@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class CircularPointer : MonoBehaviour
 {
     [Header("Which Organ Follow this UI Dot")]
-    [SerializeField] Transform anatomyOrgan;
+    [SerializeField] GameObject anatomyOrgan;
 
     [Header("Circuler Dot UI Button")]
     [SerializeField] RectTransform circularPointer;
@@ -24,13 +24,21 @@ public class CircularPointer : MonoBehaviour
     /// <param name="camera">which camera is working to render world object</param>
     public void UpdatePosition(Camera camera)
     {
-        bool isVisible = Vector3.Distance(camera.transform.position, anatomyOrgan.position) < minVisibleDistance;
+
+        if (!anatomyOrgan.activeInHierarchy)
+        {
+            circularPointer.gameObject.SetActive(false);
+            return;
+        }
+        Vector3 worldPoint = anatomyOrgan.transform.position;
+
+        bool isVisible = Vector3.Distance(camera.transform.position, worldPoint) < minVisibleDistance;
         circularPointer.gameObject.SetActive(isVisible);
         if (!isVisible) return;
 
 
         circularPointer.transform.SetParent(circularPointerCanvus);
-        Vector3 pointerPosition = camera.WorldToScreenPoint(anatomyOrgan.position);
+        Vector3 pointerPosition = camera.WorldToScreenPoint(worldPoint);
         circularPointer.position = pointerPosition;
     } 
 }
