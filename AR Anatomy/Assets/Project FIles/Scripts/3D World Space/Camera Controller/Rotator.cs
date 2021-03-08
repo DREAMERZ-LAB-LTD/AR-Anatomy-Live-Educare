@@ -16,7 +16,7 @@ public class Rotator : MonoBehaviour
 
     [Header("Focus Setup")]
     [Tooltip("Vertical Projection Offset")]
-    [SerializeField, Range(-1.00f, 1.00f)] float  verticalOffset = 0;
+    [SerializeField, Range(-1.00f, 1.00f)] float verticalOffset = 0;
     [Tooltip("Total camera offset from focus point")]
     protected float projectionOffset = 3;
     [Tooltip("Minimum Projection Offset")]
@@ -35,7 +35,7 @@ public class Rotator : MonoBehaviour
         Vector3 initialFocus = initialFocusPoint.position;
         focusPoint = initialFocus;
         projectionOffset = maxOffset;
-        
+
         Vector3 origin = cam.transform.position;
         Vector3 dir = origin - initialFocus;
         cam.transform.forward = -dir;
@@ -56,22 +56,33 @@ public class Rotator : MonoBehaviour
         UpdatePosition(focusPoint, projectionOffset);
     }
 
+    private void TouchOverUI()
+    {
+        if (Input.touchCount > 0)
+        {
+            isClickedOnUI = EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId);
+        }
+        else
+            isClickedOnUI = false;
+    }
     protected void UpdateRotation()
     {
-      //  if (Utility.IsPointerOverUIObject()) return;
+        TouchOverUI();
 
         if (Input.touchCount != 1) return;
         Touch touch = Input.GetTouch(Input.touchCount - 1);
 
-
         switch (touch.phase)
         {
-            case TouchPhase.Began:
-                isClickedOnUI = Utility.IsPointerOverUIObject();
-                break;
-            case TouchPhase.Ended:
-                isClickedOnUI = false;
-                break;
+            //case TouchPhase.Began:
+            //    isClickedOnUI = EventSystem.current.IsPointerOverGameObject();
+            //    break;
+            //case TouchPhase.Ended:
+            //    isClickedOnUI = false;
+            //    break;
+            //case TouchPhase.Canceled:
+            //    isClickedOnUI = false;
+            //    break;
             case TouchPhase.Moved:
 
                 if (isClickedOnUI) break;
@@ -87,24 +98,25 @@ public class Rotator : MonoBehaviour
                 cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis * Time.deltaTime * rotateSpeed, Space.World);
                 break;
         }
-        /*
-        if (touch.phase == TouchPhase.Moved)
-        {
-            Vector2 currentPos = touch.position;
-            Vector2 prePos = currentPos - touch.deltaPosition;
-            Vector3 direction = prePos - currentPos;
-
-            float rotationAroundYAxis = -direction.x * 180;
-            float rotationAroundXAxis = direction.y * 180;
-
-            cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis * Time.deltaTime * rotateSpeed);
-            cam.transform.Rotate(new Vector3(0, 1, 0), rotationAroundYAxis * Time.deltaTime * rotateSpeed, Space.World);
-
-
-        }
-        */
+//        ClampVerticalRotation(-90, 90);
     }
- 
+
+    //private void ClampVerticalRotation(float minAngle, float maxAngle)
+    //{
+    //    Vector3 camRotation = cam.transform.rotation.eulerAngles;
+    //    Debug.Log(camRotation);
+    //    if (camRotation.x < minAngle)
+    //    {
+    //        camRotation.x = minAngle;
+    //    }
+    //    else if (camRotation.x > maxAngle)
+    //    {
+    //        camRotation.x = maxAngle;
+    //    }
+    //    cam.transform.rotation = Quaternion.Euler(camRotation);
+    //    Debug.Log(cam.transform.rotation.eulerAngles);
+    //}
+
     //update camera position to projection the focus point
     protected void UpdatePosition(Vector3 focusPoint, float projectionDistance)
     {
@@ -114,8 +126,6 @@ public class Rotator : MonoBehaviour
         Vector3 newPosition = projectionPoint + GetVerticalOffset();
         cam.transform.position = newPosition;
 
-
-      //  cam.transform.position += GetVerticalOffset(); 
     }
     protected void UpdateProjectionOffset(Vector3 focus)
     {
@@ -124,10 +134,9 @@ public class Rotator : MonoBehaviour
         projectionOffset = Mathf.Clamp(offset, minOffset, maxOffset);
     }
 
-    protected void LearpProjectionOffset(float newOffset, float speed)
-    { 
+    protected void LearpProjectionOffset(float newOffset, float speed) =>
         projectionOffset = Mathf.Lerp(projectionOffset, newOffset, speed * Time.deltaTime);
-    }
+
 
     protected Vector3 GetVerticalOffset()
     {

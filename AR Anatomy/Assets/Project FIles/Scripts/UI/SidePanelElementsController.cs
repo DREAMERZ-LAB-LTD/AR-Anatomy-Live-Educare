@@ -13,7 +13,7 @@ public class SidePanelElementsController : MonoBehaviour
     [SerializeField] private SidePanelElement closeButton;
     [SerializeField] private List<SidePanelElement> sidepanelElements = new List<SidePanelElement>();
 
-
+    public bool isClosed = true;
 
     private void Update()
     {
@@ -28,6 +28,8 @@ public class SidePanelElementsController : MonoBehaviour
     /// </summary>
     public void OnClickShow()
     {
+        if (!isClosed) return;
+        isClosed = false;
         closeButton.StartAnimation(0, time, false);
         for (int i = 0; i < sidepanelElements.Count; i++)
         {
@@ -40,6 +42,8 @@ public class SidePanelElementsController : MonoBehaviour
     /// </summary>
     public void Close()
     {
+        if (isClosed) return;
+        isClosed = true;
         closeButton.StartAnimation(1, time, true);
         for (int i = 0; i < sidepanelElements.Count; i++)
         {

@@ -34,7 +34,7 @@ public class AnatomyInformationShower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Utility.IsPointerOverUIObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))

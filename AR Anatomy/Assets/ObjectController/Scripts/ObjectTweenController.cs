@@ -52,25 +52,22 @@ namespace DreamerzLab.Controller
         bool _inZoom = false;
         bool _callOnSingleTapEvent = false;
 
+        bool isClickedOnUI = false;
 
 
-
-        private void Start()
+        private void TouchOverUI()
         {
-            //if (useVertical && !cameraTransform)
-            //    cameraTransform = Camera.main.transform;
-        }
-        public bool IsPointerOverUIObject()
-        {
-            PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-            eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-            return results.Count > 0;
+            if (Input.touchCount > 0)
+            {
+                isClickedOnUI = EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId);
+            }
+            else
+                isClickedOnUI = false;
         }
         private void Update()
         {
-            if (IsPointerOverUIObject()) return;
+            TouchOverUI();
+            if (isClickedOnUI) return;
 
             if (Input.touchCount > 0)
             {
@@ -106,6 +103,7 @@ namespace DreamerzLab.Controller
             }
         }
 
+     
 
         private void TouchStart()
         {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class innerLayer : MonoBehaviour
 {
-    [SerializeField] Transform destination;
    
     private bool isCompressed = true;
     Vector3 initialPositoion;

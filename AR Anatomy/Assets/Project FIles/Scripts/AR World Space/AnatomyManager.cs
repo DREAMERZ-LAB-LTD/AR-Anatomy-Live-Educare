@@ -29,8 +29,14 @@ public class AnatomyManager : AnatomySystem
     private Color[] colors;
 #pragma warning restore 649
 
-    void Awake()=> layerSlider.maxValue = bodyParts.Length - 1;
-    private void OnEnable()=>layerSlider.value = SelectedLAyer;
+    void Awake()
+    {
+        layerSlider.maxValue = bodyParts.Length - 1;
+    }
+    private void OnEnable() 
+    {
+        layerSlider.value = SelectedLAyer;
+    }
 
     public void OnBackButtonClick()
     {
