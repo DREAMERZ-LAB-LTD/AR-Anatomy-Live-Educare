@@ -19916,6 +19916,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1333908317}
     m_Modifications:
+    - target: {fileID: 1253397920224385194, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7025dcff68aa65d4ba3beaf938c998bc,
+        type: 3}
     - target: {fileID: 1253397920224385195, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -20071,6 +20077,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 334634577}
+    - target: {fileID: 1253397921977690665, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c07b5638f87cea044a0c8e59b9f6ff71,
+        type: 3}
     - target: {fileID: 1253397921977690666, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
       propertyPath: m_AnchorMax.x

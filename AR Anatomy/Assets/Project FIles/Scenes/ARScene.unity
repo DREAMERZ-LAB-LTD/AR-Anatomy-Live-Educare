@@ -6543,7 +6543,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d7c1ff52ec311484099d0df7012d197d,
+      objectReference: {fileID: 21300000, guid: 591f66a465c6b3a49bdaedba10810a12,
         type: 3}
     - target: {fileID: 1253397920224385195, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
@@ -6970,6 +6970,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Side Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 1253397921531578184, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e5ee7f13350a2794e8a3bcd65b7fbf6d,
+        type: 3}
     - target: {fileID: 1253397921531578185, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
