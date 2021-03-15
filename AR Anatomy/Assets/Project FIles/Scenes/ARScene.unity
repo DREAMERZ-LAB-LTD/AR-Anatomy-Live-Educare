@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.22792621, g: 0.22463714, b: 0.22520481, a: 1}
+  m_IndirectSpecularColor: {r: 0.49965775, g: 0.49548602, b: 0.4958716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3548,7 +3548,7 @@ ReflectionProbe:
   m_Mode: 0
   m_RefreshMode: 0
   m_TimeSlicingMode: 0
-  m_Resolution: 512
+  m_Resolution: 256
   m_UpdateFrequency: 0
   m_BoxSize: {x: 5, y: 5, z: 5}
   m_BoxOffset: {x: 0, y: 0, z: 0}
@@ -4284,10 +4284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -4437,7 +4437,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.9
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4471,7 +4471,7 @@ Light:
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -6534,6 +6534,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 128943480}
     m_Modifications:
+    - target: {fileID: 1365088627, guid: 29ea9edb8da333146b7b994e515d9300, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1253397920224385109, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
       propertyPath: m_IsActive
@@ -6969,6 +6973,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Side Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253397920788086554, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.14996338
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253397920817748192, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253397920817748192, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1253397920817748192, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 846
       objectReference: {fileID: 0}
     - target: {fileID: 1253397921531578184, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
@@ -7939,12 +7963,12 @@ PrefabInstance:
     - target: {fileID: 145380788549508193, guid: 3ea2d29647b7a904ca356f9333f83243,
         type: 3}
       propertyPath: m_fontSize
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 145380788549508193, guid: 3ea2d29647b7a904ca356f9333f83243,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 145380788549508194, guid: 3ea2d29647b7a904ca356f9333f83243,
         type: 3}
@@ -8149,12 +8173,12 @@ PrefabInstance:
     - target: {fileID: 145380789540972671, guid: 3ea2d29647b7a904ca356f9333f83243,
         type: 3}
       propertyPath: m_fontSize
-      value: 35
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 145380789540972671, guid: 3ea2d29647b7a904ca356f9333f83243,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 35
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 145380790349072048, guid: 3ea2d29647b7a904ca356f9333f83243,
         type: 3}
