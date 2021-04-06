@@ -6538,6 +6538,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1253397920224385108, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -144.19
+      objectReference: {fileID: 0}
     - target: {fileID: 1253397920224385109, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
       propertyPath: m_IsActive

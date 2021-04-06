@@ -20212,6 +20212,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1333908317}
     m_Modifications:
+    - target: {fileID: 1253397920224385108, guid: 29ea9edb8da333146b7b994e515d9300,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -144.19
+      objectReference: {fileID: 0}
     - target: {fileID: 1253397920224385194, guid: 29ea9edb8da333146b7b994e515d9300,
         type: 3}
       propertyPath: m_Sprite
