@@ -9,5 +9,9 @@ public class SceneController : MonoBehaviour
 
     public void OnClickBackFromARscene() => MainMenuActivityController.backFromARscene = true;
 
-
+    public void OnClickReloadScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Load_Scene(currentSceneIndex);
+    }
 }
