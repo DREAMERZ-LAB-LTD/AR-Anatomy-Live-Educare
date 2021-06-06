@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InnerOrgan : MonoBehaviour
 {
     [Header("Compression and Decompression Speed")]
     [SerializeField] float Speed = 2.00f;
-#pragma warning disable 649
-    [SerializeField] private GameObject fullOrgan;
-#pragma warning restore 649
+
     [SerializeField] private List<innerLayer> layers = new List<innerLayer>();
 
 
@@ -19,10 +18,6 @@ public class InnerOrgan : MonoBehaviour
     public void SetActive(bool enable)
     {
         gameObject.SetActive(enable);
-        if (fullOrgan != null)
-        {
-            fullOrgan.SetActive(true);
-        }
     }
 
     /// <summary>
@@ -30,11 +25,6 @@ public class InnerOrgan : MonoBehaviour
     /// </summary>
     public void Extract(Vector3 leftThreshold, Vector3 rightThreshold)
     {
-        if (fullOrgan != null)
-        {
-            fullOrgan.SetActive(false);
-        }
-        
         float fraction = rightThreshold.x - leftThreshold.x;
         fraction /= (layers.Count - 1);
         fraction /= 2;
@@ -46,7 +36,7 @@ public class InnerOrgan : MonoBehaviour
             layerPoit.x += fraction;
 
             var layer = layers[i];
-            layer.Extracting(layerPoit, Speed);
+            layer.Extracting(layerPoit, Speed, OnExtrack);
         }
     }
 
@@ -58,7 +48,11 @@ public class InnerOrgan : MonoBehaviour
         for (int i = 0; i < layers.Count; i++)
         {
             var layer = layers[i];
-            layer.Compressing(Speed);
+            layer.Compressing(Speed, OnCompressed);
         }
     }
+
+    [SerializeField] private UnityEvent OnExtrack;
+    [SerializeField] private UnityEvent OnCompressed;
+
 }
