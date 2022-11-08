@@ -12,6 +12,7 @@ using UI;
 
 public class AppleLogin : MonoBehaviour
 {
+#pragma warning disable 649
     [SerializeField] Text appleIDText;
     [SerializeField] AuthManager networkConnector;
    // [SerializeField] UI_Handeler _logInSystemUIHolder;
@@ -20,9 +21,7 @@ public class AppleLogin : MonoBehaviour
 
     private const string AppleUserIdKey = "AppleUserId";
     private IAppleAuthManager _appleAuthManager;
-
-    /*public LoginMenuHandler LoginMenu;
-    public GameMenuHandler GameMenu;*/
+#pragma warning restore 649
 
     private void Start()
     {

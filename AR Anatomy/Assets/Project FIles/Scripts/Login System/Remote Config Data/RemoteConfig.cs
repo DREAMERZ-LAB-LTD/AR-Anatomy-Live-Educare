@@ -7,12 +7,31 @@ using LoginRegisterSystem;
 
 public class RemoteConfig : MonoBehaviour
 {
-  
-    public static appAttributes URLData;
+    #region SingleTone
+
+    private static RemoteConfig api;
+    public static RemoteConfig API => api;
+    private void SingleTone()
+    {
+        if (API != null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        api = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
+    #endregion SingleTone
+
+
+    public appAttributes URLData;
 
 
     void Awake()
     {
+        SingleTone();
+/*
         // Add a listener to apply settings when successfully retrieved:
         ConfigManager.FetchCompleted += ApplyRemoteSettings;
 
@@ -24,10 +43,12 @@ public class RemoteConfig : MonoBehaviour
 
         // Fetch configuration setting from the remote service:
         ConfigManager.FetchConfigs<userAttributes, appAttributes>(new userAttributes(), new appAttributes());
+*/
     }
 
     void ApplyRemoteSettings(ConfigResponse configResponse)
     {
+        appAttributes urlData = new appAttributes();
         // Conditionally update settings, depending on the response's origin:
         switch (configResponse.requestOrigin)
         {
@@ -36,47 +57,51 @@ public class RemoteConfig : MonoBehaviour
                 Show.Log("No settings loaded this session; using default values.");
                 break;
             case ConfigOrigin.Cached:
-                Show.Log("No settings loaded this session; using cached values from a previous session.");
-                Show.Log(ConfigManager.appConfig.GetString("SignUp"));
-
-                URLData.BaseURL = ConfigManager.appConfig.GetString("BaseURL");
-                URLData.SignUp = ConfigManager.appConfig.GetString("SignUp");
-                URLData.EmailVerification = ConfigManager.appConfig.GetString("EmailVerification");
-                URLData.ResedOTP = ConfigManager.appConfig.GetString("ResedOTP");
-                URLData.Login = ConfigManager.appConfig.GetString("Login");
-                URLData.PasswordResetRequest = ConfigManager.appConfig.GetString("PasswordResetRequest");
-                URLData.PasswordResetRequestVerication = ConfigManager.appConfig.GetString("PasswordResetRequestVerication");
-                URLData.PasswordReset = ConfigManager.appConfig.GetString("PasswordReset");
-                URLData.GetUserInfo = ConfigManager.appConfig.GetString("GetUserInfo");
-                URLData.GetCategoryResponse = ConfigManager.appConfig.GetString("GetCategoryResponse");
-                URLData.company_id = ConfigManager.appConfig.GetString("company_id");
-                URLData.GetFurnitureFromCategory = ConfigManager.appConfig.GetString("GetFurnitureFromCategory");
-                URLData.SocialLogin = ConfigManager.appConfig.GetString("SocialLogin");
+#if UNITY_EDITOR
+                Debug.Log("No settings loaded this session; using cached values from a previous session.");
+#endif
+                urlData.BaseURL = ConfigManager.appConfig.GetString("BaseURL");
+                urlData.SignUp = ConfigManager.appConfig.GetString("SignUp");
+                urlData.EmailVerification = ConfigManager.appConfig.GetString("EmailVerification");
+                urlData.ResedOTP = ConfigManager.appConfig.GetString("ResedOTP");
+                urlData.Login = ConfigManager.appConfig.GetString("Login");
+                urlData.PasswordResetRequest = ConfigManager.appConfig.GetString("PasswordResetRequest");
+                urlData.PasswordResetRequestVerication = ConfigManager.appConfig.GetString("PasswordResetRequestVerication");
+                urlData.PasswordReset = ConfigManager.appConfig.GetString("PasswordReset");
+                urlData.GetUserInfo = ConfigManager.appConfig.GetString("GetUserInfo");
+                urlData.GetCategoryResponse = ConfigManager.appConfig.GetString("GetCategoryResponse");
+                urlData.company_id = ConfigManager.appConfig.GetString("company_id");
+                urlData.GetFurnitureFromCategory = ConfigManager.appConfig.GetString("GetFurnitureFromCategory");
 
 
                break;
             case ConfigOrigin.Remote:
-                Show.Log("New settings loaded this session; update values accordingly.");
-                Show.Log(ConfigManager.appConfig.GetString("Register"));
-                
-                URLData.BaseURL = ConfigManager.appConfig.GetString("BaseURL");
-                URLData.SignUp = ConfigManager.appConfig.GetString("SignUp");
-                URLData.EmailVerification = ConfigManager.appConfig.GetString("EmailVerification");
-                URLData.ResedOTP = ConfigManager.appConfig.GetString("ResedOTP");
-                URLData.Login = ConfigManager.appConfig.GetString("Login");
-                URLData.PasswordResetRequest = ConfigManager.appConfig.GetString("PasswordResetRequest");
-                URLData.PasswordResetRequestVerication = ConfigManager.appConfig.GetString("PasswordResetRequestVerication");
-                URLData.PasswordReset = ConfigManager.appConfig.GetString("PasswordReset");
-                URLData.GetUserInfo = ConfigManager.appConfig.GetString("GetUserInfo");
-                URLData.GetCategoryResponse = ConfigManager.appConfig.GetString("GetCategoryResponse");
-                URLData.company_id = ConfigManager.appConfig.GetString("company_id");
-                URLData.GetFurnitureFromCategory = ConfigManager.appConfig.GetString("GetFurnitureFromCategory");
-                URLData.SocialLogin = ConfigManager.appConfig.GetString("SocialLogin");
+#if UNITY_EDITOR
+                Debug.Log("New settings loaded this session; update values accordingly.");
+#endif
+                urlData.BaseURL = ConfigManager.appConfig.GetString("BaseURL");
+                urlData.SignUp = ConfigManager.appConfig.GetString("SignUp");
+                urlData.EmailVerification = ConfigManager.appConfig.GetString("EmailVerification");
+                urlData.ResedOTP = ConfigManager.appConfig.GetString("ResedOTP");
+                urlData.Login = ConfigManager.appConfig.GetString("Login");
+                urlData.PasswordResetRequest = ConfigManager.appConfig.GetString("PasswordResetRequest");
+                urlData.PasswordResetRequestVerication = ConfigManager.appConfig.GetString("PasswordResetRequestVerication");
+                urlData.PasswordReset = ConfigManager.appConfig.GetString("PasswordReset");
+                urlData.GetUserInfo = ConfigManager.appConfig.GetString("GetUserInfo");
+                urlData.GetCategoryResponse = ConfigManager.appConfig.GetString("GetCategoryResponse");
+                urlData.company_id = ConfigManager.appConfig.GetString("company_id");
+                urlData.GetFurnitureFromCategory = ConfigManager.appConfig.GetString("GetFurnitureFromCategory");
 
  
                 break;
         }
 
+
+        //set updated API data if remoteconfig working fine otherwise continue with manual API that initialize from inspector
+        if (urlData.BaseURL != string.Empty)
+        {
+            this.URLData = urlData;
+        }
     }
 
 

@@ -13,11 +13,12 @@ namespace LoginRegisterSystem
 
 #pragma warning disable 649
         [SerializeField] private UI_Handeler ui;
-    
 
-       private appAttributes URLData => RemoteConfig.URLData;
+        [Header("Super Admin Login key With out internet")]
+        [SerializeField] private string SuperAdminKey = "dlab";
+
+       private appAttributes URLData => RemoteConfig.API.URLData;
 #pragma warning restore 649
-
 
         #region Initilize
         private void Start()
@@ -26,12 +27,11 @@ namespace LoginRegisterSystem
             ui.LoginPanel.SetButtonEvents(OnClickLogin, OnClickAppleLogin, OnClickFacebookLogin);
             ui.ForgotPasswordPanel.SetButtonEvents(OnClickResetPasswordRequest);
             ui.NewPasswordPanel.SetResetBtnEvent(OnClickSetNewPassword);
-            ui.SaveduserPanel.SetButtonEvents(GetUserInfo);
-            ui.SetLogOutBtnEvent(OnClickLogOut);
+            ui.SaveduserPanel.SetButtonEvents(delegate { GetUserInfo(false); });
+
             InitilizeFaceook();
         }
         #endregion Initilize
-
 
         #region Saved User
         /// <summary>
@@ -99,6 +99,12 @@ namespace LoginRegisterSystem
             LogInStruct user = new LogInStruct();
             user.email = ui.LoginPanel.GetUserEmail;
             user.password = ui.LoginPanel.GetUserPassword;
+            if (SuperAdminKey == user.email && SuperAdminKey == user.password)
+            {
+                SceneController.Load_Scene(2);
+                return;
+            }
+
 
             UnAuthorizedmail = user.email;//store email for unauthorized verification
 
@@ -112,7 +118,7 @@ namespace LoginRegisterSystem
             //Login Success Callack
             void OnLoginSuccess(string json)
             {
-                OnClickLogOut();
+                LogOut();
                 ui.ShowLoadingPage(false);
                 
                 loginresponse = JsonUtility.FromJson<SuccessLogIn>(json);
@@ -146,12 +152,10 @@ namespace LoginRegisterSystem
         #endregion User Login
 
         #region User LogOut
-        private void OnClickLogOut()
+        public static void LogOut()
         {
             Token = "";
             SavedUser = new GetUserInfoStruct();
-            ui.ShowLoginPage();
-            ui.ShowToast("Logout success", 2, Color.green);
         }
         #endregion User LogOut
 
@@ -441,19 +445,10 @@ namespace LoginRegisterSystem
         #endregion Set New Password
 
         #region Retive User Data
-        public void GetUserInfo()
+        public void GetUserInfo(bool showSavedUser = true)
         {
             ui.ShowLoadingPage(true);
 
-            //if saved user was loagged in from facebook then no need to retrive from our akend server, Couse user will be exist in faceook server
-            if (SavedUser.data.email == "Facebook")
-            {
-                ui.ShowLoadingPage(false);
-                ui.ShowGamePage();
-                return;
-            }
-
-            //string url = BaseURL + "/details";
             string url = URLData.BaseURL + URLData.GetUserInfo;
             StartCoroutine(RestApiHandeler.PostData(url, Token, null, OnSuccessRetriveUserdata, OnUserRetriveError));
        
@@ -461,9 +456,17 @@ namespace LoginRegisterSystem
             {
                 GetUserInfoStruct user = JsonUtility.FromJson<GetUserInfoStruct>(json);
                 SavedUser = user;//save user info into cash
-
                 ui.ShowLoadingPage(false);
-                ui.ShowGamePage();
+
+              
+                if (showSavedUser)
+                {
+                    ui.ShowSavedUser();
+                }
+                else
+                { 
+                    ui.OpenMenuScene();
+                }
             }
             void OnUserRetriveError(string message)
             {
@@ -510,7 +513,6 @@ namespace LoginRegisterSystem
             }
             else
             {
-                Show.Log("IsInitialized");
                 FB.ActivateApp();
             }
             
@@ -521,7 +523,7 @@ namespace LoginRegisterSystem
 
             ui.ShowLoadingPage(true);
 
-            IEnumerable<string> Permissions = new List<string>() { "public_profile", "email", "user_friends" };
+            IEnumerable<string> Permissions = new List<string>() { "public_profile", "email"/*, "user_friends" */};
             FB.LogInWithReadPermissions(Permissions, Auth_Callback);
 
             void Auth_Callback(ILoginResult result)
@@ -529,7 +531,7 @@ namespace LoginRegisterSystem
                 if (FB.IsLoggedIn)
                 {
                     FB.API("/me?fields=id,name,email", HttpMethod.GET, GetUserInfo);//sent request to faceook for retrive user data
-                    ui.ShowLoadingPage(false);
+                  
                 }
                 else
                 {
@@ -540,10 +542,10 @@ namespace LoginRegisterSystem
 
             void GetUserInfo(IResult userInfo)
             {
-                ui.ShowLoadingPage(false);
 
                 if (userInfo.Error != null)
                 {
+                    ui.ShowLoadingPage(false);
                     ui.ShowToast(userInfo.Error, 2, Color.red);//pass error message
                     Show.Log("an Error");
                     return;
@@ -558,10 +560,10 @@ namespace LoginRegisterSystem
                 facebookUser.data.email = "Facebook";
                 //facebookUser.data.id = userInfo.ResultDictionary["id"].ToString();
                 //facebookUser.data.email = userInfo.ResultDictionary["email"].ToString();
-               // Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
-
+                // Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
+ 
                 SavedUser = facebookUser;
-                ui.ShowGamePage();
+                ui.ShowSavedUser();
                 ui.ShowToast("Facebook Login Success", 2, Color.green);//pass error message
             }
         }
@@ -576,7 +578,7 @@ namespace LoginRegisterSystem
             ui.ShowLoadingPage(true);
 
             string json = JsonUtility.ToJson(facebookStruct);
-            string url = RemoteConfig.URLData.SocialLogin;
+            string url = RemoteConfig.API.URLData.SocialLogin;
             StartCoroutine(RestApiHandeler.PostData(url, null, json, FacebookLoginSuccessCallBack, FacebookLoginErrorCallBack));
 
             Show.Log(json);
@@ -588,16 +590,16 @@ namespace LoginRegisterSystem
             ui.ShowLoadingPage(false);
             successFacebookStruct = JsonUtility.FromJson<SuccessFacebookStruct>(val);
             Token = successFacebookStruct.access_token;
+            Debug.Log(val);
             GetUserInfo();
         }
         private void FacebookLoginErrorCallBack(string val)
         {
+            Debug.Log(val);
             ui.ShowLoadingPage(false);
             // calling the popupwith message
             if (val == "0")
             {
-                string redtext = "No internet connection";
-                string blacktext = "Please make sure that Wi-Fi or mobile data is turned on, then try again";
                 ui.Warning_Haler.ConnnectionError();
                 Show.Log(val);
             }
@@ -609,11 +611,6 @@ namespace LoginRegisterSystem
                 //_logInSystemUIHolder.OpenPoPup(1, redtext, blacktext);
                 Show.Log(val);
             }
-
-            //_logInSystemUIHolder.LogIn();
-           // PlayerPrefs.DeleteKey("token");
-           // Show.Log("Delete Player Prefs " + PlayerPrefs.GetString("token", ""));
-           // Show.Log(val);
         }
 
         

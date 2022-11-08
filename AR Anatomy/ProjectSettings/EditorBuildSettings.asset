@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/Project FIles/Scenes/SplashScene.unity
     guid: 2b241fe6197218b4b8fe40ee01b741ef
   - enabled: 1
-    path: Assets/Project FIles/Scenes/HomeScene.unity
-    guid: 2d60e2f441b52be46a39920074d7373e
+    path: Assets/Project FIles/Scenes/Authentication System.unity
+    guid: 5b598fcd71854684fbab3d5d3901bfef
+  - enabled: 1
+    path: Assets/Project FIles/Scenes/Anatomy 3D world.unity
+    guid: 3781c2fdc54f2594e8ff4d912c13efea
   - enabled: 1
     path: Assets/Project FIles/Scenes/ARScene.unity
     guid: 5a334bbaae75d1b4c975dd2e304633de
