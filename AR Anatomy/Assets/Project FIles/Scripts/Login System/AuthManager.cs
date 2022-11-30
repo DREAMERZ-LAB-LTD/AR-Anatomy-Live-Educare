@@ -554,7 +554,7 @@ namespace LoginRegisterSystem
                 Token = aToken.TokenString;
                 FaceBookApi();
 
-                ;
+                
                 GetUserInfoStruct facebookUser = new GetUserInfoStruct();
                 facebookUser.data.name = userInfo.ResultDictionary["name"].ToString();
                 facebookUser.data.email = "Facebook";
@@ -587,6 +587,8 @@ namespace LoginRegisterSystem
         [SerializeField] SuccessFacebookStruct successFacebookStruct;
         private void FacebookLoginSuccessCallBack(string val)
         {
+            Debug.Log(val);
+
             ui.ShowLoadingPage(false);
             successFacebookStruct = JsonUtility.FromJson<SuccessFacebookStruct>(val);
             Token = successFacebookStruct.access_token;

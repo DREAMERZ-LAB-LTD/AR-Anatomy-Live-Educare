@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 540, y: 934.0193, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -55,5 +56,5 @@ MonoBehaviour:
     GetUserInfo: /details
     GetCategoryResponse: /v1/getProductCategory
     GetFurnitureFromCategory: /v1/getProduct?category_id=
-    company_id: company_id=
-    SocialLogin: http://54.254.22.111/live-educare/public/social-login
+    company_id: company_id=2
+    SocialLogin: http://178.128.116.81/live-educare/public/social-login

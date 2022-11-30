@@ -33,7 +33,7 @@ public static class RestApiHandeler
         }
         if (url != null)
         {
-            url += "?" + RemoteConfig.API.URLData.company_id + "2"; // "2" is company ID "2" for AR Anatomy "1" for Live Educare
+            url += "?" + RemoteConfig.API.URLData.company_id; // "2" is company ID "2" for AR Anatomy "1" for Live Educare
             Show.Log("Final URL " + url);
         }
 
@@ -96,7 +96,7 @@ public static class RestApiHandeler
 
         if (url != null)
         {
-            url += "?" + RemoteConfig.API.URLData.company_id + "2"; // "2" is company ID "2" for AR Anatomy "1" for Live Educare
+            url += "?" + RemoteConfig.API.URLData.company_id; // "2" is company ID "2" for AR Anatomy "1" for Live Educare
             Show.Log("Final URL " + url);
         }
 

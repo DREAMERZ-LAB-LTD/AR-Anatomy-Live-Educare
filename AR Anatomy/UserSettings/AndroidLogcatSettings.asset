@@ -1,13 +1,26 @@
 {
-    "m_SelectedDeviceId": "",
+    "m_SelectedDeviceId": "9889ba304f5045504d",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "9889ba304f5045504d",
+        "name": "com.dreamerzlab.anatomy",
+        "processId": 17404,
         "exited": false
     },
     "m_SelectedPriority": 0,
-    "m_KnownPackagesForSerialization": [],
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "9889ba304f5045504d",
+            "name": "com.dreamerzlab.anatomy",
+            "processId": 6787,
+            "exited": false
+        },
+        {
+            "deviceId": "9889ba304f5045504d",
+            "name": "com.dreamerzlab.anatomy",
+            "processId": 17404,
+            "exited": false
+        }
+    ],
     "m_Tags": {
         "m_Entries": [
             {
