@@ -2,7 +2,7 @@
 using UnityEngine;
 //using Facebook.Unity;
 using UI;
-using Facebook.Unity;
+//using Facebook.Unity;
 
 namespace LoginRegisterSystem
 {
@@ -487,34 +487,34 @@ namespace LoginRegisterSystem
         private void InitilizeFaceook()
         {
 
-            if (!FB.IsInitialized)
-            {
-                FB.Init(() =>
-                {
-                    if (FB.IsInitialized)
-                    {
-                        Show.Log("IsInitialized");
-                        FB.ActivateApp();
-                    }
-                    else
-                    {
-                        Show.Log("Couldn't initialize");
-                    }
-                },
-                isGameShown =>
-                {
-                    if (!isGameShown)
-                    {
-                        Show.Log("IS not Game Shown");
-                    }
-                    else
-                        Show.Log("IS Game Shown");
-                });
-            }
-            else
-            {
-                FB.ActivateApp();
-            }
+          ////  if (!FB.IsInitialized)
+          //  {
+          //     // FB.Init(() =>
+          //      {
+          //        //  if (FB.IsInitialized)
+          //          {
+          //              Show.Log("IsInitialized");
+          //           //   FB.ActivateApp();
+          //          }
+          //          else
+          //          {
+          //              Show.Log("Couldn't initialize");
+          //          }
+          //      },
+          //      isGameShown =>
+          //      {
+          //          if (!isGameShown)
+          //          {
+          //              Show.Log("IS not Game Shown");
+          //          }
+          //          else
+          //              Show.Log("IS Game Shown");
+          //      });
+          //  }
+          //  else
+          //  {
+          //     // FB.ActivateApp();
+          //  }
 
         }
 
@@ -524,48 +524,48 @@ namespace LoginRegisterSystem
             ui.ShowLoadingPage(true);
 
             IEnumerable<string> Permissions = new List<string>() { "public_profile", "email"/*, "user_friends" */};
-            FB.LogInWithReadPermissions(Permissions, Auth_Callback);
+           // FB.LogInWithReadPermissions(Permissions, Auth_Callback);
 
-            void Auth_Callback(ILoginResult result)
-            {
-                if (FB.IsLoggedIn)
-                {
-                    FB.API("/me?fields=id,name,email", HttpMethod.GET, GetUserInfo);//sent request to faceook for retrive user data
+            //void Auth_Callback(ILoginResult result)
+            //{
+            //    if (FB.IsLoggedIn)
+            //    {
+            //        FB.API("/me?fields=id,name,email", HttpMethod.GET, GetUserInfo);//sent request to faceook for retrive user data
 
-                }
-                else
-                {
-                    ui.ShowToast("Login cancelled ", 2, Color.red);
-                    ui.ShowLoadingPage(false);
-                }
-            }
+            //    }
+            //    else
+            //    {
+            //        ui.ShowToast("Login cancelled ", 2, Color.red);
+            //        ui.ShowLoadingPage(false);
+            //    }
+            //}
 
-            void GetUserInfo(IResult userInfo)
-            {
+            //void GetUserInfo(IResult userInfo)
+            //{
 
-                if (userInfo.Error != null)
-                {
-                    ui.ShowLoadingPage(false);
-                    ui.ShowToast(userInfo.Error, 2, Color.red);//pass error message
-                    Show.Log("an Error");
-                    return;
-                }
-                var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
-                Token = aToken.TokenString;
-                FaceBookApi();
+            //    if (userInfo.Error != null)
+            //    {
+            //        ui.ShowLoadingPage(false);
+            //        ui.ShowToast(userInfo.Error, 2, Color.red);//pass error message
+            //        Show.Log("an Error");
+            //        return;
+            //    }
+            //    var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
+            //    Token = aToken.TokenString;
+            //    FaceBookApi();
 
-                ;
-                GetUserInfoStruct facebookUser = new GetUserInfoStruct();
-                facebookUser.data.name = userInfo.ResultDictionary["name"].ToString();
-                facebookUser.data.email = "Facebook";
-                //facebookUser.data.id = userInfo.ResultDictionary["id"].ToString();
-                //facebookUser.data.email = userInfo.ResultDictionary["email"].ToString();
-                // Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
+            //    ;
+            //    GetUserInfoStruct facebookUser = new GetUserInfoStruct();
+            //    facebookUser.data.name = userInfo.ResultDictionary["name"].ToString();
+            //    facebookUser.data.email = "Facebook";
+            //    //facebookUser.data.id = userInfo.ResultDictionary["id"].ToString();
+            //    //facebookUser.data.email = userInfo.ResultDictionary["email"].ToString();
+            //    // Token = Facebook.Unity.AccessToken.CurrentAccessToken.ToString(); // Get access token from faceook
 
-                SavedUser = facebookUser;
-                ui.ShowSavedUser();
-                ui.ShowToast("Facebook Login Success", 2, Color.green);//pass error message
-            }
+            //    SavedUser = facebookUser;
+            //    ui.ShowSavedUser();
+            //    ui.ShowToast("Facebook Login Success", 2, Color.green);//pass error message
+            //}
         }
 
 
@@ -664,20 +664,21 @@ namespace LoginRegisterSystem
         {
             ui.ShowLoadingPage(false);
             // calling the popupwith message
+            Debug.Log("Apple login Failed");
             if (val == "0")
             {
                 ui.Warning_Haler.ConnnectionError();
-                Show.Log(val);
+                Debug.Log("0 =>"+val);
             }
             else
             {
                 ui.Warning_Haler.PasswordError();/*********************************it will change******************************/
-                Show.Log(val);
+                Debug.Log("Not 0=>" + val);
             }
 
             ui.ShowLoginPage();
             Token = "";
-            Show.Log(val);
+            Debug.Log("More Lese  =>" + val);
         }
 
         #endregion AppleLogin

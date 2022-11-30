@@ -1,0 +1,10 @@
+
+=== Mon Nov 28 14:42:11 2022
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.xr.arcore from version 4.2.3 to 4.2.6
+  com.unity.xr.arfoundation from version 4.2.3 to 4.2.6
+  com.unity.xr.arkit from version 4.2.3 to 4.2.6

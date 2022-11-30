@@ -1,29 +1,42 @@
-﻿<Properties StartupConfiguration="{BF102748-6A12-4FA9-0D5A-9FBFBD504B6B}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Vuforia/Scripts/DefaultInitializationErrorHandler.cs">
+﻿<Properties StartupConfiguration="{A75CE53C-8464-A192-7C1A-0C75371E37D7}|">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Project FIles/Scripts/Apple Login/AppleLogin.cs">
     <Files>
-      <File FileName="Assets/Vuforia/Scripts/DefaultInitializationErrorHandler.cs" Line="19" Column="2" />
+      <File FileName="Assets/Project FIles/Scripts/Login System/AuthManager.cs" Line="517" Column="16" />
+      <File FileName="Assets/Project FIles/Scripts/Apple Login/AppleLogin.cs" Line="251" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AR Anatomy" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Vuforia" expanded="True">
+              <Node name="Project FIles" expanded="True">
                 <Node name="Scripts" expanded="True">
-                  <Node name="DefaultInitializationErrorHandler.cs" selected="True" />
+                  <Node name="Apple Login" expanded="True">
+                    <Node name="AppleLogin.cs" selected="True" />
+                  </Node>
+                  <Node name="Login System" expanded="True" />
                 </Node>
               </Node>
             </Node>
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Unity" selected="True" />
+        </State>
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="aeefd559-b56e-4294-836e-80e6c56ffe2f" />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.AppleAuth PreferredExecutionTarget="27336baa-334c-4f25-b545-a0a7212f8d67" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="aeefd559-b56e-4294-836e-80e6c56ffe2f" />
 </Properties>
