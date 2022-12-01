@@ -236,7 +236,7 @@ public class AppleLogin : MonoBehaviour
             appleSignUpStruct.name = appleIdCredential.FullName.ToLocalizedString();
             appleSignUpStruct.token = appleUserId;
             networkConnector.AppleSignUP(appleSignUpStruct);
-            Debug.Log("Apple token: " + appleUserId);
+            Debug.Log("Apple token SignUp: " + appleUserId);
         }
 
         else
@@ -246,7 +246,7 @@ public class AppleLogin : MonoBehaviour
             //calling Login
             appleLoginStruct.token = appleUserId;
             networkConnector.AppleLogin(appleLoginStruct);
-            Debug.Log("Apple token: " + appleUserId);
+            Debug.Log("Apple token LogIn: " + appleUserId);
             return;
         }
 
